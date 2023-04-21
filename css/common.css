@@ -106,16 +106,21 @@ span {
     }
     50% {
         opacity: 100%;
-        transform: translateY(0);
+        transform: translateY(0) scaleY(1);
+        line-height: var(--bs-body-line-height);
     }
     to {
         opacity: 0;
-        transform: translateY(-100%);
+        transform: translateY(-100%) scaleY(0);
+        line-height: 0;
     }
 }
 
 div.show-level-animation {
-    animation: show-level-animation cubic-bezier(0.4, 0, 0.6, 1) 2s 1s;
+    animation: show-level-animation;
+    animation-timing-function: (0.4, 0, 0.6, 1);
+    animation-duration: 2s;
+    animation-delay: 1s;
 }
 
 @keyframes zoom-in-animation {
@@ -167,12 +172,12 @@ div.show-level-animation {
 #messagesSpan div.rotate-in-animation {
     animation-name:  rotate-in-animation;
     animation-timing-function: cubic-bezier(.25,.46,.45,.94);
-    animation-duration: 1.5s;
+    animation-duration: 1s;
 }
 
 #messagesSpan div.zoom-in-animation {
     animation-name: zoom-in-animation;
     animation-timing-function: cubic-bezier(.25,.46,.45,.94);
     transform-origin:center;
-    animation-duration: 1.5s;
+    animation-duration: 1s;
 }
