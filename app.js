@@ -413,11 +413,12 @@ class Stats {
         this.highScore = Number(localStorage["highScore"]) || 0
         this.combo = -1
         this.b2b = -1
+        this.time = 0
     }
 
     set score(score) {
         this._score = score
-        scoreTd.innerText = score.toLocaleString()
+        scoreCell.innerText = score.toLocaleString()
         if (score > this.highScore) {
             this.highScore = score
         }
@@ -429,7 +430,7 @@ class Stats {
 
     set highScore(highScore) {
         this._highScore = highScore
-        highScoreTd.innerText = highScore.toLocaleString()
+        highScoreCell.innerText = highScore.toLocaleString()
     }
 
     get highScore() {
@@ -445,7 +446,7 @@ class Stats {
         if (level > 15)
             this.lockDelay = 500 * Math.pow(0.9, level - 15)
         levelInput.value = level
-        levelTd.innerText = level
+        levelCell.innerText = level
         levelSpan.innerHTML =  `<h1>LEVEL<br/>${this.level}</h1>`
         levelSpan.classList.add("show-level-animation")
     }
@@ -456,11 +457,20 @@ class Stats {
 
     set goal(goal) {
         this._goal = goal
-        goalTd.innerText = goal
+        goalCell.innerText = goal
     }
 
     get goal() {
         return this._goal
+    }
+
+    set time(time) {
+        this._time = time
+        timeCell.innerText = this.timeFormat.format(1000 * time)
+    }
+
+    get time() {
+        return this._time
     }
 
     lockDown(nbClearedLines, tSpin) {
@@ -523,6 +533,11 @@ class Stats {
         if (this.goal <= 0) this.level++
     }
 }
+Stats.prototype.timeFormat = new Intl.DateTimeFormat("fr-FR", {
+    minute: "2-digit",
+    second: "2-digit",
+    timeZone: "UTC"
+})
 
 
 /* Game */
@@ -550,6 +565,7 @@ function pause() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearTimeout(repeat)
     scheduler.clearInterval(autorepeat)
+    scheduler.clearInterval(clock)
     resumeButton.disabled = false
     settings.modal.show()
 }
@@ -581,7 +597,12 @@ function resume(event) {
     document.onkeydown = onkeydown
     document.onkeyup = onkeyup
 
+    scheduler.setInterval(clock, 1000)
     if (stats.fallPeriod) scheduler.setInterval(fall, stats.fallPeriod)
+}
+
+function clock() {
+    stats.time++
 }
 
 function generate(piece=nextQueue.shift()) {
@@ -740,8 +761,12 @@ function lockDown() {
 function gameOver() {
     matrix.piece.locked = false
     matrix.drawPiece()
+
     document.onkeydown = null
     document.onkeyup = null
+    
+    scheduler.clearInterval(clock)
+
     localStorage["highScore"] = stats.highScore
     levelSpan.innerHTML =  "<h1>GAME<br/>OVER</h1>"
     levelSpan.classList.add("show-level-animation")
