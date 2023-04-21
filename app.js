@@ -464,13 +464,11 @@ class Stats {
     }
 
     lockDown(nbClearedLines, tSpin) {
-        messagesSpan.innerHTML = ""
-
         // Cleared lines & T-Spin
         let patternScore = SCORES[tSpin][nbClearedLines] * this.level
-        if (tSpin) messagesSpan.innerHTML += `<div class="rotate-in-animation">${tSpin}</div>\n`
-        if (nbClearedLines) messagesSpan.innerHTML += `<div class="zoom-in-animation">${CLEARED_LINES_NAMES[nbClearedLines]}</div>\n`
-        if (patternScore) messagesSpan.innerHTML += `<div class="zoom-in-animation">${patternScore}</div>\n`
+        if (tSpin) scoreSpan.innerHTML += `<div class="rotate-in-animation">${tSpin}</div>\n`
+        if (nbClearedLines) scoreSpan.innerHTML += `<div class="zoom-in-animation">${CLEARED_LINES_NAMES[nbClearedLines]}</div>\n`
+        if (patternScore) scoreSpan.innerHTML += `<div class="zoom-in-animation">${patternScore}</div>\n`
         this.score += patternScore
 
         // Combo
@@ -478,7 +476,7 @@ class Stats {
             this.combo++
             if (this.combo >= 1) {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
-                messagesSpan.innerHTML += `<div class="zoom-in-animation">COMBO x${this.combo}<br/>${comboScore}</div>\n`
+                scoreSpan.innerHTML += `<div class="zoom-in-animation">COMBO x${this.combo}<br/>${comboScore}</div>\n`
                 this.score += comboScore
             }
         } else {
@@ -490,7 +488,7 @@ class Stats {
             this.b2b++
             if (this.b2b >= 1) {
                 let b2bScore = patternScore / 2
-                messagesSpan.innerHTML += `<div class="zoom-in-animation">BACK TO BACK x${this.b2b}<br/>${b2bScore}</div>\n`
+                scoreSpan.innerHTML += `<div class="zoom-in-animation">BACK TO BACK x${this.b2b}<br/>${b2bScore}</div>\n`
                 this.score += b2bScore
             }
         } else if ((0 < nbClearedLines) && (nbClearedLines < 4) && !tSpin) {
@@ -508,6 +506,10 @@ onanimationend = function (event) {
     event.target.classList.remove(event.animationName)
 }
 
+scoreSpan.onanimationend = function(event) {
+    console.log(event)
+    event.target.remove() 
+}
 
 let scheduler = new Scheduler()
 let settings = new Settings()
