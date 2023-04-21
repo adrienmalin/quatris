@@ -130,13 +130,13 @@ span {
         opacity: 1;
         transform: scale3d(1, 1, 1);
     }
-    90% {
+    85% {
         opacity: 1;
         transform: scale3d(1, 1, 1);
     }
     to {
         opacity: 0;
-        transform: scale3d(1.5, 1, 1);
+        transform: scale3d(1.5, 0, 1);
     }
 }
 
@@ -150,13 +150,13 @@ span {
         transform:translateZ(0);
         transform: scale3d(1, 1, 1);
     }
-    90% {
+    85% {
         opacity: 1;
         transform: scale3d(1, 1, 1);
     }
     to {
         opacity: 0;
-        transform: scale3d(1.5, 1, 1);
+        transform: scale3d(1.5, 0, 1);
     }
 }
 

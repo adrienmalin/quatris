@@ -701,7 +701,7 @@ function lockDown() {
 
     lockedMinoesCoord = matrix.piece.minoesCoord[matrix.piece.orientation]
         .translate(matrix.piece.center)
-    if (lockedMinoesCoord.every(minoCoord => minoCoord.y >= 4)) {
+    if (lockedMinoesCoord.some(minoCoord => minoCoord.y >= 4)) {
         lockedMinoesCoord.forEach(minoCoord => {
             matrix.lockedMinoes[minoCoord.y][minoCoord.x] = matrix.piece.className
             matrix.drawMino(minoCoord, matrix.piece.className)
@@ -713,7 +713,6 @@ function lockDown() {
             let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.orientation]
                 .translate(matrix.piece.center)
                 .map(minoCoord => !matrix.cellIsEmpty(minoCoord))
-                .sort()
             if (a && b && (c || d))
                 tSpin = T_SPIN.T_SPIN
             else if (c && d && (a || b))
@@ -723,6 +722,7 @@ function lockDown() {
         // Cleared lines
         let clearedLines = Array.from(new Set(lockedMinoesCoord.map(minoCoord => minoCoord.y)))
             .filter(y =>  matrix.lockedMinoes[y].filter(lockedMino => lockedMino).length == matrix.columns)
+            .sort()
         for (y of clearedLines) {
             matrix.lockedMinoes.splice(y, 1)
             matrix.lockedMinoes.unshift(Array(matrix.columns))
@@ -738,7 +738,6 @@ function lockDown() {
 }
 
 function gameOver() {
-    console.log("GAME OVER")
     matrix.piece.locked = false
     matrix.drawPiece()
     document.onkeydown = null
