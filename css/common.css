@@ -1,0 +1,196 @@
+:root {
+    --cell-side: 20px;
+}
+
+.modal-content {
+    background-color: rgba(33, 37, 41, 30%);
+    backdrop-filter: blur(15px);
+}
+
+.card {
+    background-color: rgb(37, 41, 45);
+}
+
+.minoes-table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    height: calc(var(--rows) * var(--cell-side));
+    width: calc(var(--columns) * var(--cell-side));
+}
+
+#matrixTable {
+    margin-top: calc(-1 * var(--no-bordered-rows) * var(--cell-side));
+    background-color: transparent;
+}
+
+@keyframes hard-dropped-table-animation {
+    from {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(5px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+#matrixTable.hard-dropped-table-animation {
+    animation: hard-dropped-table-animation .2s;
+}
+
+tr.no-border td:not(.mino) {
+    border-width: 0;
+    padding: 4px;
+}
+
+tr.border td:not(.mino) {
+    border: 1px solid #333;
+    padding: 3px;
+}
+
+td {
+    overflow: hidden;
+    width: calc(var(--cell-side) + 4px);
+    height: calc(var(--cell-side) + 4px);
+}
+
+@keyframes hard-drop-animation {
+    from {
+        background-color: rgb(206, 255, 255, 40%);
+        filter: saturate(50%) brightness(300%);
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+td.hard-drop-animation {
+    animation: hard-drop-animation ease-out .3s;
+}
+
+@keyframes line-cleared-animation {
+    from {
+        background-color: rgb(206, 255, 255, 40%);
+        filter: saturate(50%) brightness(300%);
+        box-shadow: -60px 0 5px white, 60px 0 5px white;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+tr.line-cleared-animation{
+    animation: line-cleared-animation ease-out .3s;
+}
+
+span {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+    font-size: 3vmin;
+    text-align: center;
+}
+
+#levelSpan {
+    font-size: 4vmin;
+    font-weight: bold;
+    opacity: 0;
+}
+
+@keyframes show-level-animation {
+    from {
+        opacity: 0;
+        top: 70%;
+    }
+    50% {
+        opacity: 100%;
+        top: 40%
+    }
+    to {
+        opacity: 0;
+        top: 20%
+    }
+}
+
+#levelSpan.show-level-animation {
+    animation: cubic-bezier(0.4, 0, 0.6, 1) 2s show-level-animation;
+}
+
+@keyframes zoom-in-animation {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    30% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+    90% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        opacity: 0;
+        transform: scale3d(1.5, 1, 1);
+    }
+}
+
+@keyframes rotate-in-animation {
+    0% {
+        opacity:0;
+        transform:rotate(200deg);
+    }
+    30% {
+        opacity:1;
+        transform:translateZ(0);
+        transform: scale3d(1, 1, 1);
+    }
+    90% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        opacity: 0;
+        transform: scale3d(1.5, 1, 1);
+    }
+}
+
+#messagesSpan div {
+    opacity: 0;
+}
+
+#messagesSpan div.rotate-in-animation {
+    animation-name:  rotate-in-animation;
+    animation-timing-function: cubic-bezier(.25,.46,.45,.94);
+    animation-duration: 1s;
+}
+
+#messagesSpan div.zoom-in-animation {
+    animation-name: zoom-in-animation;
+    animation-timing-function: cubic-bezier(.25,.46,.45,.94);
+    transform-origin:center;
+}
+#messagesSpan div.zoom-in-animation:first-child {
+    animation-duration: 1s;
+}
+#messagesSpan div.zoom-in-animation:nth-child(2) {
+    animation-delay: .2s;
+    animation-duration: .9s;
+}
+#messagesSpan div.zoom-in-animation:nth-child(3) {
+    animation-delay: .4s;
+    animation-duration: .8s;
+}
+#messagesSpan div.zoom-in-animation:nth-child(4) {
+    animation-delay: .6s;
+    animation-duration: .7s;
+}
+#messagesSpan div.zoom-in-animation:nth-child(5) {
+    animation-delay: .8s;
+    animation-duration: .6s;
+}

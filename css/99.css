@@ -1,0 +1,91 @@
+.mino {
+    background: radial-gradient(
+        ellipse 140% 66% at 122% 88%,
+        var(--background-color) 100%,
+        var(--frontier-color) 105%,
+        var(--light-color) 130%
+    );
+    border: 4px solid;
+    padding: 0;
+    opacity: 100%;
+    border-radius: 2px;
+}
+
+.I.mino {
+    --background-color: #00d6fb;
+    --frontier-color:  #43e7fd;
+    --light-color: #afeff9;
+    border-top-color: #7cf2fd;
+    border-left-color: #2ed5e5;
+    border-right-color: #00b8ca;
+    border-bottom-color: #00a4b0;
+}
+
+.J.mino {
+    --background-color: #2d00fa;
+    --frontier-color:  #7054fb;
+    --light-color: #b8b4ff;
+    border-top-color: #4985fd;
+    border-left-color: #2f36ea;
+    border-right-color: #0006ca;
+    border-bottom-color: #00009d;
+}
+
+.L.mino {
+    --background-color: #ff6c13;
+    --frontier-color:  #fe9551;
+    --light-color: #fdd0b7;
+    border-top-color: #fd9f6b;
+    border-left-color: #e76d28;
+    border-right-color: #e74f00;
+    border-bottom-color: #c54800;
+}
+
+.O.mino {
+    --background-color: #ffce12;
+    --frontier-color:  #fce15c;
+    --light-color: #ffedac;;
+    border-top-color: #ffe364;
+    border-left-color: #e7ba23;
+    border-right-color: #e3a707;
+    border-bottom-color: #ca9501;
+}
+
+.T.mino {
+    --background-color: #ad00fa;
+    --frontier-color:  #c541fc;
+    --light-color: #edb2ff;
+    border-top-color: #d380ff;
+    border-left-color: #b42deb;
+    border-right-color: #8000cd;
+    border-bottom-color: #6e019a;
+}
+
+.S.mino {
+    --background-color: #6e1;
+    --frontier-color:  #93f85a;
+    --light-color: #93f85a;
+    border-top-color: #a4fc6d;
+    border-left-color: #5ee82b;
+    border-right-color: #35db00;
+    border-bottom-color: #1cbc02;
+}
+
+.Z.mino {
+    --background-color: #ff1945;
+    --frontier-color:  #fe6483;
+    --light-color: #ffb8c5;
+    border-top-color: #fd718d;
+    border-left-color: #e62250;
+    border-right-color: #e20332;
+    border-bottom-color: #ad1936;
+}
+
+.locked.mino {
+    filter: saturate(50%) brightness(200%)
+}
+
+.ghost.mino {
+    opacity: 20%;
+    filter: brightness(200%)
+}
