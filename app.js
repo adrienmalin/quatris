@@ -29,7 +29,7 @@ const CLEARED_LINES_NAMES = [
     "SINGLE",
     "DOUBLE",
     "TRIPLE",
-    "<h4>QUATRIS</h4>",
+    "QUATRIS",
 ]
 
 const DELAY = {
@@ -379,11 +379,9 @@ class Settings {
     load() {
         for (let input of keyBindFielset.getElementsByTagName("input")) {
             this[input.name] = KEY_NAMES[input.value] || input.value
-            localStorage[input.name] = input.value
         }
         for (let input of autorepearFieldset.getElementsByTagName("input")) {
             this[input.name] = input.valueAsNumber
-            localStorage[input.name] = input.value
         }
     
         this.keyBind = {}
@@ -447,8 +445,10 @@ class Stats {
             this.lockDelay = 500 * Math.pow(0.9, level - 15)
         levelInput.value = level
         levelCell.innerText = level
-        levelSpan.innerHTML =  `<h1>LEVEL<br/>${this.level}</h1>`
-        levelSpan.classList.add("show-level-animation")
+        let div = document.createElement("div")
+        div.className = "show-level-animation"
+        div.innerHTML = `<h1>LEVEL<br/>${this.level}</h1>`
+        messagesSpan.appendChild(div)
     }
 
     get level() {
@@ -480,20 +480,20 @@ class Stats {
             let div = document.createElement("div")
             div.className = "rotate-in-animation"
             div.innerHTML = tSpin
-            scoreSpan.appendChild(div)
+            messagesSpan.appendChild(div)
         }
         if (nbClearedLines) {
             let div = document.createElement("div")
             div.className = "zoom-in-animation"
             div.innerHTML = CLEARED_LINES_NAMES[nbClearedLines]
-            scoreSpan.appendChild(div)
+            messagesSpan.appendChild(div)
         }
         if (patternScore) {
             let div = document.createElement("div")
             div.className = "zoom-in-animation"
-            div.style = "animation-delay: .2s; animation-duration: .8s"
+            div.style = "animation-delay: .2s"
             div.innerHTML = patternScore
-            scoreSpan.appendChild(div)
+            messagesSpan.appendChild(div)
             this.score += patternScore
         }
 
@@ -504,9 +504,9 @@ class Stats {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
                 let div = document.createElement("div")
                 div.className = "zoom-in-animation"
-                div.style = "animation-delay: .4s; animation-duration: .6s"
+                div.style = "animation-delay: .4s"
                 div.innerHTML = `COMBO x${this.combo}<br/>${comboScore}`
-                scoreSpan.appendChild(div)
+                messagesSpan.appendChild(div)
                 this.score += comboScore
             }
         } else {
@@ -520,9 +520,9 @@ class Stats {
                 let b2bScore = patternScore / 2
                 let div = document.createElement("div")
                 div.className = "zoom-in-animation"
-                div.style = "animation-delay: .4s; animation-duration: .6s"
+                div.style = "animation-delay: .4s"
                 div.innerHTML = `BACK TO BACK x${this.b2b}<br/>${b2bScore}`
-                scoreSpan.appendChild(div)
+                messagesSpan.appendChild(div)
                 this.score += b2bScore
             }
         } else if ((0 < nbClearedLines) && (nbClearedLines < 4) && !tSpin) {
@@ -545,7 +545,7 @@ onanimationend = function (event) {
     event.target.classList.remove(event.animationName)
 }
 
-scoreSpan.onanimationend = function(event) {
+messagesSpan.onanimationend = function(event) {
     event.target.remove() 
 }
 
@@ -570,7 +570,7 @@ function pause() {
     settings.modal.show()
 }
 
-//window.onblur = pause()
+window.onblur = pause()
 
 pause()
 
@@ -767,9 +767,17 @@ function gameOver() {
     
     scheduler.clearInterval(clock)
 
+    let div = document.createElement("div")
+    div.className = "show-level-animation"
+    div.innerHTML = "<h1>GAME<br/>OVER</h1>"
+    messagesSpan.appendChild(div)
+}
+
+window.onbeforeunload = function(event) {
     localStorage["highScore"] = stats.highScore
-    levelSpan.innerHTML =  "<h1>GAME<br/>OVER</h1>"
-    levelSpan.classList.add("show-level-animation")
+    for (let input of settingsForm.getElementsByTagName("input")) {
+        localStorage[input.name] = input.value
+    }
 }
 
 if ('serviceWorker' in navigator) {

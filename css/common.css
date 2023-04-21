@@ -72,7 +72,7 @@ td.hard-drop-animation {
     from {
         background-color: rgb(206, 255, 255, 40%);
         filter: saturate(50%) brightness(300%);
-        box-shadow: -60px 0 5px white, 60px 0 5px white;
+        box-shadow: -100px 0 5px white, 100px 0 5px white;
     }
     to {
         background-color: transparent;
@@ -85,7 +85,7 @@ tr.cleared-line-animation{
 
 span {
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, 0);
     color: rgba(255, 255, 255, 0.8);
@@ -94,29 +94,27 @@ span {
     text-align: center;
 }
 
-#levelSpan {
-    font-size: 4vmin;
-    font-weight: bold;
+#messagesSpan div {
     opacity: 0;
 }
 
 @keyframes show-level-animation {
     from {
         opacity: 0;
-        top: 70%;
+        transform: translateY(200%);
     }
     50% {
         opacity: 100%;
-        top: 40%
+        transform: translateY(0);
     }
     to {
         opacity: 0;
-        top: 20%
+        transform: translateY(-100%);
     }
 }
 
-#levelSpan.show-level-animation {
-    animation: cubic-bezier(0.4, 0, 0.6, 1) 2s show-level-animation;
+div.show-level-animation {
+    animation: show-level-animation cubic-bezier(0.4, 0, 0.6, 1) 2s 1s;
 }
 
 @keyframes zoom-in-animation {
@@ -162,19 +160,15 @@ span {
     }
 }
 
-#scoreSpan div {
-    opacity: 0;
-}
-
-#scoreSpan div.rotate-in-animation {
+#messagesSpan div.rotate-in-animation {
     animation-name:  rotate-in-animation;
     animation-timing-function: cubic-bezier(.25,.46,.45,.94);
-    animation-duration: 1s;
+    animation-duration: 1.5s;
 }
 
-#scoreSpan div.zoom-in-animation {
+#messagesSpan div.zoom-in-animation {
     animation-name: zoom-in-animation;
     animation-timing-function: cubic-bezier(.25,.46,.45,.94);
     transform-origin:center;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
 }
