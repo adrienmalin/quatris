@@ -17,7 +17,7 @@ const T_SPIN = {
     T_SPIN: "T-SPIN"
 }
 
-// score = SCORES[tSpin][clearedLines]
+// score = SCORES[tSpin][nbClearedLines]
 const SCORES = {
     [T_SPIN.NONE]:   [0, 100, 300, 500, 800],
     [T_SPIN.MINI]:   [100, 200],
@@ -29,7 +29,7 @@ const CLEARED_LINES_NAMES = [
     "SINGLE",
     "DOUBLE",
     "TRIPLE",
-    "<strong>QUATRIS</strong>",
+    "<h4>QUATRIS</h4>",
 ]
 
 const DELAY = {
@@ -411,6 +411,7 @@ function changeKey(input) {
 class Stats {
     constructor() {
         this.highScore = Number(localStorage["highScore"]) || 0
+        this.combo = -1
     }
 
     set score(score) {
@@ -459,6 +460,36 @@ class Stats {
 
     get goal() {
         return this._goal
+    }
+
+    lockDown(nbClearedLines, tSpin) {
+        messagesSpan.innerHTML = ""
+
+        // Cleared lines & T-Spin
+        if (nbClearedLines || tSpin ) {
+            this.goal -= nbClearedLines
+            let patternScore = SCORES[tSpin][nbClearedLines] * this.level
+            this.score += patternScore
+
+            if (tSpin) messagesSpan.innerHTML += `<div class="rotate-in-animation">${tSpin}</div>\n`
+            if (nbClearedLines) messagesSpan.innerHTML += `<div class="zoom-in-animation">${CLEARED_LINES_NAMES[nbClearedLines]}</div>\n`
+            messagesSpan.innerHTML += `<div class="zoom-in-animation">${patternScore}</div>\n`
+        }
+
+        // Combo
+        if (nbClearedLines) {
+            this.combo++
+            if (this.combo >= 1) {
+                let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
+                this.score += comboScore
+                messagesSpan.innerHTML += `<div class="zoom-in-animation">COMBO x${this.combo}</div>\n`
+                messagesSpan.innerHTML += `<div class="zoom-in-animation">${comboScore}</div>\n`
+            }
+        } else {
+            this.combo = -1
+        }
+
+        if (this.goal <= 0) this.level++
     }
 }
 
@@ -664,20 +695,8 @@ function lockDown() {
             matrix.lockedMinoes.unshift(Array(matrix.columns))
             matrix.table.rows[y].classList.add("line-cleared-animation")
         }
-        let nbClearedLines = clearedLines.length
-        if (nbClearedLines || tSpin) {
-            matrix.redraw()
-            stats.goal -= nbClearedLines
-            stats.score += SCORES[tSpin][nbClearedLines]
-            messagesSpan.innerHTML = ""
-            if (tSpin) messagesSpan.innerHTML += `<div class="rotate-in-animation">${tSpin}</div>\n`
-            if (nbClearedLines) messagesSpan.innerHTML += `<div class="zoom-in-animation">${CLEARED_LINES_NAMES[nbClearedLines]}</div>\n`
-            messagesSpan.innerHTML += `<div class="zoom-in-animation">${SCORES[tSpin][nbClearedLines]}</div>\n`
-        }
-
-        if (stats.goal <= 0) {
-            stats.level++
-        }
+        matrix.redraw()
+        stats.lockDown(clearedLines.length, tSpin)
         
         generate()
     }
