@@ -726,7 +726,7 @@ function lockDown() {
         for (y of clearedLines) {
             matrix.lockedMinoes.splice(y, 1)
             matrix.lockedMinoes.unshift(Array(matrix.columns))
-            matrix.table.rows[y].classList.add("line-cleared-animation")
+            matrix.table.rows[y].classList.add("cleared-line-animation")
         }
         matrix.redraw()
         stats.lockDown(clearedLines.length, tSpin)

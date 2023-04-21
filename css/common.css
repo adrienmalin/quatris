@@ -70,7 +70,7 @@ td.hard-drop-animation {
     animation: hard-drop-animation ease-out .3s;
 }
 
-@keyframes line-cleared-animation {
+@keyframes cleared-line-animation {
     from {
         background-color: rgb(206, 255, 255, 40%);
         filter: saturate(50%) brightness(300%);
@@ -81,8 +81,8 @@ td.hard-drop-animation {
     }
 }
 
-tr.line-cleared-animation{
-    animation: line-cleared-animation ease-out .3s;
+tr.cleared-line-animation{
+    animation: cleared-line-animation ease-out .3s;
 }
 
 span {
