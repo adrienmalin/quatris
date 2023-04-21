@@ -466,17 +466,37 @@ class Stats {
     lockDown(nbClearedLines, tSpin) {
         // Cleared lines & T-Spin
         let patternScore = SCORES[tSpin][nbClearedLines] * this.level
-        if (tSpin) scoreSpan.innerHTML += `<div class="rotate-in-animation">${tSpin}</div>\n`
-        if (nbClearedLines) scoreSpan.innerHTML += `<div class="zoom-in-animation">${CLEARED_LINES_NAMES[nbClearedLines]}</div>\n`
-        if (patternScore) scoreSpan.innerHTML += `<div class="zoom-in-animation">${patternScore}</div>\n`
-        this.score += patternScore
+        if (tSpin) {
+            let div = document.createElement("div")
+            div.className = "rotate-in-animation"
+            div.innerHTML = tSpin
+            scoreSpan.appendChild(div)
+        }
+        if (nbClearedLines) {
+            let div = document.createElement("div")
+            div.className = "zoom-in-animation"
+            div.innerHTML = CLEARED_LINES_NAMES[nbClearedLines]
+            scoreSpan.appendChild(div)
+        }
+        if (patternScore) {
+            let div = document.createElement("div")
+            div.className = "zoom-in-animation"
+            div.style = "animation-delay: .2s"
+            div.innerHTML = patternScore
+            scoreSpan.appendChild(div)
+            this.score += patternScore
+        }
 
         // Combo
         if (nbClearedLines) {
             this.combo++
             if (this.combo >= 1) {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
-                scoreSpan.innerHTML += `<div class="zoom-in-animation">COMBO x${this.combo}<br/>${comboScore}</div>\n`
+                let div = document.createElement("div")
+                div.className = "zoom-in-animation"
+                div.style = "animation-delay: .4s"
+                div.innerHTML = `COMBO x${this.combo}<br/>${comboScore}`
+                scoreSpan.appendChild(div)
                 this.score += comboScore
             }
         } else {
@@ -488,7 +508,11 @@ class Stats {
             this.b2b++
             if (this.b2b >= 1) {
                 let b2bScore = patternScore / 2
-                scoreSpan.innerHTML += `<div class="zoom-in-animation">BACK TO BACK x${this.b2b}<br/>${b2bScore}</div>\n`
+                let div = document.createElement("div")
+                div.className = "zoom-in-animation"
+                div.style = "animation-delay: .4s"
+                div.innerHTML = `BACK TO BACK x${this.b2b}<br/>${b2bScore}`
+                scoreSpan.appendChild(div)
                 this.score += b2bScore
             }
         } else if ((0 < nbClearedLines) && (nbClearedLines < 4) && !tSpin) {
@@ -507,7 +531,6 @@ onanimationend = function (event) {
 }
 
 scoreSpan.onanimationend = function(event) {
-    console.log(event)
     event.target.remove() 
 }
 
