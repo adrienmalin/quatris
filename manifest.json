@@ -1,6 +1,6 @@
 {
-    "short_name": "TETRIS",
-    "name": "Tetris",
+    "short_name": "Quatris",
+    "name": "Quatris",
     "description": "Falling blocks",
     "icons": [
       {
@@ -26,8 +26,8 @@
     "theme_color": "#212529",
     "shortcuts": [
       {
-        "name": "TETRIS",
-        "short_name": "Tetris",
+        "name": "Quatris",
+        "short_name": "Quatris",
         "description": "Falling blocks",
         "url": "index.html",
         "icons": [
