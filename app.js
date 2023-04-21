@@ -412,6 +412,7 @@ class Stats {
     constructor() {
         this.highScore = Number(localStorage["highScore"]) || 0
         this.combo = -1
+        this.b2b = -1
     }
 
     set score(score) {
@@ -466,29 +467,36 @@ class Stats {
         messagesSpan.innerHTML = ""
 
         // Cleared lines & T-Spin
-        if (nbClearedLines || tSpin ) {
-            this.goal -= nbClearedLines
-            let patternScore = SCORES[tSpin][nbClearedLines] * this.level
-            this.score += patternScore
-
-            if (tSpin) messagesSpan.innerHTML += `<div class="rotate-in-animation">${tSpin}</div>\n`
-            if (nbClearedLines) messagesSpan.innerHTML += `<div class="zoom-in-animation">${CLEARED_LINES_NAMES[nbClearedLines]}</div>\n`
-            messagesSpan.innerHTML += `<div class="zoom-in-animation">${patternScore}</div>\n`
-        }
+        let patternScore = SCORES[tSpin][nbClearedLines] * this.level
+        if (tSpin) messagesSpan.innerHTML += `<div class="rotate-in-animation">${tSpin}</div>\n`
+        if (nbClearedLines) messagesSpan.innerHTML += `<div class="zoom-in-animation">${CLEARED_LINES_NAMES[nbClearedLines]}</div>\n`
+        if (patternScore) messagesSpan.innerHTML += `<div class="zoom-in-animation">${patternScore}</div>\n`
+        this.score += patternScore
 
         // Combo
         if (nbClearedLines) {
             this.combo++
             if (this.combo >= 1) {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
+                messagesSpan.innerHTML += `<div class="zoom-in-animation">COMBO x${this.combo}<br/>${comboScore}</div>\n`
                 this.score += comboScore
-                messagesSpan.innerHTML += `<div class="zoom-in-animation">COMBO x${this.combo}</div>\n`
-                messagesSpan.innerHTML += `<div class="zoom-in-animation">${comboScore}</div>\n`
             }
         } else {
             this.combo = -1
         }
 
+        // Back to back sequence
+        if ((clearedLines == 4) || (tSpin && clearedLines)) {
+            if (this.b2b >= 1) {
+                let b2bScore = patternScore / 2
+                messagesSpan.innerHTML += `<div class="zoom-in-animation">BACK TO BACK x${this.b2b}<br/>${b2bScore}</div>\n`
+                this.score += b2bScore
+            }
+        } else {
+            this.b2b = -1
+        }
+
+        this.goal -= nbClearedLines
         if (this.goal <= 0) this.level++
     }
 }
