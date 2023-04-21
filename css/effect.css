@@ -1,5 +1,9 @@
 .mino {
-    background: rgba(127, 229, 255, 0.3);
+    background-image: radial-gradient(
+        farthest-corner at 4px 6px,
+        rgba(204, 238, 247, 0.3) 0%,
+        rgba(106, 197, 220, 0.3) 100%
+    );
     border: 1px solid rgba(127, 229, 255, 0.7);
     border-radius: 0.3vmin;
 }
