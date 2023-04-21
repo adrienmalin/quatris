@@ -130,13 +130,15 @@ span {
         opacity: 1;
         transform: scale3d(1, 1, 1);
     }
-    85% {
+    80% {
         opacity: 1;
-        transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1) translateY(0);
+        height: 2rem;
     }
     to {
         opacity: 0;
-        transform: scale3d(1.5, 0, 1);
+        transform: scale3d(1.5, 0, 1) translateY(-50%);
+        height: 0;
     }
 }
 
@@ -150,13 +152,15 @@ span {
         transform:translateZ(0);
         transform: scale3d(1, 1, 1);
     }
-    85% {
+    80% {
         opacity: 1;
-        transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1) translateY(0);
+        height: 2rem;
     }
     to {
         opacity: 0;
-        transform: scale3d(1.5, 0, 1);
+        transform: scale3d(1.5, 0, 1) translateY(-50%);
+        height: 0;
     }
 }
 
