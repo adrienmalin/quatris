@@ -85,7 +85,7 @@ tr.cleared-line-animation{
 
 span {
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, 0);
     color: rgba(255, 255, 255, 0.8);
@@ -96,6 +96,7 @@ span {
 
 #messagesSpan div {
     opacity: 0;
+    overflow: hidden;
 }
 
 @keyframes show-level-animation {
@@ -121,6 +122,8 @@ div.show-level-animation {
     from {
         opacity: 0;
         transform: scale3d(0.3, 0.3, 0.3);
+        line-height: var(--bs-body-line-height);
+
     }
     30% {
         opacity: 1;
@@ -128,13 +131,13 @@ div.show-level-animation {
     }
     80% {
         opacity: 1;
-        transform: scale3d(1, 1, 1) translateY(0);
-        height: 100%;
+        transform: scale3d(1, 1, 1);
+        line-height: var(--bs-body-line-height);
     }
     to {
         opacity: 0;
-        transform: scale3d(1.5, 0, 1) translateY(-50%);
-        height: 0;
+        transform: scale3d(1.5, 0, 1);
+        line-height: 0;
     }
 }
 
@@ -142,6 +145,7 @@ div.show-level-animation {
     0% {
         opacity:0;
         transform:rotate(200deg);
+        line-height: var(--bs-body-line-height);
     }
     30% {
         opacity:1;
@@ -150,13 +154,13 @@ div.show-level-animation {
     }
     80% {
         opacity: 1;
-        transform: scale3d(1, 1, 1) translateY(0);
-        height: 100%;
+        transform: scale3d(1, 1, 1);
+        line-height: var(--bs-body-line-height);
     }
     to {
         opacity: 0;
-        transform: scale3d(1.5, 0, 1) translateY(-50%);
-        height: 0;
+        transform: scale3d(1.5, 0, 1);
+        line-height: 0;
     }
 }
 
