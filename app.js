@@ -481,7 +481,7 @@ class Stats {
         if (patternScore) {
             let div = document.createElement("div")
             div.className = "zoom-in-animation"
-            div.style = "animation-delay: .2s"
+            div.style = "animation-delay: .2s; animation-duration: .8s"
             div.innerHTML = patternScore
             scoreSpan.appendChild(div)
             this.score += patternScore
@@ -494,7 +494,7 @@ class Stats {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
                 let div = document.createElement("div")
                 div.className = "zoom-in-animation"
-                div.style = "animation-delay: .4s"
+                div.style = "animation-delay: .4s; animation-duration: .6s"
                 div.innerHTML = `COMBO x${this.combo}<br/>${comboScore}`
                 scoreSpan.appendChild(div)
                 this.score += comboScore
@@ -510,7 +510,7 @@ class Stats {
                 let b2bScore = patternScore / 2
                 let div = document.createElement("div")
                 div.className = "zoom-in-animation"
-                div.style = "animation-delay: .4s"
+                div.style = "animation-delay: .4s; animation-duration: .6s"
                 div.innerHTML = `BACK TO BACK x${this.b2b}<br/>${b2bScore}`
                 scoreSpan.appendChild(div)
                 this.score += b2bScore
