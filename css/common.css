@@ -9,6 +9,7 @@
 
 .card {
     background-color: rgb(37, 41, 45);
+    box-shadow: 5px 5px 20px #202020;
 }
 
 .minoes-table {
