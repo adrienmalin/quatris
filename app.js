@@ -667,20 +667,19 @@ function lockDown() {
 
     lockedMinoesCoord = matrix.piece.minoesCoord[matrix.piece.orientation]
         .translate(matrix.piece.center)
-    if (lockedMinoesCoord.every(minoCoord => minoCoord.y < 4)) {
-        gameOver()
-    } else {
+    if (lockedMinoesCoord.every(minoCoord => minoCoord.y >= 4)) {
         lockedMinoesCoord.forEach(minoCoord => {
             matrix.lockedMinoes[minoCoord.y][minoCoord.x] = matrix.piece.className
             matrix.drawMino(minoCoord, matrix.piece.className)
         })
 
-        // T-spin
+        // T-Spin
         let tSpin = T_SPIN.NONE
         if (matrix.piece.lastRotation && matrix.piece.constructor == T) {
             let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.orientation]
                 .translate(matrix.piece.center)
                 .map(minoCoord => !matrix.cellIsEmpty(minoCoord))
+                .sort()
             if (a && b && (c || d))
                 tSpin = T_SPIN.T_SPIN
             else if (c && d && (a || b))
@@ -699,6 +698,8 @@ function lockDown() {
         stats.lockDown(clearedLines.length, tSpin)
         
         generate()
+    } else {
+        gameOver()
     }
 }
 
