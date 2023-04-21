@@ -486,13 +486,14 @@ class Stats {
         }
 
         // Back to back sequence
-        if ((clearedLines == 4) || (tSpin && clearedLines)) {
+        if ((nbClearedLines == 4) || (tSpin && nbClearedLines)) {
+            this.b2b++
             if (this.b2b >= 1) {
                 let b2bScore = patternScore / 2
                 messagesSpan.innerHTML += `<div class="zoom-in-animation">BACK TO BACK x${this.b2b}<br/>${b2bScore}</div>\n`
                 this.score += b2bScore
             }
-        } else {
+        } else if ((0 < nbClearedLines) && (nbClearedLines < 4) && !tSpin) {
             this.b2b = -1
         }
 
