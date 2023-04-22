@@ -420,7 +420,7 @@ class Stats {
         this.highScore = Number(localStorage["highScore"]) || 0
         this.combo = -1
         this.b2b = -1
-        this.startTime = 0
+        this._time = 0
     }
 
     set score(score) {
@@ -470,8 +470,12 @@ class Stats {
         return this._goal
     }
 
+    set time(time) {
+        this._time = time - this._time
+    }
+
     get time() {
-        return new Date() - this.startTime
+        return new Date() - this._time
     }
 
     clock() {
@@ -567,12 +571,11 @@ function pause() {
     scheduler.clearTimeout(repeat)
     scheduler.clearInterval(autorepeat)
     scheduler.clearInterval(clock)
-    stats.startTime = stats.time
+    stats.time = new Date()
     resumeButton.disabled = false
     settings.modal.show()
 }
-
-window.onblur = pause()
+onblur = pause
 
 pause()
 
@@ -598,7 +601,7 @@ function resume(event) {
     document.onkeydown = onkeydown
     document.onkeyup = onkeyup
 
-    stats.startTime = stats.time
+    stats.time = new Date()
     scheduler.setInterval(clock, 1000)
     if (stats.fallPeriod) scheduler.setInterval(fall, stats.fallPeriod)
 }
