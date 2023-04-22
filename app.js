@@ -475,11 +475,7 @@ class Stats {
     }
 
     get time() {
-        return new Date() - this._time
-    }
-
-    clock() {
-        timeCell.innerText = this.timeFormat.format(this.time)
+        return this.timeFormat.format(new Date() - this._time)
     }
 
     lockDown(nbClearedLines, tSpin) {
@@ -607,7 +603,7 @@ function resume(event) {
 }
 
 function clock() {
-    stats.clock()
+    timeCell.innerText = stats.time
 }
 
 function generate(piece=nextQueue.shift()) {
