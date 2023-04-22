@@ -420,7 +420,7 @@ class Stats {
         this.highScore = Number(localStorage["highScore"]) || 0
         this.combo = -1
         this.b2b = -1
-        this.time = 0
+        this.startTime = 0
     }
 
     set score(score) {
@@ -470,13 +470,8 @@ class Stats {
         return this._goal
     }
 
-    set time(time) {
-        this._time = time
-        timeCell.innerText = this.timeFormat.format(1000 * time)
-    }
-
-    get time() {
-        return this._time
+    clock() {
+        timeCell.innerText = this.timeFormat.format(new Date() - this.startTime)
     }
 
     lockDown(nbClearedLines, tSpin) {
@@ -568,6 +563,7 @@ function pause() {
     scheduler.clearTimeout(repeat)
     scheduler.clearInterval(autorepeat)
     scheduler.clearInterval(clock)
+    stats.startTime = new Date() - stats.startTime
     resumeButton.disabled = false
     settings.modal.show()
 }
@@ -599,12 +595,13 @@ function resume(event) {
     document.onkeydown = onkeydown
     document.onkeyup = onkeyup
 
+    stats.startTime = new Date() - stats.startTime
     scheduler.setInterval(clock, 1000)
     if (stats.fallPeriod) scheduler.setInterval(fall, stats.fallPeriod)
 }
 
 function clock() {
-    stats.time++
+    stats.clock()
 }
 
 function generate(piece=nextQueue.shift()) {
