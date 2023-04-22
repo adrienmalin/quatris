@@ -470,8 +470,12 @@ class Stats {
         return this._goal
     }
 
+    get time() {
+        return new Date() - this.startTime
+    }
+
     clock() {
-        timeCell.innerText = this.timeFormat.format(new Date() - this.startTime)
+        timeCell.innerText = this.timeFormat.format(this.time)
     }
 
     lockDown(nbClearedLines, tSpin) {
@@ -563,7 +567,7 @@ function pause() {
     scheduler.clearTimeout(repeat)
     scheduler.clearInterval(autorepeat)
     scheduler.clearInterval(clock)
-    stats.startTime = new Date() - stats.startTime
+    stats.startTime = stats.time
     resumeButton.disabled = false
     settings.modal.show()
 }
@@ -579,7 +583,6 @@ function newGame(event) {
     levelInput.disabled = true
     resumeButton.innerHTML = "Reprendre"
     event.target.onsubmit = resume
-    settingsModal["data-bs-backdrop"] = ""
     stats.score = 0
     stats.goal = 0
     stats.level = levelInput.valueAsNumber
@@ -595,7 +598,7 @@ function resume(event) {
     document.onkeydown = onkeydown
     document.onkeyup = onkeyup
 
-    stats.startTime = new Date() - stats.startTime
+    stats.startTime = stats.time
     scheduler.setInterval(clock, 1000)
     if (stats.fallPeriod) scheduler.setInterval(fall, stats.fallPeriod)
 }
