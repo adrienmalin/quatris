@@ -406,6 +406,7 @@ function changeKey(input) {
     input.onkeydown = function (event) {
         event.preventDefault()
         input.value = KEY_NAMES[event.key] || event.key
+        input.blur()
     }
     input.onblur = function (event) {
         if (input.value == "Touche ?") input.value = prevValue
