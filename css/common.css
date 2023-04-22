@@ -2,6 +2,10 @@
     --cell-side: 20px;
 }
 
+body {
+  background: linear-gradient(#111315, #012) fixed;
+}
+
 .modal-content {
     background-color: rgba(33, 37, 41, 30%);
     backdrop-filter: blur(15px);
@@ -73,7 +77,7 @@ td.hard-drop-animation {
     from {
         background-color: rgb(206, 255, 255, 40%);
         filter: saturate(50%) brightness(300%);
-        box-shadow: -100px 0 5px white, 100px 0 5px white;
+        box-shadow: -200px 0 5px white, 200px 0 5px white;
     }
     to {
         background-color: transparent;
