@@ -117,11 +117,10 @@ span {
     }
 }
 
-div.show-level-animation {
+#messagesSpan div.show-level-animation {
     animation: show-level-animation;
     animation-timing-function: (0.4, 0, 0.6, 1);
     animation-duration: 2s;
-    animation-delay: 1s;
 }
 
 @keyframes zoom-in-animation {
@@ -181,4 +180,22 @@ div.show-level-animation {
     animation-timing-function: cubic-bezier(.25,.46,.45,.94);
     transform-origin:center;
     animation-duration: 1s;
+}
+
+@keyframes game-over-animation {
+    from {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    to {
+        opacity: 100%;
+        transform: translateY(0) scaleY(1);
+        line-height: var(--bs-body-line-height);
+    }
+}
+
+#messagesSpan div.game-over-animation {
+    animation: game-over-animation;
+    animation-timing-function: (0.4, 0, 0.6, 1);
+    animation-duration: 2s;
 }

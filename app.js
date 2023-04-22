@@ -445,10 +445,7 @@ class Stats {
             this.lockDelay = 500 * Math.pow(0.9, level - 15)
         levelInput.value = level
         levelCell.innerText = level
-        let div = document.createElement("div")
-        div.className = "show-level-animation"
-        div.innerHTML = `<h1>LEVEL<br/>${this.level}</h1>`
-        messagesSpan.appendChild(div)
+        messagesSpan.addDiv({ className: "show-level-animation", innerHTML: `<h1>LEVEL<br/>${this.level}</h1>` })
     }
 
     get level() {
@@ -476,24 +473,20 @@ class Stats {
     lockDown(nbClearedLines, tSpin) {
         // Cleared lines & T-Spin
         let patternScore = SCORES[tSpin][nbClearedLines] * this.level
-        if (tSpin) {
-            let div = document.createElement("div")
-            div.className = "rotate-in-animation"
-            div.innerHTML = tSpin
-            messagesSpan.appendChild(div)
-        }
-        if (nbClearedLines) {
-            let div = document.createElement("div")
-            div.className = "zoom-in-animation"
-            div.innerHTML = CLEARED_LINES_NAMES[nbClearedLines]
-            messagesSpan.appendChild(div)
-        }
+        if (tSpin) messagesSpan.addDiv({
+            className: "rotate-in-animation",
+            innerHTML: tSpin
+        })
+        if (nbClearedLines) messagesSpan.addDiv({
+            className: "zoom-in-animation",
+            innerHTML: CLEARED_LINES_NAMES[nbClearedLines]
+        })
         if (patternScore) {
-            let div = document.createElement("div")
-            div.className = "zoom-in-animation"
-            div.style = "animation-delay: .2s"
-            div.innerHTML = patternScore
-            messagesSpan.appendChild(div)
+            messagesSpan.addDiv({
+                className: "zoom-in-animation",
+                style: "animation-delay: .2s",
+                innerHTML: patternScore
+            })
             this.score += patternScore
         }
 
@@ -502,11 +495,11 @@ class Stats {
             this.combo++
             if (this.combo >= 1) {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
-                let div = document.createElement("div")
-                div.className = "zoom-in-animation"
-                div.style = "animation-delay: .4s"
-                div.innerHTML = `COMBO x${this.combo}<br/>${comboScore}`
-                messagesSpan.appendChild(div)
+                messagesSpan.addDiv({
+                    className: "zoom-in-animation",
+                    style: "animation-delay: .4s",
+                    innerHTML: `COMBO x${this.combo}<br/>${comboScore}`
+                })
                 this.score += comboScore
             }
         } else {
@@ -518,14 +511,14 @@ class Stats {
             this.b2b++
             if (this.b2b >= 1) {
                 let b2bScore = patternScore / 2
-                let div = document.createElement("div")
-                div.className = "zoom-in-animation"
-                div.style = "animation-delay: .4s"
-                div.innerHTML = `BACK TO BACK x${this.b2b}<br/>${b2bScore}`
-                messagesSpan.appendChild(div)
+                messagesSpan.addDiv({
+                    className: "zoom-in-animation",
+                    style: "animation-delay: .4s",
+                    innerHTML: `BACK TO BACK x${this.b2b}<br/>${b2bScore}`
+                })
                 this.score += b2bScore
             }
-        } else if ((0 < nbClearedLines) && (nbClearedLines < 4) && !tSpin) {
+        } else if (nbClearedLines && !tSpin ) {
             this.b2b = -1
         }
 
@@ -547,6 +540,14 @@ onanimationend = function (event) {
 
 messagesSpan.onanimationend = function(event) {
     event.target.remove() 
+}
+
+messagesSpan.addDiv = function(attributes) {
+    let div = document.createElement("div")
+    for (key in attributes) {
+        div[key] = attributes[key]
+    }
+    messagesSpan.appendChild(div)
 }
 
 let scheduler = new Scheduler()
@@ -767,10 +768,12 @@ function gameOver() {
     
     scheduler.clearInterval(clock)
 
-    let div = document.createElement("div")
-    div.className = "show-level-animation"
-    div.innerHTML = "<h1>GAME<br/>OVER</h1>"
-    messagesSpan.appendChild(div)
+    messagesSpan.onanimationend = null
+    messagesSpan.addDiv({
+        className: "game-over-animation",
+        style: "opacity: 100%",
+        innerHTML: "<h1>GAME<br/>OVER</h1>"
+    })
 }
 
 window.onbeforeunload = function(event) {
