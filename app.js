@@ -51,12 +51,14 @@ const KEY_NAMES = {
     ["ArrowDown"]:  "↓",
     [" "]:          "Espace",
     ["Escape"]:     "Échap",
+    ["Enter"]:      "Entrée",
     ["←"]:          "ArrowLeft",
     ["→"]:          "ArrowRight",
     ["↑"]:          "ArrowUp",
     ["↓"]:          "ArrowDown",
     ["Espace"]:     " ",
     ["Échap"]:      "Escape",
+    ["Entrée"]:     "Enter",
 }
 
 /* Customize Array to be use as coord */
@@ -568,15 +570,15 @@ let nextQueue = new NextQueue("nextTable")
 
 
 function pause() {
-    document.onkeydown = null
-    document.onkeyup = null
-
     scheduler.clearInterval(fall)
     scheduler.clearTimeout(lockDown)
     scheduler.clearTimeout(repeat)
     scheduler.clearInterval(autorepeat)
     scheduler.clearInterval(ticktack)
     stats.pauseTime = stats.time
+
+    document.onkeydown = null
+
     resumeButton.disabled = false
     settings.modal.show()
 }
@@ -671,6 +673,7 @@ const REPEATABLE_ACTIONS = [
 ]
 pressedKeys = new Set()
 actionsQueue = []
+
 function onkeydown(event) {
     if (event.key in settings.keyBind) {
         event.preventDefault()
@@ -769,7 +772,6 @@ function gameOver() {
     matrix.drawPiece()
 
     document.onkeydown = null
-    document.onkeyup = null
     onblur = null
     scheduler.clearInterval(ticktack)
 
