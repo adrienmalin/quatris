@@ -13,8 +13,8 @@ const ROTATION = {
 
 const T_SPIN = {
     NONE:   "",
-    MINI:   "MINI T-SPIN",
-    T_SPIN: "T-SPIN"
+    MINI:   "PETITE<br/>PIROUETTE",
+    T_SPIN: "PIROUETTE"
 }
 
 // score = SCORES[tSpin][nbClearedLines]
@@ -26,9 +26,9 @@ const SCORES = {
 
 const CLEARED_LINES_NAMES = [
     "",  
-    "SINGLE",
-    "DOUBLE",
-    "TRIPLE",
+    "SOLO",
+    "DUO",
+    "TRIO",
     "QUATRIS",
 ]
 
@@ -49,12 +49,12 @@ const KEY_NAMES = {
     ["ArrowRight"]: "→",
     ["ArrowUp"]:    "↑",
     ["ArrowDown"]:  "↓",
-    [" "]:          "Space",
+    [" "]:          "Espace",
     ["←"]:          "ArrowLeft",
     ["→"]:          "ArrowRight",
     ["↑"]:          "ArrowUp",
     ["↓"]:          "ArrowDown",
-    ["Space"]:      " ",
+    ["Espace"]:      " ",
 }
 
 /* Customize Array to be use as coord */
@@ -453,7 +453,7 @@ class Stats {
             this.lockDelay = 500 * Math.pow(0.9, level - 15)
         levelInput.value = level
         levelCell.innerText = level
-        messagesSpan.addNewChild("div", { className: "show-level-animation", innerHTML: `<h1>LEVEL<br/>${this.level}</h1>` })
+        messagesSpan.addNewChild("div", { className: "show-level-animation", innerHTML: `<h1>NIVEAU<br/>${this.level}</h1>` })
     }
 
     get level() {
@@ -505,7 +505,7 @@ class Stats {
                 messagesSpan.addNewChild("div", {
                     className: "zoom-in-animation",
                     style: "animation-delay: .4s",
-                    innerHTML: `COMBO x${this.combo}<br/>${comboScore}`
+                    innerHTML: `ENCHAINEMENT x${this.combo}<br/>${comboScore}`
                 })
                 this.score += comboScore
             }
@@ -521,7 +521,7 @@ class Stats {
                 messagesSpan.addNewChild("div", {
                     className: "zoom-in-animation",
                     style: "animation-delay: .4s",
-                    innerHTML: `BACK TO BACK x${this.b2b}<br/>${b2bScore}`
+                    innerHTML: `BOUT À BOUT x${this.b2b}<br/>${b2bScore}`
                 })
                 this.score += b2bScore
             }
@@ -530,7 +530,7 @@ class Stats {
                 messagesSpan.addNewChild("div", {
                     className: "zoom-in-animation",
                     style: "animation-delay: .4s",
-                    innerHTML: `BACK TO BACK END`
+                    innerHTML: `FIN DU BOUT À BOUT`
                 })
             }
             this.b2b = -1
@@ -766,14 +766,14 @@ function gameOver() {
 
     document.onkeydown = null
     document.onkeyup = null
-    
+    onblur = null
     scheduler.clearInterval(clock)
 
     messagesSpan.onanimationend = null
     messagesSpan.addNewChild("div", {
         className: "game-over-animation",
         style: "opacity: 100%",
-        innerHTML: "<h1>GAME<br/>OVER</h1>"
+        innerHTML: "<h1>FIN</h1>"
     })
 }
 
