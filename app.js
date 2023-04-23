@@ -50,11 +50,13 @@ const KEY_NAMES = {
     ["ArrowUp"]:    "↑",
     ["ArrowDown"]:  "↓",
     [" "]:          "Espace",
+    ["Escape"]:     "Échap",
     ["←"]:          "ArrowLeft",
     ["→"]:          "ArrowRight",
     ["↑"]:          "ArrowUp",
     ["↓"]:          "ArrowDown",
-    ["Espace"]:      " ",
+    ["Espace"]:     " ",
+    ["Échap"]:      "Escape",
 }
 
 /* Customize Array to be use as coord */
@@ -419,7 +421,7 @@ class Stats {
         this.highScore = Number(localStorage["highScore"]) || 0
         this.combo = -1
         this.b2b = -1
-        this._time = 0
+        this.startTime = new Date()
     }
 
     set score(score) {
@@ -470,11 +472,12 @@ class Stats {
     }
 
     set time(time) {
-        this._time = time - this._time
+        this.startTime = new Date() - time
+        ticktack()
     }
 
     get time() {
-        return this.timeFormat.format(new Date() - this._time)
+        return new Date() - this.startTime
     }
 
     lockDown(nbClearedLines, tSpin) {
@@ -572,8 +575,8 @@ function pause() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearTimeout(repeat)
     scheduler.clearInterval(autorepeat)
-    scheduler.clearInterval(clock)
-    stats.time = new Date()
+    scheduler.clearInterval(ticktack)
+    stats.pauseTime = stats.time
     resumeButton.disabled = false
     settings.modal.show()
 }
@@ -586,6 +589,7 @@ function newGame(event) {
     resume(event)
     levelInput.name = "level"
     levelInput.disabled = true
+    titleHeader.innerHTML = "PAUSE"
     resumeButton.innerHTML = "Reprendre"
     event.target.onsubmit = resume
     stats.score = 0
@@ -603,13 +607,13 @@ function resume(event) {
     document.onkeydown = onkeydown
     document.onkeyup = onkeyup
 
-    stats.time = new Date()
-    scheduler.setInterval(clock, 1000)
+    stats.time = stats.pauseTime
+    scheduler.setInterval(ticktack, 1000)
     if (stats.fallPeriod) scheduler.setInterval(fall, stats.fallPeriod)
 }
 
-function clock() {
-    timeCell.innerText = stats.time
+function ticktack() {
+    timeCell.innerText = stats.timeFormat.format(stats.time)
 }
 
 function generate(piece) {
@@ -767,7 +771,7 @@ function gameOver() {
     document.onkeydown = null
     document.onkeyup = null
     onblur = null
-    scheduler.clearInterval(clock)
+    scheduler.clearInterval(ticktack)
 
     messagesSpan.onanimationend = null
     messagesSpan.addNewChild("div", {
