@@ -607,8 +607,8 @@ function clock() {
     timeCell.innerText = stats.time
 }
 
-function generate(piece=nextQueue.shift()) {
-    matrix.piece = piece
+function generate(piece) {
+    matrix.piece = piece || nextQueue.shift()
 
     if (matrix.piece.canMove(TRANSLATION.NONE)) {
         scheduler.setInterval(fall, stats.fallPeriod)
@@ -645,14 +645,9 @@ let playerActions = {
             matrix.piece.holdEnabled = false
             matrix.piece.locked = false
             matrix.piece.orientation = ORIENTATION.NORTH
-            if (holdQueue.piece) {
-                let piece = holdQueue.piece
-                holdQueue.piece = matrix.piece
-                generate(piece)
-            } else {
-                holdQueue.piece = matrix.piece
-                generate()
-            }
+            let piece = holdQueue.piece
+            holdQueue.piece = matrix.piece
+            generate(piece)
         }
     },
     
