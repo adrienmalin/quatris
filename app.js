@@ -528,6 +528,13 @@ class Stats {
                 this.score += b2bScore
             }
         } else if (nbClearedLines && !tSpin ) {
+            if (this.b2b >= 1) {
+                messagesSpan.addNewChild("div", {
+                    className: "zoom-in-animation",
+                    style: "animation-delay: .4s",
+                    innerHTML: `BACK TO BACK END`
+                })
+            }
             this.b2b = -1
         }
 
