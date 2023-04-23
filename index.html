@@ -25,75 +25,79 @@
             <form name="settingsForm">
               <fieldset id="keyBindFielset" class="row g-2 mb-3 align-items-center text-center">
                 <legend class="text-start">Commandes</legend>
-                <label for="moveLeftInput" title="Gauche" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="moveLeftInput" title="Gauche" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-left"></i>
                 </label>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="moveLeft" id="moveLeftInput" type="button" class="form-control text-center" value="←" onclick="changeKey(this)">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="moveRight" id="moveRightInput" type="button" class="form-control text-center" value="→" onclick="changeKey(this)">
                 </div>
-                <label for="moveRightInput" title="Droite" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="moveRightInput" title="Droite" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-right"></i>
                 </label>
-                <label for="rotateCounterclockwiseInput" title="Rotation anti-horaire" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="rotateCounterclockwiseInput" title="Rotation anti-horaire" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-counterclockwise"></i>
                 </label>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="rotateCounterclockwise" id="rotateCounterclockwiseInput" type="button" class="form-control text-center" value="w" onclick="changeKey(this)">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="rotateClockwise" id="rotateClockwiseInput" type="button" class="form-control text-center" value="↑" onclick="changeKey(this)">
                 </div>
-                <label for="rotateClockwiseInput" title="Rotation horaire" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="rotateClockwiseInput" title="Rotation horaire" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-clockwise"></i>
                 </label>
-                <label for="softDropInput" title="Chute lente" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="softDropInput" title="Chute lente" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-down-short"></i>
                 </label>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="softDrop" id="softDropInput" type="button" class="form-control text-center" value="↓" onclick="changeKey(this)">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="hardDrop" id="hardDropInput" type="button" class="form-control text-center" value="Space" onclick="changeKey(this)">
                 </div>
-                <label for="hardDropInput" title="Chute rapide" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="hardDropInput" title="Chute rapide" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-download"></i>
                 </label>
-                <label for="holdInput" title="Échanger la pièce" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="holdInput" title="Échanger la pièce" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-left-right"></i>
                 </label>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="hold" id="holdInput" type="button" class="form-control text-center" value="c" onclick="changeKey(this)">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <input name="pause" id="pauseInput" type="button" class="form-control text-center" value="Escape" onclick="changeKey(this)">
                 </div>
-                <label for="pauseInput" title="Pause" class="col-sm-3 col-form-label d-flex align-items-center justify-content-center">
+                <label for="pauseInput" title="Pause" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-pause"></i>
                 </label>
               </fieldset>
               <fieldset id="autorepearFieldset" class="row g-2 mb-3 align-items-center text-center">
                 <legend class="text-start">Répétition automatique</legend>
-                <label for="arrInput" class="col-sm-3 col-form-label" title="Automatic Repeat Rate : période de répétition de l'action">ARR</label>
-                <div class="col-sm-3">
-                  <output id="arrOutput" class="form-text form-text-sm w-100 m-auto text-center" for="arrInput">33 ms</output>
-                  <input name="arr" id="arrInput" type="range" class="form-range h-100" value="33" min="2" max="200" step="1" oninput="arrOutput.value = value + ' ms'">
+                <label for="arrInput" class="col-sm-2 col-form-label" title="Automatic Repeat Rate : période de répétition de l'action">ARR</label>
+                <div class="col-sm-4">
+                  <div class="input-group">
+                    <input name="arr" id="arrInput" type="number" class="form-control text-center" value="33" min="2" max="200" step="1">
+                    <div class="input-group-text">ms</div>
+                  </div>
                 </div>
-                <div class="col-sm-3">
-                  <output id="dasOutput" class="form-text form-text-sm w-100 m-auto text-center" for="dasInput">180 ms</output>
-                  <input name="das" id="dasInput" type="range" class="form-range h-100" value="180" min="100" max="500" step="5" oninput="dasOutput.value = value + ' ms'">
+                <div class="col-sm-4">
+                  <div class="input-group">
+                    <input name="das" id="dasInput" type="number" class="form-control text-center" value="180" min="100" max="500" step="5">
+                    <div class="input-group-text">ms</div>
+                  </div>
                 </div>
-                <label for="dasInput" class="col-sm-3 col-form-label" title="Delayed AutoShift : délai initial avant répétition">DAS</label>
+                <label for="dasInput" class="col-sm-2 col-form-label" title="Delayed AutoShift : délai initial avant répétition">DAS</label>
               </fieldset>
               <fieldset class="row g-2 mb-3 align-items-center text-center">
                 <legend class="text-start">Partie</legend>
-                <label for="levelInput" class="col-sm-3 col-form-label text-center">Niveau</label>
-                <div class="col-sm-3">
-                  <input name="startLevel" id="levelInput" type="number" class="form-control" value="1" min="1" max="15">
+                <label for="levelInput" class="col-sm-2 col-form-label text-center">Niveau</label>
+                <div class="col-sm-4">
+                  <input name="startLevel" id="levelInput" type="number" class="form-control text-center" value="1" min="1" max="15">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <button id="resumeButton" type="submit" data-bs-dismiss="modal" class="btn btn-primary form-control" autofocus>Jouer</button>
                 </div>
               </fieldset>

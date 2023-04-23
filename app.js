@@ -375,8 +375,6 @@ class Settings {
         for (let input of settingsForm.getElementsByTagName("input")) {
             if (localStorage[input.name]) input.value = localStorage[input.name]
         }
-        arrOutput.value = arrInput.value + " ms"
-        dasOutput.value = dasInput.value + " ms"
 
         settingsForm.onsubmit = newGame
         this.modal = new bootstrap.Modal('#settingsModal')
