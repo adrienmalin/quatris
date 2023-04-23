@@ -650,9 +650,9 @@ let playerActions = {
             matrix.piece.holdEnabled = false
             matrix.piece.locked = false
             matrix.piece.orientation = ORIENTATION.NORTH
-            let piece = holdQueue.piece
+            let heldPiece = holdQueue.piece
             holdQueue.piece = matrix.piece
-            generate(piece)
+            generate(heldPiece)
         }
     },
     
