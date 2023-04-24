@@ -1,0 +1,45 @@
+.mino {
+    background: rgba(255, 255, 255, 10%);
+    border: 5px solid;
+    padding: 0;
+    opacity: 100%;
+    border-radius: 4px;
+    filter: blur(1px)
+}
+
+.I.mino {
+    border-color: #9bf6ff;
+}
+
+.J.mino {
+    border-color: #a0c4ff;
+}
+
+.L.mino {
+    border-color: #ffd6a5;
+}
+
+.O.mino {
+    border-color: #fdffb6;
+}
+
+.T.mino {
+    border-color: #bdb2ff;
+}
+
+.S.mino {
+    border-color: #caffbf;
+}
+
+.Z.mino {
+    border-color: #ffadad;
+}
+
+.locked.mino {
+    border-color: white;
+    filter: blur(2px);
+}
+
+.ghost.mino {
+    filter: brightness(150%) blur(2px);
+}
