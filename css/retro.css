@@ -1,0 +1,118 @@
+:root {
+    --g0: #062807;
+    --g1: #1f5b1c;
+    --g2: #83b70b;
+    --g3: #a3d30d;
+    
+    --bs-body-font-family: monospace;
+}
+
+body {
+    background: #7b787f;
+    font-family: monospace;
+}
+
+.card {
+    background-color: var(--g3);
+}
+
+.card,
+table,
+#messagesSpan {
+    color: var(--g0) !important;
+}
+
+td:not(.mino) {
+    border: 0;
+}
+
+tr.matrix td:not(.mino) {
+    border: 0;
+}
+
+.mino {
+    position: relative;
+    border: 2px solid var(--g0);
+}
+
+.mino::after {
+    position: absolute;
+    content: " ";
+}
+
+.I.mino {
+    background-color: var(--g2);
+}
+
+.J.mino {
+    background-color: var(--g2);
+}
+
+.J.mino::after {
+    top: 5px;
+    left: 5px;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--g0);
+}
+
+.L.mino {
+    background-color: var(--g1);
+}
+
+.O.mino {
+    background-color: var(--g3);
+}
+
+.O.mino::after {
+    top: 3px;
+    left: 3px;
+    width: 15px;
+    height: 15px;
+    background-color: var(--g0);
+}
+
+.S.mino {
+    background-color: var(--g1);
+}
+
+.S.mino::after {
+    top: 5px;
+    left: 5px;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--g0);
+}
+
+.T.mino {
+    background-color: var(--g2);
+}
+
+.T.mino::after {
+    top: 5px;
+    left: 5px;
+    width: 11px;
+    height: 11px;
+    border: 2px solid;
+    border-top-color: var(--g3);
+    border-left-color: var(--g3);
+    border-right-color: var(--g0);
+    border-bottom-color: var(--g0);
+}
+
+.Z.mino {
+    background-color: var(--g2);
+}
+
+.Z.mino::after {
+    top: 5px;
+    left: 5px;
+    width: 11px;
+    height: 11px;
+    background-color: var(--g0);
+}
+
+.locked.mino {
+    background-color: var(--g2);
+    border-color: var(--g3);
+}

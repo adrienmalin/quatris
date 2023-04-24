@@ -803,6 +803,7 @@ function lockDown() {
         for (let y=0; y<matrix.rows; y++) {
             let row = matrix.blocks[y]
             if (row.filter(lockedMino => lockedMino).length == matrix.columns) {
+                nbClearedLines++
                 matrix.blocks.splice(y, 1)
                 matrix.blocks.unshift(Array(matrix.columns))
                 matrix.table.rows[y].classList.add("cleared-line-animation")
