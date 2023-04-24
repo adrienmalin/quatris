@@ -24,7 +24,7 @@ body {
 }
 
 #matrixTable {
-    margin-top: calc(-1 * var(--no-bordered-rows) * var(--cell-side));
+    margin-top: calc(-1 * var(--buffer-zoneed-rows) * var(--cell-side));
 }
 
 @keyframes hard-dropped-table-animation {
@@ -43,12 +43,12 @@ body {
     animation: hard-dropped-table-animation .2s;
 }
 
-tr.no-border td:not(.mino) {
+tr.buffer-zone td:not(.mino) {
     border-width: 0;
     padding: 4px;
 }
 
-tr.border td:not(.mino) {
+tr.matrix td:not(.mino) {
     border: 1px solid #333;
     padding: 3px;
 }
