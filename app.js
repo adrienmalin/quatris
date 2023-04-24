@@ -380,7 +380,7 @@ class Settings {
         for (let input of this.form.getElementsByTagName("input")) {
             if (localStorage[input.name]) input.value = localStorage[input.name]
         }
-        this.form.submit = newGame
+        this.form.onsubmit = newGame
         this.modal = new bootstrap.Modal('#settingsModal')
         document.getElementById('settingsModal').addEventListener('shown.bs.modal', () => {
             resumeButton.focus()
@@ -597,36 +597,50 @@ function pause() {
 
     resumeButton.disabled = false
     settings.modal.show()
+    settings.form.reportValidity()
 }
 onblur = pause
 
 pause()
 
 function newGame(event) {
-    stats.lockDelay = DELAY.LOCK
-    resume(event)
-    levelInput.name = "level"
-    levelInput.disabled = true
-    titleHeader.innerHTML = "PAUSE"
-    resumeButton.innerHTML = "Reprendre"
-    event.target.onsubmit = resume
-    stats.score = 0
-    stats.goal = 0
-    stats.level = levelInput.valueAsNumber
-    localStorage["startLevel"] = levelInput.value
-    generate()
+    if (!settings.form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+        settings.form.reportValidity()
+        settings.form.classList.add('was-validated')
+    } else {
+        stats.lockDelay = DELAY.LOCK
+        levelInput.name = "level"
+        levelInput.disabled = true
+        titleHeader.innerHTML = "PAUSE"
+        resumeButton.innerHTML = "Reprendre"
+        event.target.onsubmit = resume
+        stats.score = 0
+        stats.goal = 0
+        stats.level = levelInput.valueAsNumber
+        localStorage["startLevel"] = levelInput.value
+        resume(event)
+    }
 }
 
 function resume(event) {
     event.preventDefault()
+    event.stopPropagation()
 
-    settings.load()
-    document.onkeydown = onkeydown
-    document.onkeyup = onkeyup
-
-    stats.time = stats.pauseTime
-    scheduler.setInterval(ticktack, 1000)
-    if (stats.fallPeriod) scheduler.setInterval(fall, stats.fallPeriod)
+    if (!settings.form.checkValidity()) {
+        settings.form.reportValidity()
+        settings.form.classList.add('was-validated')
+    } else {
+        settings.load()
+        settings.modal.hide()
+        document.onkeydown = onkeydown
+        document.onkeyup = onkeyup
+    
+        stats.time = stats.pauseTime
+        scheduler.setInterval(ticktack, 1000)
+        if (!matrix.piece) generate()
+    }
 }
 
 function ticktack() {
