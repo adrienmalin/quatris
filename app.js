@@ -404,14 +404,14 @@ class Settings {
 
 function changeKey(input) {
     prevValue = input.value
-    input.value = "Touche ?"
+    input.value = ""
     input.onkeydown = function (event) {
         event.preventDefault()
         input.value = KEY_NAMES[event.key] || event.key
         input.blur()
     }
     input.onblur = function (event) {
-        if (input.value == "Touche ?") input.value = prevValue
+        if (input.value == "") input.value = prevValue
         input.onkeydown = null
         input.onblur = null
     }
@@ -597,6 +597,7 @@ function pause() {
     document.onkeydown = null
 
     resumeButton.disabled = false
+    settings.form.classList.remove('was-validated')
     settings.modal.show()
     settings.form.reportValidity()
 }
@@ -629,11 +630,10 @@ function newGame(event) {
 function resume(event) {
     event.preventDefault()
     event.stopPropagation()
+    settings.form.reportValidity()
+    settings.form.classList.add('was-validated')
 
-    if (!settings.form.checkValidity()) {
-        settings.form.reportValidity()
-        settings.form.classList.add('was-validated')
-    } else {
+    if (settings.form.checkValidity()) {
         settings.load()
         settings.modal.hide()
         document.onkeydown = onkeydown

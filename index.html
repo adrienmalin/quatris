@@ -29,10 +29,10 @@
                   <i class="bi bi-arrow-left"></i>
                 </label>
                 <div class="col-sm-4">
-                  <input name="moveLeft" id="moveLeftInput" type="button" class="form-control text-center" value="←" onclick="changeKey(this)">
+                  <input name="moveLeft" id="moveLeftInput" type="text" class="form-control text-center" value="←" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <div class="col-sm-4">
-                  <input name="moveRight" id="moveRightInput" type="button" class="form-control text-center" value="→" onclick="changeKey(this)">
+                  <input name="moveRight" id="moveRightInput" type="text" class="form-control text-center" value="→" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <label for="moveRightInput" title="Droite" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-right"></i>
@@ -41,10 +41,10 @@
                   <i class="bi bi-arrow-counterclockwise"></i>
                 </label>
                 <div class="col-sm-4">
-                  <input name="rotateCounterclockwise" id="rotateCounterclockwiseInput" type="button" class="form-control text-center" value="w" onclick="changeKey(this)">
+                  <input name="rotateCounterclockwise" id="rotateCounterclockwiseInput" type="text" class="form-control text-center" value="w" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <div class="col-sm-4">
-                  <input name="rotateClockwise" id="rotateClockwiseInput" type="button" class="form-control text-center" value="↑" onclick="changeKey(this)">
+                  <input name="rotateClockwise" id="rotateClockwiseInput" type="text" class="form-control text-center" value="↑" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <label for="rotateClockwiseInput" title="Rotation horaire" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-arrow-clockwise"></i>
@@ -53,10 +53,10 @@
                   <i class="bi bi-arrow-down-short"></i>
                 </label>
                 <div class="col-sm-4">
-                  <input name="softDrop" id="softDropInput" type="button" class="form-control text-center" value="↓" onclick="changeKey(this)">
+                  <input name="softDrop" id="softDropInput" type="text" class="form-control text-center" value="↓" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <div class="col-sm-4">
-                  <input name="hardDrop" id="hardDropInput" type="button" class="form-control text-center" value="Espace" onclick="changeKey(this)">
+                  <input name="hardDrop" id="hardDropInput" type="text" class="form-control text-center" value="Espace" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <label for="hardDropInput" title="Chute rapide" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-download"></i>
@@ -65,10 +65,10 @@
                   <i class="bi bi-arrow-left-right"></i>
                 </label>
                 <div class="col-sm-4">
-                  <input name="hold" id="holdInput" type="button" class="form-control text-center" value="c" onclick="changeKey(this)">
+                  <input name="hold" id="holdInput" type="text" class="form-control text-center" value="c" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <div class="col-sm-4">
-                  <input name="pause" id="pauseInput" type="button" class="form-control text-center" value="Échap" onclick="changeKey(this)">
+                  <input name="pause" id="pauseInput" type="text" class="form-control text-center" value="Échap" onclick="changeKey(this)" placeholder="Touche ?" required>
                 </div>
                 <label for="pauseInput" title="Pause" class="col-sm-2 col-form-label d-flex align-items-center justify-content-center">
                   <i class="bi bi-pause"></i>
@@ -98,7 +98,7 @@
                   <input name="startLevel" id="levelInput" type="number" class="form-control text-center" value="1" min="1" max="15">
                 </div>
                 <div class="col-sm-4">
-                  <button id="resumeButton" type="submit" class="btn btn-primary form-control" autofocus>Jouer</button>
+                  <button id="resumeButton" type="submit" class="btn btn-primary w-100" autofocus>Jouer</button>
                 </div>
               </fieldset>
             </form>
