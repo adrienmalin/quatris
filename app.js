@@ -421,8 +421,8 @@ function changeKey(input) {
 class Stats {
     constructor() {
         this.highScore = Number(localStorage["highScore"]) || 0
-        this.combo = -1
-        this.b2b = -1
+        this.combo = 0
+        this.b2b = 0
         this.startTime = new Date()
     }
 
@@ -507,11 +507,19 @@ class Stats {
             this.combo++
             if (this.combo >= 1) {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
-                messagesSpan.addNewChild("div", {
-                    className: "zoom-in-animation",
-                    style: "animation-delay: .4s",
-                    innerHTML: `ENCHAINEMENT x${this.combo}<br/>${comboScore}`
-                })
+                if (this.combo == 1) {
+                    messagesSpan.addNewChild("div", {
+                        className: "zoom-in-animation",
+                        style: "animation-delay: .4s",
+                        innerHTML: `ENCHAINEMENT<br/>${comboScore}`
+                    })
+                } else {
+                    messagesSpan.addNewChild("div", {
+                        className: "zoom-in-animation",
+                        style: "animation-delay: .4s",
+                        innerHTML: `ENCHAINEMENT x${this.combo}<br/>${comboScore}`
+                    })
+                }
                 this.score += comboScore
             }
         } else {
@@ -523,11 +531,19 @@ class Stats {
             this.b2b++
             if (this.b2b >= 1) {
                 let b2bScore = patternScore / 2
-                messagesSpan.addNewChild("div", {
-                    className: "zoom-in-animation",
-                    style: "animation-delay: .4s",
-                    innerHTML: `BOUT À BOUT x${this.b2b}<br/>${b2bScore}`
-                })
+                if (this.b2b == 1) {
+                    messagesSpan.addNewChild("div", {
+                        className: "zoom-in-animation",
+                        style: "animation-delay: .4s",
+                        innerHTML: `BOUT À BOUT<br/>${b2bScore}`
+                    })
+                } else {
+                    messagesSpan.addNewChild("div", {
+                        className: "zoom-in-animation",
+                        style: "animation-delay: .4s",
+                        innerHTML: `BOUT À BOUT x${this.b2b}<br/>${b2bScore}`
+                    })
+                }
                 this.score += b2bScore
             }
         } else if (nbClearedLines && !tSpin ) {
