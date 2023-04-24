@@ -733,7 +733,8 @@ function onkeydown(event) {
                 actionsQueue.unshift(action)
                 scheduler.clearTimeout(repeat)
                 scheduler.clearInterval(autorepeat)
-                scheduler.setTimeout(repeat, settings.das)
+                if (action == playerActions.softDrop) scheduler.setInterval(autorepeat, settings.fallPeriod/20)
+                else scheduler.setTimeout(repeat, settings.das)
             }
         }
     }
