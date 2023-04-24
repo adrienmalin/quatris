@@ -6,9 +6,11 @@ body {
   background: linear-gradient(#212529, #14171a) fixed;
 }
 
-.modal-content {
-    background-color: rgba(33, 37, 41, 30%);
-    backdrop-filter: blur(15px);
+@supports (backdrop-filter: blur()) {
+    .modal-content {
+        background-color: rgba(33, 37, 41, 30%);
+        backdrop-filter: blur(15px);
+    }
 }
 
 .card {
