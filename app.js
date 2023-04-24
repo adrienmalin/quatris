@@ -61,7 +61,7 @@ const KEY_NAMES = {
     ["Entrée"]:     "Enter",
 }
 
-/* Customize Array to be use as coord */
+/* Customize Array to be use as position */
 Object.defineProperties(Array.prototype, {
     "x": {
         get: function() { return this[0] },
@@ -135,15 +135,15 @@ class MinoesTable {
         this.drawPiece()
     }
 
-    drawMino(coord, className) {
-        this.table.rows[coord.y].cells[coord.x].className = className
+    drawMino(position, className) {
+        this.table.rows[position.y].cells[position.x].className = className
     }
 
     drawPiece(piece=this.piece, className=piece.className + (piece.locked? " locked" : "")) {
-        piece.minoesCoord[piece.orientation]
+        piece.minoesPosition[piece.orientation]
             .translate(piece.center)
-            .forEach(minoCoord => {
-                this.drawMino(minoCoord, className)
+            .forEach(minoPosition => {
+                this.drawMino(minoPosition, className)
             })
     }
 
@@ -191,11 +191,11 @@ NextQueue.prototype.init_centers = [[2, 2], [2, 5], [2, 8], [2, 11], [2, 14]]
 class PlayfieldMatrix extends MinoesTable {
     constructor(id, piece_init_position) {
         super(id, piece_init_position)
-        this.lockedMinoes = Array(this.rows).fill().map(() => Array(this.columns))
+        this.blocks = Array(this.rows).fill().map(() => Array(this.columns))
     }
 
-    cellIsEmpty(coord) {
-        return 0 <= coord.x && coord.x < this.columns && 0 <= coord.y && coord.y < this.rows && !this.lockedMinoes[coord.y][coord.x]
+    cellIsEmpty(position) {
+        return 0 <= position.x && position.x < this.columns && 0 <= position.y && position.y < this.rows && !this.blocks[position.y][position.x]
     }
 
     get piece() {
@@ -221,7 +221,7 @@ class PlayfieldMatrix extends MinoesTable {
         for (let y=0; y<this.rows; y++) {
             for (let x=0; x<this.columns; x++) {
                 if (this.table.rows[y].cells[x].classList != "hard-drop-animation")
-                    this.drawMino([x, y], this.lockedMinoes[y][x] || "")
+                    this.drawMino([x, y], this.blocks[y][x] || "")
             }
         }
     }
@@ -249,10 +249,10 @@ class Tetromino {
     canMove(translation, rotation=ROTATION.NONE) {
         let testCenter = this.center.add(translation)
         let testOrientation = rotation? (this.orientation + rotation + 4) % 4: this.orientation
-        let testMinoesCoord = this.minoesCoord[testOrientation]
-        if (testMinoesCoord
+        let testMinoesPosition = this.minoesPosition[testOrientation]
+        if (testMinoesPosition
             .translate(testCenter)
-            .every(minoCoord => matrix.cellIsEmpty(minoCoord)))
+            .every(minoPosition => matrix.cellIsEmpty(minoPosition)))
             return {center: testCenter, orientation: testOrientation}
         else
             return false
@@ -305,7 +305,7 @@ Tetromino.prototype.srs = [
 ]
 
 class I extends Tetromino {}
-I.prototype.minoesCoord = [
+I.prototype.minoesPosition = [
     [[-1, 0], [0, 0], [1, 0], [2, 0]],
     [[1, -1], [1, 0], [1, 1], [1, 2]],
     [[-1, 1], [0, 1], [1, 1], [2, 1]],
@@ -319,7 +319,7 @@ I.prototype.srs = [
 ]
 
 class J extends Tetromino {}
-J.prototype.minoesCoord = [
+J.prototype.minoesPosition = [
     [[-1, -1], [-1, 0], [0, 0], [1, 0]],
     [[ 0, -1], [1, -1], [0, 0], [0, 1]],
     [[ 1,  1], [-1, 0], [0, 0], [1, 0]],
@@ -327,7 +327,7 @@ J.prototype.minoesCoord = [
 ]
 
 class L extends Tetromino {}
-L.prototype.minoesCoord = [
+L.prototype.minoesPosition = [
     [[-1, 0], [0, 0], [1, 0], [ 1, -1]],
     [[0, -1], [0, 0], [0, 1], [ 1,  1]],
     [[-1, 0], [0, 0], [1, 0], [-1,  1]],
@@ -335,7 +335,7 @@ L.prototype.minoesCoord = [
 ]
 
 class O extends Tetromino {}
-O.prototype.minoesCoord = [
+O.prototype.minoesPosition = [
     [[0, 0], [1, 0], [0, -1], [1, -1]]
 ]
 O.prototype.srs = [
@@ -344,7 +344,7 @@ O.prototype.srs = [
 
 
 class S extends Tetromino {}
-S.prototype.minoesCoord = [
+S.prototype.minoesPosition = [
     [[-1,  0], [0, 0], [0, -1], [1, -1]],
     [[ 0, -1], [0, 0], [1,  0], [1,  1]],
     [[-1,  1], [0, 0], [1,  0], [0,  1]],
@@ -352,7 +352,7 @@ S.prototype.minoesCoord = [
 ]
 
 class T extends Tetromino {}
-T.prototype.minoesCoord = [
+T.prototype.minoesPosition = [
     [[-1, 0], [0, 0], [1, 0], [0, -1]],
     [[0, -1], [0, 0], [1, 0], [0,  1]],
     [[-1, 0], [0, 0], [1, 0], [0,  1]],
@@ -366,7 +366,7 @@ T.prototype.tSlots = [
 ]
 
 class Z extends Tetromino {}
-Z.prototype.minoesCoord = [
+Z.prototype.minoesPosition = [
     [[-1, -1], [0, -1], [0, 0], [ 1, 0]],
     [[ 1, -1], [1,  0], [0, 0], [ 0, 1]],
     [[-1,  0], [0,  0], [0, 1], [ 1, 1]],
@@ -640,7 +640,7 @@ function generate(piece) {
     if (matrix.piece.canMove(TRANSLATION.NONE)) {
         scheduler.setInterval(fall, stats.fallPeriod)
     } else {
-        gameOver()
+        gameOver() // block out
     }
 }
 
@@ -745,12 +745,12 @@ function lockDown() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
 
-    lockedMinoesCoord = matrix.piece.minoesCoord[matrix.piece.orientation]
+    blocksPosition = matrix.piece.minoesPosition[matrix.piece.orientation]
         .translate(matrix.piece.center)
-    if (lockedMinoesCoord.some(minoCoord => minoCoord.y >= 4)) {
-        lockedMinoesCoord.forEach(minoCoord => {
-            matrix.lockedMinoes[minoCoord.y][minoCoord.x] = matrix.piece.className
-            matrix.drawMino(minoCoord, matrix.piece.className)
+    if (blocksPosition.some(minoPosition => minoPosition.y >= 4)) {
+        blocksPosition.forEach(minoPosition => {
+            matrix.blocks[minoPosition.y][minoPosition.x] = matrix.piece.className
+            matrix.drawMino(minoPosition, matrix.piece.className)
         })
 
         // T-Spin
@@ -758,7 +758,7 @@ function lockDown() {
         if (matrix.piece.lastRotation && matrix.piece.constructor == T) {
             let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.orientation]
                 .translate(matrix.piece.center)
-                .map(minoCoord => !matrix.cellIsEmpty(minoCoord))
+                .map(minoPosition => !matrix.cellIsEmpty(minoPosition))
             if (a && b && (c || d))
                 tSpin = T_SPIN.T_SPIN
             else if (c && d && (a || b))
@@ -766,12 +766,12 @@ function lockDown() {
         }
 
         // Cleared lines
-        let clearedLines = Array.from(new Set(lockedMinoesCoord.map(minoCoord => minoCoord.y)))
-            .filter(y =>  matrix.lockedMinoes[y].filter(lockedMino => lockedMino).length == matrix.columns)
+        let clearedLines = Array.from(new Set(blocksPosition.map(minoPosition => minoPosition.y)))
+            .filter(y =>  matrix.blocks[y].filter(lockedMino => lockedMino).length == matrix.columns)
             .sort()
         for (y of clearedLines) {
-            matrix.lockedMinoes.splice(y, 1)
-            matrix.lockedMinoes.unshift(Array(matrix.columns))
+            matrix.blocks.splice(y, 1)
+            matrix.blocks.unshift(Array(matrix.columns))
             matrix.table.rows[y].classList.add("cleared-line-animation")
         }
         matrix.redraw()
@@ -779,7 +779,7 @@ function lockDown() {
         
         generate()
     } else {
-        gameOver()
+        gameOver() // lock out
     }
 }
 
