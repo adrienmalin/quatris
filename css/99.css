@@ -12,7 +12,7 @@
 }
 
 .I.mino {
-    --background-color: #00d6fb;
+    --background-color: #009FdA;
     --frontier-color:  #43e7fd;
     --light-color: #afeff9;
     border-top-color: #7cf2fd;
@@ -22,7 +22,7 @@
 }
 
 .J.mino {
-    --background-color: #2d00fa;
+    --background-color: #0065Bd;
     --frontier-color:  #7054fb;
     --light-color: #b8b4ff;
     border-top-color: #4985fd;
@@ -32,7 +32,7 @@
 }
 
 .L.mino {
-    --background-color: #ff6c13;
+    --background-color: #FF7900;
     --frontier-color:  #fe9551;
     --light-color: #fdd0b7;
     border-top-color: #fd9f6b;
@@ -42,7 +42,7 @@
 }
 
 .O.mino {
-    --background-color: #ffce12;
+    --background-color: #FeCB00;
     --frontier-color:  #fce15c;
     --light-color: #ffedac;;
     border-top-color: #ffe364;
@@ -52,7 +52,7 @@
 }
 
 .T.mino {
-    --background-color: #ad00fa;
+    --background-color: #952d98;
     --frontier-color:  #c541fc;
     --light-color: #edb2ff;
     border-top-color: #d380ff;
@@ -62,7 +62,7 @@
 }
 
 .S.mino {
-    --background-color: #6e1;
+    --background-color: #69Be28;
     --frontier-color:  #93f85a;
     --light-color: #93f85a;
     border-top-color: #a4fc6d;
@@ -72,7 +72,7 @@
 }
 
 .Z.mino {
-    --background-color: #ff1945;
+    --background-color: #ed2939;
     --frontier-color:  #fe6483;
     --light-color: #ffb8c5;
     border-top-color: #fd718d;
