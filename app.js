@@ -37,7 +37,7 @@ const DELAY = {
     FALL: 1000,
 }
 
-const ORIENTATION = {
+const FACING = {
     NORTH: 0,
     EAST:  1,
     SOUTH: 2,
@@ -140,7 +140,7 @@ class MinoesTable {
     }
 
     drawPiece(piece=this.piece, className=piece.className + (piece.locked? " locked" : "")) {
-        piece.minoesPosition[piece.orientation]
+        piece.minoesPosition[piece.facing]
             .translate(piece.center)
             .forEach(minoPosition => {
                 this.drawMino(minoPosition, className)
@@ -236,10 +236,10 @@ class Tetromino {
         return this.randomBag.pick()
     }
 
-    constructor(center, orientation=0, className=this.constructor.name + " mino") {
+    constructor(center, facing=0, className=this.constructor.name + " mino") {
         this.center = center
         this.className = className
-        this.orientation = orientation
+        this.facing = facing
         this.lastRotation = false
         this.rotationPoint4Used = false
         this.holdEnabled = true
@@ -248,12 +248,12 @@ class Tetromino {
 
     canMove(translation, rotation=ROTATION.NONE) {
         let testCenter = this.center.add(translation)
-        let testOrientation = rotation? (this.orientation + rotation + 4) % 4: this.orientation
-        let testMinoesPosition = this.minoesPosition[testOrientation]
+        let testFacing = rotation? (this.facing + rotation + 4) % 4: this.facing
+        let testMinoesPosition = this.minoesPosition[testFacing]
         if (testMinoesPosition
             .translate(testCenter)
             .every(minoPosition => matrix.cellIsEmpty(minoPosition)))
-            return {center: testCenter, orientation: testOrientation}
+            return {center: testCenter, facing: testFacing}
         else
             return false
     }
@@ -264,7 +264,7 @@ class Tetromino {
             scheduler.clearTimeout(lockDown)
             matrix.drawPiece(this, clearClassName)
             this.center = success.center
-            if (rotation) this.orientation = success.orientation
+            if (rotation) this.facing = success.facing
             this.lastRotation = rotation
             if (this.canMove(TRANSLATION.DOWN)) {
                 this.locked = false
@@ -283,7 +283,7 @@ class Tetromino {
     }
     
     rotate(rotation) {
-        return this.srs[this.orientation][rotation].some((translation, rotationPoint) => {
+        return this.srs[this.facing][rotation].some((translation, rotationPoint) => {
             if (this.move(translation, rotation)) {
                 if (rotationPoint == 4) this.rotationPoint4Used = true
                 return true
@@ -292,11 +292,11 @@ class Tetromino {
     }
 
     get ghost() {
-        return new this.constructor(Array.from(this.center), this.orientation, "ghost " + this.className)
+        return new this.constructor(Array.from(this.center), this.facing, "ghost " + this.className)
     }
 }
 // Super Rotation System
-// freedom of movement = srs[piece.orientation][rotation]
+// freedom of movement = srs[piece.facing][rotation]
 Tetromino.prototype.srs = [
     { [ROTATION.CW]: [[0, 0], [-1, 0], [-1, -1], [0,  2], [-1,  2]], [ROTATION.CCW]: [[0, 0], [ 1, 0], [ 1, -1], [0,  2], [ 1,  2]] },
     { [ROTATION.CW]: [[0, 0], [ 1, 0], [ 1,  1], [0, -2], [ 1, -2]], [ROTATION.CCW]: [[0, 0], [ 1, 0], [ 1,  1], [0, -2], [ 1, -2]] },
@@ -703,7 +703,7 @@ let playerActions = {
     
             matrix.piece.holdEnabled = false
             matrix.piece.locked = false
-            matrix.piece.orientation = ORIENTATION.NORTH
+            matrix.piece.facing = FACING.NORTH
             let heldPiece = holdQueue.piece
             holdQueue.piece = matrix.piece
             generate(heldPiece)
@@ -778,7 +778,7 @@ function lockDown() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
 
-    blocksPosition = matrix.piece.minoesPosition[matrix.piece.orientation]
+    blocksPosition = matrix.piece.minoesPosition[matrix.piece.facing]
                         .translate(matrix.piece.center)
     if (blocksPosition.some(minoPosition => minoPosition.y >= 4)) {
         blocksPosition.forEach(minoPosition => {
@@ -789,7 +789,7 @@ function lockDown() {
         // T-Spin
         let tSpin = T_SPIN.NONE
         if (matrix.piece.lastRotation && matrix.piece.constructor == T) {
-            let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.orientation]
+            let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.facing]
                 .translate(matrix.piece.center)
                 .map(minoPosition => !matrix.cellIsEmpty(minoPosition))
             if (a && b && (c || d))
