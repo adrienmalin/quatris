@@ -1,5 +1,5 @@
 :root {
-    --cell-side: 20px;
+    --cell-side: 24px;
 }
 
 body {
@@ -26,7 +26,7 @@ body {
 }
 
 #matrixTable {
-    margin-top: calc(-1 * var(--buffer-zoneed-rows) * var(--cell-side));
+    margin-top: calc(-1 * var(--buffer-zone-rows) * var(--cell-side));
 }
 
 @keyframes hard-dropped-table-animation {
@@ -47,18 +47,16 @@ body {
 
 tr.buffer-zone td:not(.mino) {
     border-width: 0;
-    padding: 4px;
 }
 
 tr.matrix td:not(.mino) {
     border: 1px solid #333;
-    padding: 3px;
 }
 
 td {
     overflow: hidden;
-    width: calc(var(--cell-side) + 4px);
-    height: calc(var(--cell-side) + 4px);
+    width: var(--cell-side);
+    height: var(--cell-side);
 }
 
 @keyframes hard-drop-animation {
