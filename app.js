@@ -376,11 +376,11 @@ Z.prototype.minoesPosition = [
 
 class Settings {
     constructor() {
-        for (let input of settingsForm.getElementsByTagName("input")) {
+        this.form = settingsForm
+        for (let input of this.form.getElementsByTagName("input")) {
             if (localStorage[input.name]) input.value = localStorage[input.name]
         }
-
-        settingsForm.onsubmit = newGame
+        this.form.submit = newGame
         this.modal = new bootstrap.Modal('#settingsModal')
         document.getElementById('settingsModal').addEventListener('shown.bs.modal', () => {
             resumeButton.focus()
@@ -621,7 +621,6 @@ function resume(event) {
     event.preventDefault()
 
     settings.load()
-
     document.onkeydown = onkeydown
     document.onkeyup = onkeyup
 
@@ -801,7 +800,7 @@ function gameOver() {
 
 window.onbeforeunload = function(event) {
     localStorage["highScore"] = stats.highScore
-    for (let input of settingsForm.getElementsByTagName("input")) {
+    for (let input of settings.form.getElementsByTagName("input")) {
         localStorage[input.name] = input.value
     }
 }
