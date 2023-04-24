@@ -17,11 +17,11 @@ const T_SPIN = {
     T_SPIN: "PIROUETTE"
 }
 
-// score = SCORES[tSpin][nbClearedLines]
-const SCORES = {
-    [T_SPIN.NONE]:   [0, 100, 300, 500, 800],
-    [T_SPIN.MINI]:   [100, 200],
-    [T_SPIN.T_SPIN]: [400, 800, 1200, 1600]
+// score = AWARDED_LINE_CLEARS[tSpin][nbClearedLines]
+const AWARDED_LINE_CLEARS = {
+    [T_SPIN.NONE]:   [0, 1, 3, 5, 8],
+    [T_SPIN.MINI]:   [1, 2],
+    [T_SPIN.T_SPIN]: [4, 8, 12, 16]
 }
 
 const CLEARED_LINES_NAMES = [
@@ -159,8 +159,8 @@ MinoesTable.prototype.init_center = [2, 2]
 
 
 class NextQueue extends MinoesTable {
-    constructor(id) {
-        super(id)
+    constructor() {
+        super("nextTable")
         this.pieces = this.init_centers.map(center => {
             let piece = new Tetromino.pick()
             piece.center = Array.from(center)
@@ -188,9 +188,9 @@ class NextQueue extends MinoesTable {
 NextQueue.prototype.init_centers = [[2, 2], [2, 5], [2, 8], [2, 11], [2, 14]]
 
 
-class PlayfieldMatrix extends MinoesTable {
-    constructor(id, piece_init_position) {
-        super(id, piece_init_position)
+class Matrix extends MinoesTable {
+    constructor() {
+        super("matrixTable")
         this.blocks = Array(this.rows).fill().map(() => Array(this.columns))
     }
 
@@ -226,7 +226,7 @@ class PlayfieldMatrix extends MinoesTable {
         }
     }
 }
-PlayfieldMatrix.prototype.init_center = [5, 4]
+Matrix.prototype.init_center = [5, 4]
 
 
 class Tetromino {
@@ -377,9 +377,7 @@ Z.prototype.minoesPosition = [
 class Settings {
     constructor() {
         this.form = settingsForm
-        for (let input of this.form.getElementsByTagName("input")) {
-            if (localStorage[input.name]) input.value = localStorage[input.name]
-        }
+        this.load()
         this.form.onsubmit = newGame
         this.modal = new bootstrap.Modal('#settingsModal')
         document.getElementById('settingsModal').addEventListener('shown.bs.modal', () => {
@@ -388,6 +386,19 @@ class Settings {
     }
 
     load() {
+        for (let input of this.form.getElementsByTagName("input")) {
+            if (localStorage[input.name]) input.value = localStorage[input.name]
+        }
+    }
+
+    show() {
+        resumeButton.disabled = false
+        settings.form.classList.remove('was-validated')
+        settings.modal.show()
+        settings.form.reportValidity()
+    }
+
+    getInputs() {
         for (let input of keyBindFielset.getElementsByTagName("input")) {
             this[input.name] = KEY_NAMES[input.value] || input.value
         }
@@ -484,7 +495,8 @@ class Stats {
 
     lockDown(nbClearedLines, tSpin) {
         // Cleared lines & T-Spin
-        let patternScore = SCORES[tSpin][nbClearedLines] * this.level
+        let awardedLineClears = AWARDED_LINE_CLEARS[tSpin][nbClearedLines]
+        let patternScore = 100 * this.level * awardedLineClears
         if (tSpin) messagesSpan.addNewChild("div", {
             className: "rotate-in-animation",
             innerHTML: tSpin
@@ -557,7 +569,7 @@ class Stats {
             this.b2b = -1
         }
 
-        this.goal -= nbClearedLines
+        this.goal -= awardedLineClears
         if (this.goal <= 0) this.level++
     }
 }
@@ -581,12 +593,16 @@ let scheduler = new Scheduler()
 let settings = new Settings()
 let stats = new Stats()
 let holdQueue = new MinoesTable("holdTable")
-let matrix = new PlayfieldMatrix("matrixTable")
-let nextQueue = new NextQueue("nextTable")
+let matrix = new Matrix()
+let nextQueue = new NextQueue()
 let playing = false
 
+function init() {
 
-function pause() {
+}
+
+
+function pauseSettings() {
     scheduler.clearInterval(fall)
     scheduler.clearTimeout(lockDown)
     scheduler.clearTimeout(repeat)
@@ -596,14 +612,11 @@ function pause() {
 
     document.onkeydown = null
 
-    resumeButton.disabled = false
-    settings.form.classList.remove('was-validated')
-    settings.modal.show()
-    settings.form.reportValidity()
+    settings.show()
 }
-onblur = pause
+onblur = pauseSettings
 
-pause()
+pauseSettings()
 
 function newGame(event) {
     if (!settings.form.checkValidity()) {
@@ -630,17 +643,20 @@ function newGame(event) {
 function resume(event) {
     event.preventDefault()
     event.stopPropagation()
+
     settings.form.reportValidity()
     settings.form.classList.add('was-validated')
 
     if (settings.form.checkValidity()) {
-        settings.load()
         settings.modal.hide()
+        settings.getInputs()
+
         document.onkeydown = onkeydown
         document.onkeyup = onkeyup
     
         stats.time = stats.pauseTime
         scheduler.setInterval(ticktack, 1000)
+
         if (matrix.piece) scheduler.setInterval(fall, stats.fallPeriod)
         else generate()
     }
@@ -694,7 +710,7 @@ let playerActions = {
         }
     },
     
-    pause: pause,
+    pause: pauseSettings,
 }
 
 // Handle player inputs
@@ -823,6 +839,7 @@ window.onbeforeunload = function(event) {
     }
     if (playing) return false;
 }
+
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
