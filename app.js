@@ -778,7 +778,7 @@ function lockDown() {
     scheduler.clearInterval(fall)
 
     blocksPosition = matrix.piece.minoesPosition[matrix.piece.orientation]
-        .translate(matrix.piece.center)
+                        .translate(matrix.piece.center)
     if (blocksPosition.some(minoPosition => minoPosition.y >= 4)) {
         blocksPosition.forEach(minoPosition => {
             matrix.blocks[minoPosition.y][minoPosition.x] = matrix.piece.className
@@ -798,16 +798,18 @@ function lockDown() {
         }
 
         // Cleared lines
-        let clearedLines = Array.from(new Set(blocksPosition.map(minoPosition => minoPosition.y)))
-            .filter(y =>  matrix.blocks[y].filter(lockedMino => lockedMino).length == matrix.columns)
-            .sort()
-        for (y of clearedLines) {
-            matrix.blocks.splice(y, 1)
-            matrix.blocks.unshift(Array(matrix.columns))
-            matrix.table.rows[y].classList.add("cleared-line-animation")
+        let nbClearedLines = 0
+        for (let y=0; y<matrix.rows; y++) {
+            let row = matrix.blocks[y]
+            if (row.filter(lockedMino => lockedMino).length == matrix.columns) {
+                matrix.blocks.splice(y, 1)
+                matrix.blocks.unshift(Array(matrix.columns))
+                matrix.table.rows[y].classList.add("cleared-line-animation")
+            }
         }
+
         matrix.redraw()
-        stats.lockDown(clearedLines.length, tSpin)
+        stats.lockDown(nbClearedLines, tSpin)
         
         generate()
     } else {
