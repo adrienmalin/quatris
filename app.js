@@ -583,6 +583,7 @@ let stats = new Stats()
 let holdQueue = new MinoesTable("holdTable")
 let matrix = new PlayfieldMatrix("matrixTable")
 let nextQueue = new NextQueue("nextTable")
+let playing = false
 
 
 function pause() {
@@ -620,6 +621,7 @@ function newGame(event) {
         stats.goal = 0
         stats.level = levelInput.valueAsNumber
         localStorage["startLevel"] = levelInput.value
+        playing = true
         resume(event)
     }
 }
@@ -639,7 +641,8 @@ function resume(event) {
     
         stats.time = stats.pauseTime
         scheduler.setInterval(ticktack, 1000)
-        if (!matrix.piece) generate()
+        if (matrix.piece) scheduler.setInterval(fall, stats.fallPeriod)
+        else generate()
     }
 }
 
@@ -803,6 +806,7 @@ function gameOver() {
     document.onkeydown = null
     onblur = null
     scheduler.clearInterval(ticktack)
+    playing = false
 
     messagesSpan.onanimationend = null
     messagesSpan.addNewChild("div", {
@@ -817,6 +821,7 @@ window.onbeforeunload = function(event) {
     for (let input of settings.form.getElementsByTagName("input")) {
         localStorage[input.name] = input.value
     }
+    if (playing) return false;
 }
 
 if ('serviceWorker' in navigator) {
