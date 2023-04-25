@@ -16,19 +16,26 @@
 }
 
 .card {
-    background: #808302;
+    background: #8D8E04;
     border-radius: 0;
-    border-image-source: url("retro/border.png");
-    border-image-slice: 30;
-    border-image-width: 15px;
-    border-image-repeat: round;
-    border-image-outset: 15px;
-    margin: 15px !important;
+    border-image-source: url("retro/border-sm.png");
+    border-image-slice: 25;
+    border-image-width: 13px;
+    border-image-repeat: repeat;
+    border-image-outset: 12px;
     box-shadow: unset;
 }
 
 .card-header {
+    background: #8D8E04;
+}
+
+#matrixCard {
     background: #808302;
+    border-image-source: url("retro/border-lg.png");
+    border-image-slice: 30;
+    border-image-width: 15px;
+    border-image-outset: 15px;
 }
 
 #statsTable,
@@ -36,6 +43,7 @@
 #messagesSpan {
     font-family: "Early GameBoy", monospace;
     color: #254806;
+    text-shadow: -1px -1px 3px rgba(0, 0, 0, 40%), 1px 1px 1px rgba(0, 0, 0, 40%);
 }
 
 #statsTable {
@@ -43,8 +51,10 @@
     letter-spacing: -.1em;
 }
 
-#statsTable th {
+#statsTable th,
+#statsTable td {
     border: 0;
+    padding: 0 .2rem;
 }
 
 #messagesSpan {
