@@ -15,6 +15,10 @@
     border-radius: 10px;
 }
 
+.col {
+    gap: 8px;
+}
+
 .card {
     background: #8D8E04;
     border-radius: 0;
