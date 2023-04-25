@@ -11,14 +11,6 @@ body {
     background-image: url("retro/dark-bg.png");
 }
 
-#statsTable,
-.card,
-#messagesSpan {
-    font-family: "Early GameBoy", monospace;
-    color: #254806;
-    letter-spacing: -.15em;
-}
-
 .card {
     background: #808302;
     border-radius: 0;
@@ -33,6 +25,21 @@ body {
 
 .card-header {
     background: #808302;
+}
+
+#statsTable,
+.card,
+#messagesSpan {
+    font-family: "Early GameBoy", monospace;
+    color: #254806;
+}
+
+#statsTable {
+    letter-spacing: -.15em;
+}
+
+#messagesSpan {
+    text-shadow: -2px -2px #808302, -2px 2px #808302, 2px -2px #808302, 2px 2px #808302;
 }
 
 td {
