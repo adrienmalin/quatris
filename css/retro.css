@@ -35,7 +35,12 @@ body {
 }
 
 #statsTable {
+    font-size: .7em;
     letter-spacing: -.15em;
+}
+
+#statsTable th {
+    border: 0;
 }
 
 #messagesSpan {
