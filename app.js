@@ -122,6 +122,10 @@ class MinoesTable {
         this.table = document.getElementById(id)
         this.rows = this.table.rows.length
         this.columns = this.table.rows[0].childElementCount
+        this.init()
+    }
+
+    init() {
         this._piece = null
     }
 
@@ -161,6 +165,10 @@ MinoesTable.prototype.init_center = [2, 2]
 class NextQueue extends MinoesTable {
     constructor() {
         super("nextTable")
+        this.init()
+    }
+
+    init() {
         this.pieces = this.init_centers.map(center => {
             let piece = new Tetromino.pick()
             piece.center = Array.from(center)
@@ -191,6 +199,10 @@ NextQueue.prototype.init_centers = [[2, 2], [2, 5], [2, 8], [2, 11], [2, 14]]
 class Matrix extends MinoesTable {
     constructor() {
         super("matrixTable")
+    }
+
+    init() {
+        super.init()
         this.blocks = Array(this.rows).fill().map(() => Array(this.columns))
     }
 
@@ -378,17 +390,25 @@ class Settings {
     constructor() {
         this.form = settingsForm
         this.load()
-        this.form.onsubmit = newGame
         this.modal = new bootstrap.Modal('#settingsModal')
         document.getElementById('settingsModal').addEventListener('shown.bs.modal', () => {
             resumeButton.focus()
         })
+        this.init()
     }
 
     load() {
         for (let input of this.form.getElementsByTagName("input")) {
             if (localStorage[input.name]) input.value = localStorage[input.name]
         }
+    }
+
+    init() {
+        this.form.onsubmit = newGame
+        levelInput.name = "startLevel"
+        levelInput.disabled = false
+        titleHeader.innerHTML = "QUATRIS"
+        resumeButton.innerHTML = "Jouer"
     }
 
     show() {
@@ -432,9 +452,19 @@ function changeKey(input) {
 class Stats {
     constructor() {
         this.highScore = Number(localStorage["highScore"]) || 0
+        this.init()
+    }
+
+    init() {
         this.combo = 0
         this.b2b = 0
         this.startTime = new Date()
+        this.lockDelay = 0
+        this.totalClearedLines = 0
+        this.nbQuatris = 0
+        this.nbTSpin = 0
+        this.maxCombo = 0
+        this.maxB2B = 0
     }
 
     set score(score) {
@@ -494,6 +524,10 @@ class Stats {
     }
 
     lockDown(nbClearedLines, tSpin) {
+        this.totalClearedLines += nbClearedLines
+        if (nbClearedLines == 4) this.nbQuatris++
+        if (tSpin == T_SPIN.T_SPIN) this.nbTSpin++
+
         // Cleared lines & T-Spin
         let awardedLineClears = AWARDED_LINE_CLEARS[tSpin][nbClearedLines]
         let patternScore = 100 * this.level * awardedLineClears
@@ -517,6 +551,7 @@ class Stats {
         // Combo
         if (nbClearedLines) {
             this.combo++
+            if (this.combo > this.maxCombo) this.maxCombo = this.combo
             if (this.combo >= 1) {
                 let comboScore = (nbClearedLines == 1 ? 20 : 50) * this.combo * this.level
                 if (this.combo == 1) {
@@ -541,6 +576,7 @@ class Stats {
         // Back to back sequence
         if ((nbClearedLines == 4) || (tSpin && nbClearedLines)) {
             this.b2b++
+            if (this.b2b > this.maxB2B) this.maxB2B = this.b2b
             if (this.b2b >= 1) {
                 let b2bScore = patternScore / 2
                 if (this.b2b == 1) {
@@ -596,11 +632,7 @@ let holdQueue = new MinoesTable("holdTable")
 let matrix = new Matrix()
 let nextQueue = new NextQueue()
 let playing = false
-
-function init() {
-
-}
-
+let gameOverModal = new bootstrap.Modal('#gameOverModal')
 
 function pauseSettings() {
     scheduler.clearInterval(fall)
@@ -828,12 +860,29 @@ function gameOver() {
     scheduler.clearInterval(ticktack)
     playing = false
 
-    messagesSpan.onanimationend = null
-    messagesSpan.addNewChild("div", {
-        className: "game-over-animation",
-        style: "opacity: 100%",
-        innerHTML: "<h1>FIN</h1>"
-    })
+    goScoreCell.innerText = stats.score.toLocaleString()
+    goHighScoreCell.innerText = stats.highScore.toLocaleString()
+    goLevelCell.innerText = stats.level
+    let time = stats.time
+    goTimeCell.innerText = stats.timeFormat.format(time)
+    gototalClearedLines.innerText = stats.totalClearedLines
+    gototalClearedLinesPM.innerText = (stats.totalClearedLines * 60 / time).toFixed(2)
+    goNbQuatris.innerText = stats.nbQuatris
+    goNbTSpin.innerText = stats.nbTSpin
+    goMaxCombo.innerText = stats.maxCombo
+    goMaxB2B.innerText = stats.maxB2B
+    gameOverModal.show()
+}
+
+function restart() {
+    gameOverModal.hide()
+    holdQueue.init()
+    stats.init()
+    matrix.init()
+    matrix.redraw()
+    nextQueue.init()
+    settings.init()
+    pauseSettings()
 }
 
 window.onbeforeunload = function(event) {
