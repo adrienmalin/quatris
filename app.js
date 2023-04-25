@@ -391,7 +391,7 @@ class Settings {
         this.form = settingsForm
         this.load()
         this.modal = new bootstrap.Modal('#settingsModal')
-        document.getElementById('settingsModal').addEventListener('shown.bs.modal', () => {
+        settingsModal.addEventListener('shown.bs.modal', () => {
             resumeButton.focus()
         })
         this.init()
@@ -400,6 +400,13 @@ class Settings {
     load() {
         for (let input of this.form.getElementsByTagName("input")) {
             if (localStorage[input.name]) input.value = localStorage[input.name]
+        }
+        document.selectedStyleSheetSet=stylesheetSelect.value
+    }
+
+    save() {
+        for (let input of this.form.getElementsByTagName("input")) {
+            localStorage[input.name] = input.value
         }
     }
 
@@ -451,11 +458,18 @@ function changeKey(input) {
 
 class Stats {
     constructor() {
-        this.highScore = Number(localStorage["highScore"]) || 0
+        this.modal = new bootstrap.Modal('#statsModal')
+        this.load()
         this.init()
     }
 
+    load() {
+        this.highScore = Number(localStorage["highScore"]) || 0
+    }
+
     init() {
+        this.score = 0
+        this.goal = 0
         this.combo = 0
         this.b2b = 0
         this.startTime = new Date()
@@ -608,6 +622,25 @@ class Stats {
         this.goal -= awardedLineClears
         if (this.goal <= 0) this.level++
     }
+
+    show() {
+        let time = stats.time
+        statsModalScoreCell.innerText           = this.score.toLocaleString()
+        statsModalHighScoreCell.innerText       = this.highScore.toLocaleString()
+        statsModalLevelCell.innerText           = this.level
+        statsModalTimeCell.innerText            = this.timeFormat.format(time)
+        statsModaltotalClearedLines.innerText   = this.totalClearedLines
+        statsModaltotalClearedLinesPM.innerText = (stats.totalClearedLines * 60000 / time).toFixed(2)
+        statsModalNbQuatris.innerText           = this.nbQuatris
+        statsModalNbTSpin.innerText             = this.nbTSpin
+        statsModalMaxCombo.innerText            = this.maxCombo
+        statsModalMaxB2B.innerText              = this.maxB2B
+        this.modal.show()
+    }
+
+    save() {
+        localStorage["highScore"] = this.highScore
+    }
 }
 Stats.prototype.timeFormat = new Intl.DateTimeFormat("fr-FR", {
     minute: "2-digit",
@@ -632,7 +665,6 @@ let holdQueue = new MinoesTable("holdTable")
 let matrix = new Matrix()
 let nextQueue = new NextQueue()
 let playing = false
-let gameOverModal = new bootstrap.Modal('#gameOverModal')
 
 function pauseSettings() {
     scheduler.clearInterval(fall)
@@ -663,8 +695,6 @@ function newGame(event) {
         titleHeader.innerHTML = "PAUSE"
         resumeButton.innerHTML = "Reprendre"
         event.target.onsubmit = resume
-        stats.score = 0
-        stats.goal = 0
         stats.level = levelInput.valueAsNumber
         localStorage["startLevel"] = levelInput.value
         playing = true
@@ -860,22 +890,11 @@ function gameOver() {
     scheduler.clearInterval(ticktack)
     playing = false
 
-    goScoreCell.innerText = stats.score.toLocaleString()
-    goHighScoreCell.innerText = stats.highScore.toLocaleString()
-    goLevelCell.innerText = stats.level
-    let time = stats.time
-    goTimeCell.innerText = stats.timeFormat.format(time)
-    gototalClearedLines.innerText = stats.totalClearedLines
-    gototalClearedLinesPM.innerText = (stats.totalClearedLines * 60000 / time).toFixed(2)
-    goNbQuatris.innerText = stats.nbQuatris
-    goNbTSpin.innerText = stats.nbTSpin
-    goMaxCombo.innerText = stats.maxCombo
-    goMaxB2B.innerText = stats.maxB2B
-    gameOverModal.show()
+    stats.show()
 }
 
 function restart() {
-    gameOverModal.hide()
+    stats.modal.hide()
     holdQueue.init()
     stats.init()
     matrix.init()
@@ -886,10 +905,8 @@ function restart() {
 }
 
 window.onbeforeunload = function(event) {
-    localStorage["highScore"] = stats.highScore
-    for (let input of settings.form.getElementsByTagName("input")) {
-        localStorage[input.name] = input.value
-    }
+    stats.save()
+    settings.save()
     if (playing) return false;
 }
 

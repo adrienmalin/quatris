@@ -100,7 +100,7 @@
                 <legend class="text-start">Feuille de style</legend>
                 <label for="stylesheetSelect" class="col-sm-2 col-form-label text-center">Style</label>
                 <div class="col-sm-4">
-                  <select id="stylesheetSelect" class="form-select" onclick="document.selectedStyleSheetSet=stylesheetSelect.value">
+                  <select id="stylesheetSelect" class="form-select" onclick="document.selectedStyleSheetSet=this.value">
                     <option selected>Classique</option>
                     <option>Électro</option>
                     <option>Pop</option>
@@ -215,21 +215,21 @@
 
     </div>
 
-    <div class="modal fade" id="GameOverModal" tabindex="-1">
+    <div class="modal fade" id="statsModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title w-100 text-center">Fin</h1>
+              <h2 class="modal-title w-100 text-center">Fin</h2>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-0">
               <table class="table mb-0">
-                <tr><th>Score</th>                    <td id="goScoreCell"></td>         <th>Niveau</th>                  <td id="goLevelCell"></td>           </tr>
-                <tr><th>Meilleur score</th>           <td id="goHighScoreCell"></td>     <th>Temps</th>                   <td id="goTimeCell"></td>            </tr>
-                <tr><th>Lignes</th>                   <td id="gototalClearedLines"></td> <th>Lignes par minutes</th>      <td id="gototalClearedLinesPM"></td> </tr>
-                <tr><th>Quatris</th>                  <td id="goNbQuatris"></td>         <th>Pirouettes</th>              <td id="goNbTSpin"></td>             </tr>
-                <tr><th>Plus grand enchaînement</th>  <td id="goMaxCombo"></td>          <th>Plus grand bout à bout</th>  <td id="goMaxB2B"></td>              </tr>
+                <tr><th>Score</th>                    <td id="statsModalScoreCell"></td>         <th>Niveau</th>                  <td id="statsModalLevelCell"></td>           </tr>
+                <tr><th>Meilleur score</th>           <td id="statsModalHighScoreCell"></td>     <th>Temps</th>                   <td id="statsModalTimeCell"></td>            </tr>
+                <tr><th>Lignes</th>                   <td id="statsModaltotalClearedLines"></td> <th>Lignes par minutes</th>      <td id="statsModaltotalClearedLinesPM"></td> </tr>
+                <tr><th>Quatris</th>                  <td id="statsModalNbQuatris"></td>         <th>Pirouettes</th>              <td id="statsModalNbTSpin"></td>             </tr>
+                <tr><th>Plus grand enchaînement</th>  <td id="statsModalMaxCombo"></td>          <th>Plus grand bout à bout</th>  <td id="statsModalMaxB2B"></td>              </tr>
               </table>
             </div>
             <div class="modal-footer">
