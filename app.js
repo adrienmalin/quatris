@@ -238,7 +238,7 @@ class Matrix extends MinoesTable {
         }
     }
 }
-Matrix.prototype.init_center = [5, 4]
+Matrix.prototype.init_center = [4, 4]
 
 
 class Tetromino {
@@ -403,7 +403,7 @@ class Settings {
         }
         if (localStorage["stylesheet"]) stylesheetSelect.value = localStorage["stylesheet"]
 
-        document.selectedStyleSheetSet=stylesheetSelect.value
+        document.selectedStyleSheetSet = stylesheetSelect.value
     }
 
     save() {
