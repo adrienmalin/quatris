@@ -96,14 +96,13 @@
                 </div>
                 <label for="dasInput" class="col-sm-2 col-form-label" title="Delayed AutoShift : délai initial avant répétition">DAS</label>
               </fieldset>
-              <fieldset class="row g-2 mb-3 align-items-center text-center">
-                <legend class="text-start">Feuille de style</legend>
-                <label for="stylesheetSelect" class="col-sm-2 col-form-label text-center">Style</label>
-                <div class="col-sm-4">
+              <fieldset class="row g-2 mb-3 align-items-center text-center justify-content-center">
+                <legend class="text-start">Thème</legend>
+                <div class="col-sm-8">
                   <select name="stylesheet" id="stylesheetSelect" class="form-select" onclick="document.selectedStyleSheetSet=this.value">
                     <option selected>Classique</option>
-                    <option>Électro</option>
                     <option>Pop</option>
+                    <option>Électro</option>
                     <option>Rétro</option>
                   </select>
                 </div>
@@ -228,8 +227,8 @@
                 <tr><th>Score</th>                    <td id="statsModalScoreCell"></td>         <th>Niveau</th>                  <td id="statsModalLevelCell"></td>           </tr>
                 <tr><th>Meilleur score</th>           <td id="statsModalHighScoreCell"></td>     <th>Temps</th>                   <td id="statsModalTimeCell"></td>            </tr>
                 <tr><th>Lignes</th>                   <td id="statsModaltotalClearedLines"></td> <th>Lignes par minutes</th>      <td id="statsModaltotalClearedLinesPM"></td> </tr>
-                <tr><th>Quatris</th>                  <td id="statsModalNbQuatris"></td>         <th>Pirouettes</th>              <td id="statsModalNbTSpin"></td>             </tr>
-                <tr><th>Plus grand enchaînement</th>  <td id="statsModalMaxCombo"></td>          <th>Plus grand bout à bout</th>  <td id="statsModalMaxB2B"></td>              </tr>
+                <tr><th>Quatris</th>                  <td id="statsModalNbQuatris"></td>         <th>Plus grand enchaînement</th> <td id="statsModalMaxCombo"></td>            </tr>
+                <tr><th>Pirouettes</th>               <td id="statsModalNbTSpin"></td>           <th>Plus grand bout à bout</th>  <td id="statsModalMaxB2B"></td>              </tr>
               </table>
             </div>
             <div class="modal-footer">

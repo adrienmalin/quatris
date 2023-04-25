@@ -398,19 +398,20 @@ class Settings {
     }
 
     load() {
-        for (let input of this.form.getElementsByTagName("input")) {
-            if (localStorage[input.name]) input.value = localStorage[input.name]
+        for (let element of settingsForm.elements) {
+            if (element.name) {
+                if (localStorage[element.name]) element.value = localStorage[element.name]
+            }
         }
-        if (localStorage["stylesheet"]) stylesheetSelect.value = localStorage["stylesheet"]
-
         document.selectedStyleSheetSet = stylesheetSelect.value
     }
 
     save() {
-        for (let input of this.form.getElementsByTagName("input")) {
-            localStorage[input.name] = input.value
+        for (let element of settingsForm.elements) {
+            if (element.name) {
+                localStorage[element.name] = element.value
+            }
         }
-        localStorage["stylesheet"] = stylesheetSelect.value
     }
 
     init() {
