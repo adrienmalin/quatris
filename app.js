@@ -401,6 +401,8 @@ class Settings {
         for (let input of this.form.getElementsByTagName("input")) {
             if (localStorage[input.name]) input.value = localStorage[input.name]
         }
+        if (localStorage["stylesheet"]) stylesheetSelect.value = localStorage["stylesheet"]
+
         document.selectedStyleSheetSet=stylesheetSelect.value
     }
 
@@ -408,6 +410,7 @@ class Settings {
         for (let input of this.form.getElementsByTagName("input")) {
             localStorage[input.name] = input.value
         }
+        localStorage["stylesheet"] = stylesheetSelect.value
     }
 
     init() {
