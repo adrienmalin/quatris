@@ -866,7 +866,7 @@ function gameOver() {
     let time = stats.time
     goTimeCell.innerText = stats.timeFormat.format(time)
     gototalClearedLines.innerText = stats.totalClearedLines
-    gototalClearedLinesPM.innerText = (stats.totalClearedLines * 60 / time).toFixed(2)
+    gototalClearedLinesPM.innerText = (stats.totalClearedLines * 60000 / time).toFixed(2)
     goNbQuatris.innerText = stats.nbQuatris
     goNbTSpin.innerText = stats.nbTSpin
     goMaxCombo.innerText = stats.maxCombo
