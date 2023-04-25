@@ -1,118 +1,75 @@
 :root {
-    --g0: #062807;
-    --g1: #1f5b1c;
-    --g2: #83b70b;
-    --g3: #a3d30d;
-    
-    --bs-body-font-family: monospace;
+    --cell-side: 20px;
+}
+
+@font-face {
+    font-family: "Early GameBoy";
+    src: url("retro/Early GameBoy.ttf");
 }
 
 body {
-    background: #7b787f;
-    font-family: monospace;
+    background-image: url("retro/dark-bg.png");
+}
+
+#statsTable,
+.card,
+#messagesSpan {
+    font-family: "Early GameBoy", monospace;
+    color: #3C5819;
 }
 
 .card {
-    background-color: var(--g3);
+    background: #808302;
+    border-radius: 0;
+    border-image-source: url("retro/border.png");
+    border-image-slice: 15;
+    border-image-width: 15px;
+    border-image-repeat: repeat;
+    border-image-outset: 15px;
+    margin: 15px !important;
+    box-shadow: unset;
 }
 
-.card,
-table,
-#messagesSpan {
-    color: var(--g0) !important;
+.card-header {
+    background: #808302;
 }
 
-td:not(.mino) {
-    border: 0;
-}
-
-tr.matrix td:not(.mino) {
-    border: 0;
-}
-
-.mino {
-    position: relative;
-    border: 2px solid var(--g0);
-}
-
-.mino::after {
-    position: absolute;
-    content: " ";
+td {
+    border: 0 !important;
 }
 
 .I.mino {
-    background-color: var(--g2);
+    background-image: url("retro/I-mino.png")
 }
 
 .J.mino {
-    background-color: var(--g2);
-}
-
-.J.mino::after {
-    top: 5px;
-    left: 5px;
-    width: 11px;
-    height: 11px;
-    border: 2px solid var(--g0);
+    background-image: url("retro/J-mino.png")
 }
 
 .L.mino {
-    background-color: var(--g1);
+    background-image: url("retro/L-mino.png")
 }
 
 .O.mino {
-    background-color: var(--g3);
-}
-
-.O.mino::after {
-    top: 3px;
-    left: 3px;
-    width: 15px;
-    height: 15px;
-    background-color: var(--g0);
+    background-image: url("retro/O-mino.png")
 }
 
 .S.mino {
-    background-color: var(--g1);
-}
-
-.S.mino::after {
-    top: 5px;
-    left: 5px;
-    width: 11px;
-    height: 11px;
-    border: 2px solid var(--g0);
+    background-image: url("retro/S-mino.png")
 }
 
 .T.mino {
-    background-color: var(--g2);
-}
-
-.T.mino::after {
-    top: 5px;
-    left: 5px;
-    width: 11px;
-    height: 11px;
-    border: 2px solid;
-    border-top-color: var(--g3);
-    border-left-color: var(--g3);
-    border-right-color: var(--g0);
-    border-bottom-color: var(--g0);
+    background-image: url("retro/T-mino.png")
 }
 
 .Z.mino {
-    background-color: var(--g2);
-}
-
-.Z.mino::after {
-    top: 5px;
-    left: 5px;
-    width: 11px;
-    height: 11px;
-    background-color: var(--g0);
+    background-image: url("retro/Z-mino.png")
 }
 
 .locked.mino {
-    background-color: var(--g2);
-    border-color: var(--g3);
+    filter: saturate(60%) brightness(200%);
+}
+
+.ghost.mino {
+    opacity: 50%;
 }

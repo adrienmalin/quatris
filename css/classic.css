@@ -82,10 +82,10 @@
 }
 
 .locked.mino {
-    filter: saturate(50%) brightness(200%)
+    filter: saturate(50%) brightness(200%);
 }
 
 .ghost.mino {
     opacity: 20%;
-    filter: brightness(200%)
+    filter: brightness(200%);
 }
