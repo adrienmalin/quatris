@@ -647,6 +647,7 @@ class Stats {
     }
 }
 Stats.prototype.timeFormat = new Intl.DateTimeFormat("fr-FR", {
+    hour: "numeric",
     minute: "2-digit",
     second: "2-digit",
     timeZone: "UTC"
