@@ -477,6 +477,7 @@ class Stats {
     }
 
     init() {
+        levelInput.value = localStorage["startLevel"]
         this.score = 0
         this.goal = 0
         this.combo = 0
