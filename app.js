@@ -766,8 +766,8 @@ let playerActions = {
 
     hardDrop: function() {
         scheduler.clearTimeout(lockDown)
-        matrix.table.classList.add("hard-dropped-table-animation")
         while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, "hard-drop-animation")) stats.score +=2
+        matrix.table.classList.add("hard-dropped-table-animation")
         lockDown()
     },
 
