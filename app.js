@@ -581,13 +581,13 @@ class Stats {
                     messagesSpan.addNewChild("div", {
                         className: "zoom-in-animation",
                         style: "animation-delay: .4s",
-                        innerHTML: `ENCHAINEMENT<br/>${comboScore}`
+                        innerHTML: `COMBO<br/>${comboScore}`
                     })
                 } else {
                     messagesSpan.addNewChild("div", {
                         className: "zoom-in-animation",
                         style: "animation-delay: .4s",
-                        innerHTML: `ENCHAINEMENT x${this.combo}<br/>${comboScore}`
+                        innerHTML: `COMBO x${this.combo}<br/>${comboScore}`
                     })
                 }
                 this.score += comboScore
