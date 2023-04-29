@@ -29,21 +29,23 @@ body {
     margin-top: calc(-1 * var(--buffer-zone-rows) * var(--cell-side));
 }
 
+
+/*
 @keyframes hard-dropped-table-animation {
     from {
         transform: translateY(0);
     }
     25% {
-        transform: translateY(5px);
+        transform: translateY(3px);
     }
     to {
         transform: translateY(0);
     }
 }
-
 #matrixTable.hard-dropped-table-animation {
-    animation: hard-dropped-table-animation .2s;
+    animation: hard-dropped-table-animation .1s;
 }
+*/
 
 tr.buffer-zone td:not(.mino) {
     border-width: 0;
@@ -88,9 +90,9 @@ tr.cleared-line-animation{
     animation: cleared-line-animation ease-out .3s;
 }
 
-span {
+#messagesSpan {
     position: absolute;
-    top: 20%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
     color: rgba(255, 255, 255, 0.8);
