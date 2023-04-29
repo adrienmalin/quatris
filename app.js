@@ -298,6 +298,7 @@ class Tetromino {
         return this.srs[this.facing][rotation].some((translation, rotationPoint) => {
             if (this.move(translation, rotation)) {
                 if (rotationPoint == 4) this.rotationPoint4Used = true
+                favicon.href = this.favicon_href
                 return true
             }
         })
@@ -305,6 +306,10 @@ class Tetromino {
 
     get ghost() {
         return new this.constructor(Array.from(this.center), this.facing, "ghost " + this.className)
+    }
+
+    get favicon_href() {
+        return `favicons/${this.constructor.name}-${this.facing}.png`
     }
 }
 // Super Rotation System
@@ -670,6 +675,7 @@ let holdQueue = new MinoesTable("holdTable")
 let matrix = new Matrix()
 let nextQueue = new NextQueue()
 let playing = false
+let favicon = document.querySelector("link[rel~='icon']");
 
 function pauseSettings() {
     scheduler.clearInterval(fall)
@@ -735,6 +741,7 @@ function ticktack() {
 
 function generate(piece) {
     matrix.piece = piece || nextQueue.shift()
+    favicon.href = matrix.piece.favicon_href
 
     if (matrix.piece.canMove(TRANSLATION.NONE)) {
         scheduler.setInterval(fall, stats.fallPeriod)
