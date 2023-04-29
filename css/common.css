@@ -63,7 +63,7 @@ td {
 
 @keyframes hard-drop-animation {
     from {
-        background-color: rgb(206, 255, 255, 40%);
+        background-color: rgb(206, 255, 255, 25%);
         filter: saturate(50%) brightness(300%);
     }
     to {
