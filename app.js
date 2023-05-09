@@ -89,6 +89,7 @@ HTMLElement.prototype.addNewChild = function(tag, properties) {
 
 
 /* Classes */
+
 class Scheduler {
     constructor() {
         this.intervalTasks = new Map()
@@ -224,7 +225,6 @@ class Matrix extends MinoesTable {
     drawPiece(piece=this.piece, className=piece.className + (piece.locked? " locked" : "")) {
         super.drawPiece(this.ghost, "")
         this.ghost = piece.ghost
-        while (this.ghost.canMove(TRANSLATION.DOWN)) this.ghost.center.y++
         super.drawPiece(this.ghost)
         super.drawPiece(piece, className)
     }
@@ -232,10 +232,38 @@ class Matrix extends MinoesTable {
     redraw() {
         for (let y=0; y<this.rows; y++) {
             for (let x=0; x<this.columns; x++) {
-                if (this.table.rows[y].cells[x].classList != "hard-drop-animation")
+                if (this.table.rows[y].cells[x].classList != "trail-animation")
                     this.drawMino([x, y], this.blocks[y][x] || "")
             }
         }
+    }
+
+    lock() {
+        let blocksPosition = this.piece.minoesPosition[this.piece.facing].translate(this.piece.center)
+        if (blocksPosition.some(position => position.y >= 4)) {
+            blocksPosition.forEach(position => {
+                this.blocks[position.y][position.x] = this.piece.className
+                this.drawMino(position, this.piece.className)
+            })
+            return true
+        } else {
+            return false
+        }
+    }
+
+    clearLines() {
+        let nbClearedLines = 0
+        for (let y=0; y<this.rows; y++) {
+            let row = this.blocks[y]
+            if (row.filter(lockedMino => lockedMino).length == this.columns) {
+                nbClearedLines++
+                this.blocks.splice(y, 1)
+                this.blocks.unshift(Array(matrix.columns))
+                this.table.rows[y].classList.add("cleared-line-animation")
+            }
+        }
+        this.redraw()
+        return nbClearedLines
     }
 }
 Matrix.prototype.init_center = [4, 4]
@@ -305,11 +333,26 @@ class Tetromino {
     }
 
     get ghost() {
-        return new this.constructor(Array.from(this.center), this.facing, "ghost " + this.className)
+        let ghost = new this.constructor(Array.from(this.center), this.facing, "ghost " + this.className)
+        while (ghost.canMove(TRANSLATION.DOWN)) ghost.center.y++
+        return ghost
     }
 
     get favicon_href() {
         return `favicons/${this.constructor.name}-${this.facing}.png`
+    }
+
+    get tSpin() {
+        if (matrix.piece.lastRotation && matrix.piece.constructor == T) {
+            let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.facing]
+                .translate(matrix.piece.center)
+                .map(minoPosition => !matrix.cellIsEmpty(minoPosition))
+            if (a && b && (c || d))
+                return T_SPIN.T_SPIN
+            else if (c && d && (a || b))
+                return matrix.piece.rotationPoint5Used ? T_SPIN.T_SPIN : T_SPIN.MINI
+        }
+        return T_SPIN.NONE
     }
 }
 // Super Rotation System
@@ -435,11 +478,14 @@ class Settings {
     }
 
     getInputs() {
-        for (let input of keyBindFielset.getElementsByTagName("input")) {
+        for (let input of this.form.querySelectorAll("input[type='text']")) {
             this[input.name] = KEY_NAMES[input.value] || input.value
         }
-        for (let input of autorepearFieldset.getElementsByTagName("input")) {
+        for (let input of this.form.querySelectorAll("input[type='number'], input[type='range']")) {
             this[input.name] = input.valueAsNumber
+        }
+        for (let input of this.form.querySelectorAll("input[type='checkbox']")) {
+            this[input.name] = input.checked == true
         }
     
         this.keyBind = {}
@@ -483,7 +529,7 @@ class Stats {
         this.combo = 0
         this.b2b = 0
         this.startTime = new Date()
-        this.lockDelay = 0
+        this.lockDelay = DELAY.LOCK
         this.totalClearedLines = 0
         this.nbQuatris = 0
         this.nbTSpin = 0
@@ -676,7 +722,7 @@ let holdQueue = new MinoesTable("holdTable")
 let matrix = new Matrix()
 let nextQueue = new NextQueue()
 let playing = false
-let favicon = document.querySelector("link[rel~='icon']");
+let favicon = document.querySelector("link[rel~='icon']")
 
 function pauseSettings() {
     scheduler.clearInterval(fall)
@@ -701,7 +747,6 @@ function newGame(event) {
         settings.form.reportValidity()
         settings.form.classList.add('was-validated')
     } else {
-        stats.lockDelay = DELAY.LOCK
         levelInput.name = "level"
         levelInput.disabled = true
         titleHeader.innerHTML = "PAUSE"
@@ -766,7 +811,7 @@ let playerActions = {
 
     hardDrop: function() {
         scheduler.clearTimeout(lockDown)
-        while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, "hard-drop-animation")) stats.score +=2
+        while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, "trail-animation")) stats.score +=2
         matrix.table.classList.add("hard-dropped-table-animation")
         lockDown()
     },
@@ -853,39 +898,9 @@ function lockDown() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
 
-    blocksPosition = matrix.piece.minoesPosition[matrix.piece.facing]
-                        .translate(matrix.piece.center)
-    if (blocksPosition.some(minoPosition => minoPosition.y >= 4)) {
-        blocksPosition.forEach(minoPosition => {
-            matrix.blocks[minoPosition.y][minoPosition.x] = matrix.piece.className
-            matrix.drawMino(minoPosition, matrix.piece.className)
-        })
-
-        // T-Spin
-        let tSpin = T_SPIN.NONE
-        if (matrix.piece.lastRotation && matrix.piece.constructor == T) {
-            let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.facing]
-                .translate(matrix.piece.center)
-                .map(minoPosition => !matrix.cellIsEmpty(minoPosition))
-            if (a && b && (c || d))
-                tSpin = T_SPIN.T_SPIN
-            else if (c && d && (a || b))
-                tSpin = matrix.piece.rotationPoint5Used ? T_SPIN.T_SPIN : T_SPIN.MINI
-        }
-
-        // Cleared lines
-        let nbClearedLines = 0
-        for (let y=0; y<matrix.rows; y++) {
-            let row = matrix.blocks[y]
-            if (row.filter(lockedMino => lockedMino).length == matrix.columns) {
-                nbClearedLines++
-                matrix.blocks.splice(y, 1)
-                matrix.blocks.unshift(Array(matrix.columns))
-                matrix.table.rows[y].classList.add("cleared-line-animation")
-            }
-        }
-
-        matrix.redraw()
+    if (matrix.lock()) {
+        let tSpin = matrix.piece.tSpin
+        let nbClearedLines = matrix.clearLines()
         stats.lockDown(nbClearedLines, tSpin)
         
         generate()

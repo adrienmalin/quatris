@@ -60,7 +60,7 @@ td {
     height: var(--cell-side);
 }
 
-@keyframes hard-drop-animation {
+@keyframes trail-animation {
     from {
         background-color: rgb(206, 255, 255, 25%);
         filter: saturate(50%) brightness(300%);
@@ -70,8 +70,8 @@ td {
     }
 }
 
-td.hard-drop-animation {
-    animation: hard-drop-animation ease-out .3s;
+td.trail-animation {
+    animation: trail-animation ease-out .3s;
 }
 
 @keyframes cleared-line-animation {
