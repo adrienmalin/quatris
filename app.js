@@ -825,11 +825,11 @@ let playerActions = {
             scheduler.clearInterval(fall)
             scheduler.clearTimeout(lockDown)
     
-            matrix.piece.holdEnabled = false
-            matrix.piece.locked = false
-            matrix.piece.facing = FACING.NORTH
             let heldPiece = holdQueue.piece
             holdQueue.piece = matrix.piece
+            holdQueue.piece.holdEnabled = false
+            holdQueue.piece.locked = false
+            holdQueue.piece.facing = FACING.NORTH
             generate(heldPiece)
         }
     },
