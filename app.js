@@ -343,15 +343,6 @@ class Tetromino {
     }
 
     get tSpin() {
-        if (matrix.piece.lastRotation && matrix.piece.constructor == T) {
-            let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.facing]
-                .translate(matrix.piece.center)
-                .map(minoPosition => !matrix.cellIsEmpty(minoPosition))
-            if (a && b && (c || d))
-                return T_SPIN.T_SPIN
-            else if (c && d && (a || b))
-                return matrix.piece.rotationPoint5Used ? T_SPIN.T_SPIN : T_SPIN.MINI
-        }
         return T_SPIN.NONE
     }
 }
@@ -411,7 +402,20 @@ S.prototype.minoesPosition = [
     [[-1, -1], [0, 0], [-1, 0], [0,  1]],
 ]
 
-class T extends Tetromino {}
+class T extends Tetromino {
+    get tSpin() {
+        if (matrix.piece.lastRotation) {
+            let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.facing]
+                .translate(matrix.piece.center)
+                .map(minoPosition => !matrix.cellIsEmpty(minoPosition))
+            if (a && b && (c || d))
+                return T_SPIN.T_SPIN
+            else if (c && d && (a || b))
+                return matrix.piece.rotationPoint5Used ? T_SPIN.T_SPIN : T_SPIN.MINI
+        }
+        return T_SPIN.NONE
+    }
+}
 T.prototype.minoesPosition = [
     [[-1, 0], [0, 0], [1, 0], [0, -1]],
     [[0, -1], [0, 0], [1, 0], [0,  1]],
