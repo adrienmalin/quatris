@@ -404,14 +404,14 @@ S.prototype.minoesPosition = [
 
 class T extends Tetromino {
     get tSpin() {
-        if (matrix.piece.lastRotation) {
-            let [a, b, c, d] = matrix.piece.tSlots[matrix.piece.facing]
-                .translate(matrix.piece.center)
+        if (this.lastRotation) {
+            let [a, b, c, d] = this.tSlots[this.facing]
+                .translate(this.center)
                 .map(minoPosition => !matrix.cellIsEmpty(minoPosition))
             if (a && b && (c || d))
                 return T_SPIN.T_SPIN
             else if (c && d && (a || b))
-                return matrix.piece.rotationPoint5Used ? T_SPIN.T_SPIN : T_SPIN.MINI
+                return this.rotationPoint4Used ? T_SPIN.T_SPIN : T_SPIN.MINI
         }
         return T_SPIN.NONE
     }
