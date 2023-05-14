@@ -751,8 +751,6 @@ function pauseSettings() {
 }
 onblur = pauseSettings
 
-pauseSettings()
-
 function newGame(event) {
     if (!settings.form.checkValidity()) {
         event.preventDefault()
