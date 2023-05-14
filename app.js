@@ -123,7 +123,6 @@ class MinoesTable {
         this.table = document.getElementById(id)
         this.rows = this.table.rows.length
         this.columns = this.table.rows[0].childElementCount
-        this.init()
     }
 
     init() {
@@ -166,7 +165,6 @@ MinoesTable.prototype.init_center = [2, 2]
 class NextQueue extends MinoesTable {
     constructor() {
         super("nextTable")
-        this.init()
     }
 
     init() {
@@ -205,6 +203,7 @@ class Matrix extends MinoesTable {
     init() {
         super.init()
         this.blocks = Array(this.rows).fill().map(() => Array(this.columns))
+        this.redraw()
     }
 
     cellIsEmpty(position) {
@@ -446,7 +445,6 @@ class Settings {
         settingsModal.addEventListener('shown.bs.modal', () => {
             resumeButton.focus()
         })
-        this.init()
     }
 
     load() {
@@ -519,7 +517,6 @@ class Stats {
     constructor() {
         this.modal = new bootstrap.Modal('#statsModal')
         this.load()
-        this.init()
     }
 
     load() {
@@ -527,7 +524,7 @@ class Stats {
     }
 
     init() {
-        levelInput.value = localStorage["startLevel"]
+        levelInput.value = localStorage["startLevel"] || 1
         this.score = 0
         this.goal = 0
         this.combo = 0
@@ -728,6 +725,18 @@ let nextQueue = new NextQueue()
 let playing = false
 let favicon = document.querySelector("link[rel~='icon']")
 
+function restart() {
+    stats.modal.hide()
+    holdQueue.init()
+    stats.init()
+    matrix.init()
+    nextQueue.init()
+    settings.init()
+    pauseSettings()
+}
+
+restart()
+
 function pauseSettings() {
     scheduler.clearInterval(fall)
     scheduler.clearTimeout(lockDown)
@@ -923,17 +932,6 @@ function gameOver() {
     playing = false
 
     stats.show()
-}
-
-function restart() {
-    stats.modal.hide()
-    holdQueue.init()
-    stats.init()
-    matrix.init()
-    matrix.redraw()
-    nextQueue.init()
-    settings.init()
-    pauseSettings()
 }
 
 window.onbeforeunload = function(event) {
