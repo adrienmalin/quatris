@@ -749,7 +749,6 @@ function pauseSettings() {
 
     settings.show()
 }
-onblur = pauseSettings
 
 function newGame(event) {
     if (!settings.form.checkValidity()) {
@@ -766,6 +765,7 @@ function newGame(event) {
         stats.level = levelInput.valueAsNumber
         localStorage["startLevel"] = levelInput.value
         playing = true
+        onblur = pauseSettings
         resume(event)
     }
 }
