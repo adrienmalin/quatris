@@ -455,7 +455,7 @@ class Settings {
                 if (localStorage[element.name]) element.value = localStorage[element.name]
             }
         }
-        document.selectedStyleSheetSet = stylesheetSelect.value
+        window.document.selectedStyleSheetSet = stylesheetSelect.value
     }
 
     save() {
@@ -497,6 +497,10 @@ class Settings {
             this.keyBind[settings[actionName]] = playerActions[actionName]
         }
     }
+}
+
+window.onload = function (event) {
+    window.document.selectedStyleSheetSet = stylesheetSelect.value
 }
 
 function changeKey(input) {
@@ -835,10 +839,10 @@ let playerActions = {
             scheduler.clearTimeout(lockDown)
     
             let heldPiece = holdQueue.piece
+            matrix.piece.facing = FACING.NORTH
             holdQueue.piece = matrix.piece
             holdQueue.piece.holdEnabled = false
             holdQueue.piece.locked = false
-            holdQueue.piece.facing = FACING.NORTH
             generate(heldPiece)
         }
     },
