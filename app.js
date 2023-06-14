@@ -45,20 +45,22 @@ const FACING = {
 }
 
 const KEY_NAMES = {
-    ["ArrowLeft"]:  "←",
+    ["ArrowLeft"]: "←",
     ["ArrowRight"]: "→",
-    ["ArrowUp"]:    "↑",
-    ["ArrowDown"]:  "↓",
-    [" "]:          "Espace",
-    ["Escape"]:     "Échap",
-    ["Enter"]:      "Entrée",
-    ["←"]:          "ArrowLeft",
-    ["→"]:          "ArrowRight",
-    ["↑"]:          "ArrowUp",
-    ["↓"]:          "ArrowDown",
-    ["Espace"]:     " ",
-    ["Échap"]:      "Escape",
-    ["Entrée"]:     "Enter",
+    ["ArrowUp"]: "↑",
+    ["ArrowDown"]: "↓",
+    [" "]: "Espace",
+    ["Escape"]: "Échap.",
+    ["Backspace"]: "Ret. arrière",
+    ["Enter"]: "Entrée",
+    ["←"]: "ArrowLeft",
+    ["→"]: "ArrowRight",
+    ["↑"]: "ArrowUp",
+    ["↓"]: "ArrowDown",
+    ["Espace"]: " ",
+    ["Échap."]: "Escape",
+    ["Ret. arrière"]: "Backspace",
+    ["Entrée"]: "Enter",
 }
 
 /* Customize Array to be use as position */
