@@ -1,3 +1,19 @@
+body {
+    background-image: url("pop/bg.png");
+    background-size: cover;
+}
+
+.card {
+    background-color: rgba(37, 41, 45, 50%);
+}
+
+@supports (backdrop-filter: blur()) {
+    .card {
+        background-color: rgba(33, 37, 41, 20%);
+        backdrop-filter: blur(3px);
+    }
+}
+
 .mino {
     background: rgba(255, 255, 255, 10%);
     border: 5px solid;

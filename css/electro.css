@@ -1,5 +1,5 @@
 body {
-    background-image: url("electro/bg.png");
+    background-image: url("electro/bg.jpg");
     background-size: cover;
 }
 
@@ -13,7 +13,6 @@ body {
         backdrop-filter: blur(3px);
     }
 }
-
 
 .mino {
     background-image: radial-gradient(
