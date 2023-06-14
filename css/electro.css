@@ -1,9 +1,24 @@
+body {
+    background-image: url("french-touch/bg.jpg");
+    background-size: cover;
+}
+
+.card {
+    background-color: rgba(37, 41, 45, 50%);
+}
+
+@supports (backdrop-filter: blur()) {
+    .card {
+        background-color: rgba(33, 37, 41, 20%);
+        backdrop-filter: blur(3px);
+    }
+}
+
+
 .mino {
-    background-image: radial-gradient(
-        farthest-corner at 4px 6px,
-        rgba(204, 238, 247, 0.3) 0%,
-        rgba(106, 197, 220, 0.3) 100%
-    );
+    background-image: radial-gradient(farthest-corner at 4px 6px,
+            rgba(204, 238, 247, 0.3) 0%,
+            rgba(106, 197, 220, 0.3) 100%);
     border: 1px solid rgba(127, 229, 255, 0.7);
     border-radius: 0.3vmin;
     box-shadow: -1px -1px 4px rgba(128, 128, 128, 25%),
