@@ -102,8 +102,14 @@ td {
     background-image: url("retro/Z-mino.png")
 }
 
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
 .locked.mino {
-    filter: saturate(60%) brightness(200%);
+    animation: blinker 0.15s step-start infinite;
 }
 
 .ghost.mino {
