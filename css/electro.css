@@ -16,24 +16,31 @@ body {
 
 
 .mino {
-    background-image: radial-gradient(farthest-corner at 4px 6px,
-            rgba(204, 238, 247, 0.3) 0%,
-            rgba(106, 197, 220, 0.3) 100%);
+    background-image: radial-gradient(
+        farthest-corner at 4px 6px,
+        hsla(196, 100%, 72%, 0.1)   0%,
+        hsla(196, 100%, 43%, 0.1) 150%
+    );
     border: 1px solid rgba(127, 229, 255, 0.7);
     border-radius: 0.3vmin;
-    box-shadow: -1px -1px 4px rgba(128, 128, 128, 25%),
-        -1px 1px 4px rgba(128, 128, 128, 25%),
-        1px -1px 4px rgba(128, 128, 128, 25%),
-        1px 1px 4px rgba(128, 128, 128, 25%);
 }
 
 .ghost.mino {
-    background: rgba(255, 255, 255, 0.2);
+    background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 0.3vmin;
+    border-radius: 3px;
+    box-shadow:
+        -1px -1px 4px rgba(242, 255, 255, 16%),
+        -1px 1px 4px rgba(242, 255, 255, 16%),
+        1px -1px 4px rgba(242, 255, 255, 16%),
+        1px 1px 4px rgba(242, 255, 255, 16%);
 }
 
 .locked.mino {
-    background: rgba(242, 255, 255, 0.5);
+    background: rgba(186, 211, 255, 70%);
     border-color: rgba(242, 255, 255, 0.7);
+    box-shadow: -1px -1px 4px rgba(186, 211, 255, 27%),
+        -1px 1px 4px rgba(186, 211, 255, 27%),
+        1px -1px 4px rgba(186, 211, 255, 27%),
+        1px 1px 4px rgba(186, 211, 255, 27%);
 }
