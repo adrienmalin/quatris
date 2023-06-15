@@ -856,6 +856,7 @@ let playerActions = {
     
             let heldPiece = holdQueue.piece
             matrix.piece.facing = FACING.NORTH
+            matrix.piece.locked = false
             holdQueue.piece = matrix.piece
             holdQueue.piece.holdEnabled = false
             holdQueue.piece.locked = false
