@@ -177,8 +177,8 @@ class NextQueue extends MinoesTable {
 
     init() {
         this.pieces = this.init_centers.map(center => {
-            let piece = new Tetromino.pick()
-            piece.center = Array.from(center)
+            let piece        = new Tetromino.pick()
+                piece.center = Array.from(center)
             return piece
         })
     }
@@ -222,9 +222,9 @@ class Matrix extends MinoesTable {
         return this._piece
     }
     set piece(piece) {
-        this._piece = piece
+        this._piece        = piece
         this._piece.center = Array.from(this.init_center)
-        this.ghost = piece.ghost
+        this.ghost         = piece.ghost
         this.redraw()
         this.drawPiece()
     }
@@ -244,7 +244,7 @@ class Matrix extends MinoesTable {
         for (let y=0; y<this.rows; y++) {
             for (let x=0; x<this.columns; x++) {
                 if (this.table.rows[y].cells[x].classList != "trail-animation")
-                    this.drawMino([x, y], this.blocks[y][x] || "")
+                    this.drawMino([x, y], "locked " + this.blocks[y][x] || "")
             }
         }
     }

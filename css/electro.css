@@ -57,3 +57,16 @@ body {
         1px -1px 4px rgba(186, 211, 255, 27%),
         1px 1px 4px rgba(186, 211, 255, 27%);
 }
+
+@keyframes locked-animation {
+    from {
+        opacity: 1;
+        background: white;
+        border-color: white;
+    }
+}
+
+.locked.mino {
+    animation: locked-animation;
+    animation-duration: 0.2s;
+}
