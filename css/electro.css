@@ -4,38 +4,52 @@ body {
 }
 
 .card {
-    background-color: rgba(37, 41, 45, 50%);
+    background-color: rgba(37, 41, 45, 30%);
 }
 
-@supports (backdrop-filter: blur()) {
-    .card {
-        background-color: rgba(33, 37, 41, 20%);
-        backdrop-filter: blur(3px);
-    }
+.mino:not(.ghost):not(.locked) {
+    padding: 0;
+    position: relative;
+    z-index: 0;
+    box-shadow: -1px -1px 4px rgba(128, 128, 128, 25%),
+        -1px 1px 4px rgba(128, 128, 128, 25%),
+        1px -1px 4px rgba(128, 128, 128, 25%),
+        1px 1px 4px rgba(128, 128, 128, 25%);
 }
 
-.mino {
-    background-image: radial-gradient(
-        farthest-corner at 4px 6px,
-        hsla(196, 100%, 72%, 0.1)   0%,
-        hsla(196, 100%, 43%, 0.1) 150%
-    );
-    border: 1px solid rgba(127, 229, 255, 0.7);
+.mino:not(.ghost):not(.locked):before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    padding: 1px;
     border-radius: 0.3vmin;
-}
+    --glint-x: calc(50% + 50% * (var(--ghost-column) - var(--column))/10);
+    --glint-y: calc(50% + 50% * (var(--ghost-row) - var(--row))/25);
+    background: radial-gradient(
+        at var(--glint-x) var(--glint-y),
+        rgba(204, 238, 247, 0.9)   0%,
+        rgba(0, 159, 218, 0.9) 150%);
+    mask: 
+       linear-gradient(#666 0 0) content-box, 
+       linear-gradient(#fff 0 0);
+    mask-mode: luminance;
+    mask-composite: intersect;
+  }
 
 .ghost.mino {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 3px;
-    box-shadow:
-        -1px -1px 4px rgba(242, 255, 255, 16%),
+    box-shadow: -1px -1px 4px rgba(242, 255, 255, 16%),
         -1px 1px 4px rgba(242, 255, 255, 16%),
         1px -1px 4px rgba(242, 255, 255, 16%),
         1px 1px 4px rgba(242, 255, 255, 16%);
 }
 
-.locked.mino {
+.locked.mino,
+.moving.mino {
+    border-width: 1px;
     background: rgba(186, 211, 255, 70%);
     border-color: rgba(242, 255, 255, 0.7);
     box-shadow: -1px -1px 4px rgba(186, 211, 255, 27%),

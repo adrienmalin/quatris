@@ -18,6 +18,8 @@ body {
 }
 
 .minoes-table {
+    --ghost-row   : 0;
+    --ghost-column: 0;
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;

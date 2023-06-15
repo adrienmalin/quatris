@@ -123,6 +123,12 @@ class Scheduler {
 class MinoesTable {
     constructor(id) {
         this.table = document.getElementById(id)
+        Array.from(this.table.getElementsByTagName("tr")).forEach((tr, row) => {
+            Array.from(tr.getElementsByTagName("td")).forEach((td, column) => {
+                td.style.setProperty('--row', row)
+                td.style.setProperty('--column', column)
+            })
+        })
         this.rows = this.table.rows.length
         this.columns = this.table.rows[0].childElementCount
     }
@@ -145,7 +151,9 @@ class MinoesTable {
         this.table.rows[position.y].cells[position.x].className = className
     }
 
-    drawPiece(piece=this.piece, className=piece.className + (piece.locked? " locked" : "")) {
+    drawPiece(piece=this.piece, className=piece.className) {
+        if (piece.locked) className += " locked"
+        if (piece==this.piece && actionsQueue.length) className += " moving"
         piece.minoesPosition[piece.facing]
             .translate(piece.center)
             .forEach(minoPosition => {
@@ -228,6 +236,8 @@ class Matrix extends MinoesTable {
         this.ghost = piece.ghost
         super.drawPiece(this.ghost)
         super.drawPiece(piece, className)
+        matrix.table.style.setProperty('--ghost-column', this.ghost.center.x)
+        matrix.table.style.setProperty('--ghost-row',    this.ghost.center.y)
     }
 
     redraw() {
@@ -890,6 +900,7 @@ function onkeydown(event) {
                 if (action == playerActions.softDrop) scheduler.setInterval(autorepeat, settings.fallPeriod/20)
                 else scheduler.setTimeout(repeat, settings.das)
             }
+            matrix.drawPiece()
         }
     }
 }
@@ -919,6 +930,7 @@ function onkeyup(event) {
             if (!actionsQueue.length) {
                 scheduler.clearTimeout(repeat)
                 scheduler.clearInterval(autorepeat)
+                matrix.drawPiece()
             }
         }
     }
