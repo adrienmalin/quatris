@@ -47,8 +47,13 @@ body {
         1px 1px 4px rgba(242, 255, 255, 16%);
 }
 
-.locking.mino,
 .moving.mino {
+    border-width: 1px;
+    background: rgba(186, 211, 255, 30%);
+    border-color: rgba(242, 255, 255, 0.7);
+}
+
+.locking.mino {
     border-width: 1px;
     background: rgba(186, 211, 255, 70%);
     border-color: rgba(242, 255, 255, 0.7);
