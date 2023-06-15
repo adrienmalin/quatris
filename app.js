@@ -244,7 +244,7 @@ class Matrix extends MinoesTable {
         for (let y=0; y<this.rows; y++) {
             for (let x=0; x<this.columns; x++) {
                 if (this.table.rows[y].cells[x].classList != "trail-animation")
-                    this.drawMino([x, y], "locked " + this.blocks[y][x] || "")
+                    this.drawMino([x, y], this.blocks[y][x] || "")
             }
         }
     }
@@ -253,7 +253,7 @@ class Matrix extends MinoesTable {
         let blocksPosition = this.piece.minoesPosition[this.piece.facing].translate(this.piece.center)
         if (blocksPosition.some(position => position.y >= 4)) {
             blocksPosition.forEach(position => {
-                this.blocks[position.y][position.x] = this.piece.className
+                this.blocks[position.y][position.x] = "locked " + this.piece.className
                 this.drawMino(position, this.piece.className)
             })
             return true

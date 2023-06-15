@@ -115,3 +115,7 @@ td {
 .ghost.mino {
     opacity: 50%;
 }
+
+.locked.mino {
+    animation: none;
+}

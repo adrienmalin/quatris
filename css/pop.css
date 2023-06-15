@@ -51,11 +51,28 @@ body {
     border-color: #ffadad;
 }
 
+.ghost.mino {
+    filter: brightness(150%) blur(2px);
+    opacity: 50%;
+}
+
+.moving.mino {
+    filter: brightness(120%);
+}
+
 .locking.mino {
     border-color: white;
     filter: blur(2px);
 }
 
-.ghost.mino {
-    filter: brightness(150%) blur(2px);
+@keyframes locked-animation {
+    from {
+        background: white;
+        border-color: white;
+    }
+}
+
+.locked.mino {
+    animation: locked-animation;
+    animation-duration: 0.2s;
 }
