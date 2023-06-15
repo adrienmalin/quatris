@@ -81,7 +81,7 @@
     border-bottom-color: #ad1936;
 }
 
-.locked.mino {
+.locking.mino {
     filter: saturate(50%) brightness(200%);
     box-shadow: -1px -1px 4px rgba(128, 128, 128, 25%),
         -1px 1px 4px rgba(128, 128, 128, 25%),

@@ -7,7 +7,7 @@ body {
     background-color: rgba(37, 41, 45, 30%);
 }
 
-.mino:not(.ghost):not(.locked) {
+.mino:not(.ghost):not(.locking) {
     padding: 0;
     position: relative;
     z-index: 0;
@@ -17,7 +17,7 @@ body {
         1px 1px 4px rgba(128, 128, 128, 25%);
 }
 
-.mino:not(.ghost):not(.locked):before {
+.mino:not(.ghost):not(.locking):before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -47,7 +47,7 @@ body {
         1px 1px 4px rgba(242, 255, 255, 16%);
 }
 
-.locked.mino,
+.locking.mino,
 .moving.mino {
     border-width: 1px;
     background: rgba(186, 211, 255, 70%);

@@ -152,8 +152,6 @@ class MinoesTable {
     }
 
     drawPiece(piece=this.piece, className=piece.className) {
-        if (piece.locked) className += " locked"
-        if (piece==this.piece && actionsQueue.length) className += " moving"
         piece.minoesPosition[piece.facing]
             .translate(piece.center)
             .forEach(minoPosition => {
@@ -231,10 +229,12 @@ class Matrix extends MinoesTable {
         this.drawPiece()
     }
 
-    drawPiece(piece=this.piece, className=piece.className + (piece.locked? " locked" : "")) {
+    drawPiece(piece=this.piece, className=piece.className) {
         super.drawPiece(this.ghost, "")
         this.ghost = piece.ghost
         super.drawPiece(this.ghost)
+        if (piece.locked) className += " locking"
+        if (piece==this.piece && actionsQueue.length) className += " moving"
         super.drawPiece(piece, className)
         matrix.table.style.setProperty('--ghost-column', this.ghost.center.x)
         matrix.table.style.setProperty('--ghost-row',    this.ghost.center.y)

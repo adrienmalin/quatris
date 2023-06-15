@@ -51,7 +51,7 @@ body {
     border-color: #ffadad;
 }
 
-.locked.mino {
+.locking.mino {
     border-color: white;
     filter: blur(2px);
 }

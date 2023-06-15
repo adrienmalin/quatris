@@ -108,7 +108,7 @@ td {
     }
 }
 
-.locked.mino {
+.locking.mino {
     animation: blinker 0.15s step-start infinite;
 }
 
