@@ -24,8 +24,8 @@ body {
     inset: 0;
     padding: 1px;
     border-radius: 0.3vmin;
-    --glint-x: calc(50% + 50% * (var(--ghost-column) - var(--column))/10);
-    --glint-y: calc(50% + 50% * (var(--ghost-row) - var(--row))/25);
+    --glint-x: calc(50% + 50% * (var(--piece-column) - var(--column))/10);
+    --glint-y: calc(50% + 50% * (var(--piece-row) - var(--row))/25);
     background: radial-gradient(
         at var(--glint-x) var(--glint-y),
         rgba(204, 238, 247, 0.9)   0%,

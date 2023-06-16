@@ -236,8 +236,8 @@ class Matrix extends MinoesTable {
         if (piece.locked) className += " locking"
         if (piece==this.piece && actionsQueue.length) className += " moving"
         super.drawPiece(piece, className)
-        matrix.table.style.setProperty('--ghost-column', this.ghost.center.x)
-        matrix.table.style.setProperty('--ghost-row',    this.ghost.center.y)
+        matrix.table.style.setProperty('--piece-column', this.piece.center.x)
+        matrix.table.style.setProperty('--piece-row',    this.piece.center.y)
     }
 
     redraw() {

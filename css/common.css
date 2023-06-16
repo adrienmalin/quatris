@@ -1,3 +1,4 @@
+
 :root {
     --cell-side: 24px;
 }
@@ -18,8 +19,8 @@ body {
 }
 
 .minoes-table {
-    --ghost-row   : 0;
-    --ghost-column: 0;
+    --piece-column: 0;
+    --piece-row   : 0;
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;
