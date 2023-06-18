@@ -109,7 +109,7 @@ td {
 }
 
 .locking.mino {
-    animation: blinker 0.15s step-start infinite;
+    animation: blinker 0.1s step-start infinite;
 }
 
 .ghost.mino {
