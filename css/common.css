@@ -32,22 +32,20 @@ body {
 }
 
 
-/*
 @keyframes hard-dropped-table-animation {
     from {
         transform: translateY(0);
     }
     25% {
-        transform: translateY(3px);
+        transform: translateY(2px);
     }
     to {
         transform: translateY(0);
     }
 }
 #matrixTable.hard-dropped-table-animation {
-    animation: hard-dropped-table-animation .1s;
+    animation: hard-dropped-table-animation .2s;
 }
-*/
 
 tr.buffer-zone td:not(.mino) {
     border-width: 0;
