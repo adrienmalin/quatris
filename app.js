@@ -1,4 +1,5 @@
-/* Contants */
+
+/* Constants */
 const TRANSLATION = {
     NONE:  [ 0, 0],
     LEFT:  [-1, 0],
@@ -477,10 +478,10 @@ class Settings {
     }
 
     init() {
-        this.form.onsubmit = newGame
-        levelInput.name = "startLevel"
-        levelInput.disabled = false
-        titleHeader.innerHTML = "QUATRIS"
+        this.form.onsubmit     = newGame
+        levelInput.name        = "startLevel"
+        levelInput.disabled    = false
+        titleHeader.innerHTML  = "QUATRIS"
         resumeButton.innerHTML = "Jouer"
     }
 
