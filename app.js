@@ -45,24 +45,28 @@ const FACING = {
     WEST:  3,
 }
 
-const KEY_NAMES = {
+const KEY_NAMES = new Proxy({
     ["ArrowLeft"]   : "←",
-    ["ArrowRight"]  : "→",
-    ["ArrowUp"]     : "↑",
-    ["ArrowDown"]   : "↓",
-    [" "]           : "Espace",
-    ["Escape"]      : "Échap.",
-    ["Backspace"]   : "Ret. arrière",
-    ["Enter"]       : "Entrée",
     ["←"]           : "ArrowLeft",
+    ["ArrowRight"]  : "→",
     ["→"]           : "ArrowRight",
+    ["ArrowUp"]     : "↑",
     ["↑"]           : "ArrowUp",
+    ["ArrowDown"]   : "↓",
     ["↓"]           : "ArrowDown",
+    [" "]           : "Espace",
     ["Espace"]      : " ",
+    ["Escape"]      : "Échap.",
     ["Échap."]      : "Escape",
+    ["Backspace"]   : "Ret. arrière",
     ["Ret. arrière"]: "Backspace",
+    ["Enter"]       : "Entrée",
     ["Entrée"]      : "Enter",
-}
+}, {
+    get(obj, keyName) {
+        return keyName in obj? obj[keyName] : keyName
+    }
+})
 
 /* Customize Array to be use as position */
 Object.defineProperties(Array.prototype, {
@@ -494,7 +498,7 @@ class Settings {
 
     getInputs() {
         for (let input of this.form.querySelectorAll("input[type='text']")) {
-            this[input.name] = KEY_NAMES[input.value] || input.value
+            this[input.name] = KEY_NAMES[input.value]
         }
         for (let input of this.form.querySelectorAll("input[type='number'], input[type='range']")) {
             this[input.name] = input.valueAsNumber
@@ -519,7 +523,7 @@ function changeKey(input) {
     input.value = ""
     input.onkeydown = function (event) {
         event.preventDefault()
-        input.value = KEY_NAMES[event.key] || event.key
+        input.value = KEY_NAMES[event.key]
         input.blur()
     }
     input.onblur = function (event) {

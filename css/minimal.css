@@ -1,0 +1,104 @@
+.card {
+    background: #363941;
+}
+
+.minoes-table {
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(5px 8px 0 rgba(9, 9, 9, 22%));
+}
+
+.minoes-table tr {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+}
+
+tr.matrix td:not(.mino) {
+    border: 0;
+}
+
+.minoes-table td {
+    display: inline-block;
+    width: var(--cell-side);
+    height: var(--cell-side);
+    padding: 0 !important;
+}
+
+.mino {
+    content: "";
+    background: var(--background-color);
+    width: inherit;
+    height: inherit;
+    display: block;
+    z-index: calc(1000 - var(--row));
+    box-shadow: 0 -6px 0 var(--light-color);
+}
+
+.I.mino {
+    --background-color: #42AFE1;
+    --light-color: #6CEAFF;
+}
+
+.J.mino {
+    --background-color: #1165B5;
+    --light-color: #339BFF;
+}
+
+.L.mino {
+    --background-color: #F38927;
+    --light-color: #FFBA59;
+}
+
+.O.mino {
+    --background-color: #F6D03C;
+    --light-color: #FFFF7F;
+}
+
+.S.mino {
+    --background-color: #51B84D;
+    --light-color: #84F880;
+}
+
+.T.mino {
+    --background-color: #9739A2;
+    --light-color: #D958E9;
+}
+
+.Z.mino {
+    --background-color: #EB4F65;
+    --light-color: #FF7F79;
+}
+
+.ghost.mino {
+    --background-color: rgba(175, 175, 175, 80%);
+    box-shadow: none;
+}
+
+.moving.mino {
+    filter: saturate(80%) brightness(150%);
+}
+
+.locking.mino {
+    filter: saturate(50%) brightness(250%);
+}
+
+@keyframes locked-animation {
+    from {
+        filter: saturate(50%) brightness(500%);
+    }
+}
+
+.locked.mino {
+    animation: locked-animation;
+    animation-duration: 0.2s;
+}
+
+@keyframes cleared-line-animation {
+    from {
+        background-color: #eeeeee;
+    }
+    to {
+        background-color: transparent;
+    }
+}
