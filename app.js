@@ -129,8 +129,8 @@ class MinoesTable {
     constructor(id) {
         this.table = document.getElementById(id)
         Array.from(this.table.getElementsByTagName("tr")).forEach((tr, row) => {
+            tr.style.setProperty('--row', row)
             Array.from(tr.getElementsByTagName("td")).forEach((td, column) => {
-                td.style.setProperty('--row', row)
                 td.style.setProperty('--column', column)
             })
         })

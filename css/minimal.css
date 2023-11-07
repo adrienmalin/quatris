@@ -12,6 +12,7 @@
     display: flex;
     position: relative;
     flex-direction: row;
+    z-index: calc(1000 - var(--row));
 }
 
 tr.matrix td:not(.mino) {
@@ -31,7 +32,6 @@ tr.matrix td:not(.mino) {
     width: inherit;
     height: inherit;
     display: block;
-    z-index: calc(1000 - var(--row));
     box-shadow: 0 -6px 0 var(--light-color);
 }
 
