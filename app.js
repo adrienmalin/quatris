@@ -30,7 +30,7 @@ const CLEARED_LINES_NAMES = [
     "SOLO",
     "DUO",
     "TRIO",
-    "QUATRIS",
+    "QUATUOR",
 ]
 
 const DELAY = {
@@ -485,7 +485,7 @@ class Settings {
         this.form.onsubmit     = newGame
         levelInput.name        = "startLevel"
         levelInput.disabled    = false
-        titleHeader.innerHTML  = "QUATRIS"
+        titleHeader.innerHTML  = "QUATUOR"
         resumeButton.innerHTML = "Jouer"
     }
 
@@ -553,7 +553,7 @@ class Stats {
         this.startTime = new Date()
         this.lockDelay = DELAY.LOCK
         this.totalClearedLines = 0
-        this.nbQuatris = 0
+        this.nbQuatuors = 0
         this.nbTSpin = 0
         this.maxCombo = 0
         this.maxB2B = 0
@@ -635,7 +635,7 @@ class Stats {
 
     lockDown(nbClearedLines, tSpin) {
         this.totalClearedLines += nbClearedLines
-        if (nbClearedLines == 4) this.nbQuatris++
+        if (nbClearedLines == 4) this.nbQuatuors++
         if (tSpin == T_SPIN.T_SPIN) this.nbTSpin++
 
         // Cleared lines & T-Spin
@@ -725,7 +725,7 @@ class Stats {
         statsModalTimeCell.innerText            = this.timeFormat.format(time)
         statsModaltotalClearedLines.innerText   = this.totalClearedLines
         statsModaltotalClearedLinesPM.innerText = (stats.totalClearedLines * 60000 / time).toFixed(2)
-        statsModalNbQuatris.innerText           = this.nbQuatris
+        statsModalNbQuatuors.innerText          = this.nbQuatuors
         statsModalNbTSpin.innerText             = this.nbTSpin
         statsModalMaxCombo.innerText            = this.maxCombo
         statsModalMaxB2B.innerText              = this.maxB2B
