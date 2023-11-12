@@ -691,13 +691,13 @@ class Stats {
                     messagesSpan.addNewChild("div", {
                         className: "zoom-in-animation",
                         style: "animation-delay: .4s",
-                        innerHTML: `BOUT À BOUT<br/>${b2bScore}`
+                        innerHTML: `BOUT EN BOUT<br/>${b2bScore}`
                     })
                 } else {
                     messagesSpan.addNewChild("div", {
                         className: "zoom-in-animation",
                         style: "animation-delay: .4s",
-                        innerHTML: `BOUT À BOUT x${this.b2b}<br/>${b2bScore}`
+                        innerHTML: `BOUT EN BOUT x${this.b2b}<br/>${b2bScore}`
                     })
                 }
                 this.score += b2bScore
@@ -707,7 +707,7 @@ class Stats {
                 messagesSpan.addNewChild("div", {
                     className: "zoom-in-animation",
                     style: "animation-delay: .4s",
-                    innerHTML: `FIN DU BOUT À BOUT`
+                    innerHTML: `FIN DU BOUT EN BOUT`
                 })
             }
             this.b2b = -1
