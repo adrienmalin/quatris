@@ -18,6 +18,10 @@ body {
     background-color: rgb(37, 41, 45);
 }
 
+.modal-title {
+    text-shadow: 0 0 8px var(--bs-light);
+}
+
 .minoes-table {
     --piece-column: 0;
     --piece-row   : 0;
