@@ -1,5 +1,5 @@
 .card {
-    background: #363941;
+    background-color: #363941;
 }
 
 .minoes-table {
@@ -27,7 +27,6 @@ tr.matrix td:not(.mino) {
 }
 
 .mino {
-    content: "";
     background: var(--background-color);
     width: inherit;
     height: inherit;
@@ -76,11 +75,16 @@ tr.matrix td:not(.mino) {
 }
 
 .moving.mino {
-    filter: saturate(80%) brightness(130%);
+    filter: saturate(80%) brightness(150%);
 }
 
 .locking.mino {
     filter: saturate(50%) brightness(250%);
+}
+
+.locked.mino {
+    animation: locked-animation;
+    animation-duration: 0.2s;
 }
 
 @keyframes locked-animation {
@@ -89,16 +93,13 @@ tr.matrix td:not(.mino) {
     }
 }
 
-.locked.mino {
-    animation: locked-animation;
-    animation-duration: 0.2s;
-}
-
 @keyframes cleared-line-animation {
     from {
         background-color: #eeeeee;
+        box-shadow: 0 -6px 0 #DDDDDD;
     }
     to {
-        background-color: transparent;
+        background-color: #363941;
+        box-shadow: 0 -6px 0 #363941;
     }
 }
