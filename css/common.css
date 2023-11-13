@@ -1,211 +1,100 @@
-
-:root {
-    --cell-side: 24px;
-}
-
-body {
-  background: linear-gradient(#212529, #14171a) fixed;
-}
-
-@supports (backdrop-filter: blur()) {
-    .modal-content {
-        background-color: rgba(33, 37, 41, 30%);
-        backdrop-filter: blur(15px);
-    }
-}
-
 .card {
-    background-color: rgb(37, 41, 45);
-}
-
-.modal-title {
-    text-shadow: 0 0 8px var(--bs-light);
+    background: #363941;
 }
 
 .minoes-table {
-    --piece-column: 0;
-    --piece-row   : 0;
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 0;
-    width: min-content;
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(5px 8px 0 rgba(9, 9, 9, 22%));
 }
 
-#matrixTable {
-    margin-top: calc(-1 * var(--buffer-zone-rows) * var(--cell-side));
-}
-
-
-@keyframes hard-dropped-table-animation {
-    from {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(2px);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-#matrixTable.hard-dropped-table-animation {
-    animation: hard-dropped-table-animation .2s;
-}
-
-tr.buffer-zone td:not(.mino) {
-    border-width: 0;
+.minoes-table tr {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    z-index: calc(1000 - var(--row));
 }
 
 tr.matrix td:not(.mino) {
-    border: 1px solid #333;
+    border: 0;
 }
 
-td {
-    overflow: hidden;
+.minoes-table td {
+    display: inline-block;
     width: var(--cell-side);
     height: var(--cell-side);
+    padding: 0 !important;
 }
 
-@keyframes trail-animation {
+.mino {
+    content: "";
+    background: var(--background-color);
+    width: inherit;
+    height: inherit;
+    display: block;
+    box-shadow: 0 -6px 0 var(--light-color);
+}
+
+.I.mino {
+    --background-color: #42AFE1;
+    --light-color: #6CEAFF;
+}
+
+.J.mino {
+    --background-color: #1165B5;
+    --light-color: #339BFF;
+}
+
+.L.mino {
+    --background-color: #F38927;
+    --light-color: #FFBA59;
+}
+
+.O.mino {
+    --background-color: #F6D03C;
+    --light-color: #FFFF7F;
+}
+
+.S.mino {
+    --background-color: #51B84D;
+    --light-color: #84F880;
+}
+
+.T.mino {
+    --background-color: #9739A2;
+    --light-color: #D958E9;
+}
+
+.Z.mino {
+    --background-color: #EB4F65;
+    --light-color: #FF7F79;
+}
+
+.ghost.mino {
+    --background-color: rgba(175, 175, 175, 80%);
+    box-shadow: none;
+}
+
+.moving.mino {
+    filter: saturate(80%) brightness(150%);
+}
+
+.locking.mino {
+    filter: saturate(50%) brightness(250%);
+}
+
+.locked.mino {
+    animation: locked-animation;
+    animation-duration: 0.2s;
+}
+
+@keyframes locked-animation {
     from {
-        background-color: rgb(206, 255, 255, 25%);
-        filter: saturate(50%) brightness(300%);
-    }
-    to {
-        background-color: transparent;
+        filter: saturate(50%) brightness(500%);
     }
 }
 
-td.trail-animation {
-    animation: trail-animation ease-out .3s;
-}
-
-@keyframes cleared-line-animation {
-    from {
-        background-color: rgb(206, 255, 255, 40%);
-        filter: saturate(50%) brightness(300%);
-        box-shadow: -200px 0 5px white, 200px 0 5px white;
-    }
-    to {
-        background-color: transparent;
-    }
-}
-
-tr.cleared-line-animation{
+tr.cleared-line-animation,
+tr.cleared-line-animation td {
     animation: cleared-line-animation ease-out .3s;
-}
-
-#messagesSpan {
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
-    font-size: 3vmin;
-    text-align: center;
-}
-
-#messagesSpan div {
-    opacity: 0;
-    overflow: hidden;
-}
-
-@keyframes show-level-animation {
-    from {
-        opacity: 0;
-        transform: translateY(200%);
-    }
-    50% {
-        opacity: 100%;
-        transform: translateY(0) scaleY(1);
-        line-height: var(--bs-body-line-height);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-100%) scaleY(0);
-        line-height: 0;
-    }
-}
-
-#messagesSpan div.show-level-animation {
-    animation: show-level-animation;
-    animation-timing-function: (0.4, 0, 0.6, 1);
-    animation-duration: 2s;
-}
-
-@keyframes zoom-in-animation {
-    from {
-        opacity: 0;
-        transform: scale3d(0.3, 0.3, 0.3);
-        line-height: var(--bs-body-line-height);
-
-    }
-    30% {
-        opacity: 1;
-        transform: scale3d(1, 1, 1);
-    }
-    80% {
-        opacity: 1;
-        transform: scale3d(1, 1, 1);
-        line-height: var(--bs-body-line-height);
-    }
-    to {
-        opacity: 0;
-        transform: scale3d(1.5, 0, 1);
-        line-height: 0;
-    }
-}
-
-@keyframes rotate-in-animation {
-    0% {
-        opacity:0;
-        transform:rotate(200deg);
-        line-height: var(--bs-body-line-height);
-    }
-    30% {
-        opacity:1;
-        transform:translateZ(0);
-        transform: scale3d(1, 1, 1);
-    }
-    80% {
-        opacity: 1;
-        transform: scale3d(1, 1, 1);
-        line-height: var(--bs-body-line-height);
-    }
-    to {
-        opacity: 0;
-        transform: scale3d(1.5, 0, 1);
-        line-height: 0;
-    }
-}
-
-#messagesSpan div.rotate-in-animation {
-    animation-name:  rotate-in-animation;
-    animation-timing-function: cubic-bezier(.25,.46,.45,.94);
-    animation-duration: 1s;
-}
-
-#messagesSpan div.zoom-in-animation {
-    animation-name: zoom-in-animation;
-    animation-timing-function: cubic-bezier(.25,.46,.45,.94);
-    transform-origin:center;
-    animation-duration: 1s;
-}
-
-@keyframes game-over-animation {
-    from {
-        opacity: 0;
-        transform: translateY(200%);
-    }
-    to {
-        opacity: 100%;
-        transform: translateY(0) scaleY(1);
-        line-height: var(--bs-body-line-height);
-    }
-}
-
-#messagesSpan div.game-over-animation {
-    animation: game-over-animation;
-    animation-timing-function: (0.4, 0, 0.6, 1);
-    animation-duration: 2s;
 }

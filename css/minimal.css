@@ -76,7 +76,7 @@ tr.matrix td:not(.mino) {
 }
 
 .moving.mino {
-    filter: saturate(80%) brightness(150%);
+    filter: saturate(80%) brightness(130%);
 }
 
 .locking.mino {
