@@ -75,11 +75,11 @@ tr.matrix td:not(.mino) {
 }
 
 .moving.mino {
-    filter: saturate(80%) brightness(150%);
+    filter: saturate(80%) brightness(110%);
 }
 
 .locking.mino {
-    filter: saturate(50%) brightness(250%);
+    filter: saturate(50%) brightness(130%);
 }
 
 .locked.mino {
@@ -89,17 +89,15 @@ tr.matrix td:not(.mino) {
 
 @keyframes locked-animation {
     from {
-        filter: saturate(50%) brightness(500%);
+        filter: saturate(50%) brightness(300%);
     }
 }
 
 @keyframes cleared-line-animation {
     from {
         background-color: #eeeeee;
-        box-shadow: 0 -6px 0 #DDDDDD;
     }
     to {
         background-color: #363941;
-        box-shadow: 0 -6px 0 #363941;
     }
 }
