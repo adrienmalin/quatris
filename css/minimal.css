@@ -12,7 +12,7 @@
     display: flex;
     position: relative;
     flex-direction: row;
-    z-index: calc(1000 - var(--row));
+    z-index: calc(100 - var(--row));
 }
 
 tr.matrix td:not(.mino) {
@@ -24,6 +24,7 @@ tr.matrix td:not(.mino) {
     width: var(--cell-side);
     height: var(--cell-side);
     padding: 0 !important;
+    z-index: calc(200 - var(--row));
 }
 
 .mino {
