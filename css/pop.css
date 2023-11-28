@@ -15,40 +15,41 @@ body {
 }
 
 .mino {
-    background: rgba(255, 255, 255, 10%);
-    border: 5px solid;
+    background: rgba(255, 255, 255, 33%);
+    border: 6px solid var(--color);
     padding: 0;
     opacity: 100%;
     border-radius: 4px;
-    filter: blur(1px)
+    filter: blur(1px);
+    box-shadow: 0 0 10px var(--color);
 }
 
 .I.mino {
-    border-color: #9bf6ff;
+    --color: #9bf6ff;
 }
 
 .J.mino {
-    border-color: #a0c4ff;
+    --color: #a0c4ff;
 }
 
 .L.mino {
-    border-color: #ffd6a5;
+    --color: #ffd6a5;
 }
 
 .O.mino {
-    border-color: #fdffb6;
+    --color: #fdffb6;
 }
 
 .T.mino {
-    border-color: #bdb2ff;
+    --color: #bdb2ff;
 }
 
 .S.mino {
-    border-color: #caffbf;
+    --color: #caffbf;
 }
 
 .Z.mino {
-    border-color: #ffadad;
+    --color: #ffadad;
 }
 
 .ghost.mino {
@@ -61,14 +62,14 @@ body {
 }
 
 .locking.mino {
-    border-color: white;
+    --color: white;
     filter: blur(2px);
 }
 
 @keyframes locked-animation {
     from {
         background: white;
-        border-color: white;
+        --color: white;
     }
 }
 

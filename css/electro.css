@@ -8,13 +8,14 @@ body {
 }
 
 .mino:not(.ghost):not(.locking) {
-    padding: 0;
+    padding: 1px;
     position: relative;
     z-index: 0;
-    box-shadow: -1px -1px 4px rgba(128, 128, 128, 25%),
-        -1px 1px 4px rgba(128, 128, 128, 25%),
-        1px -1px 4px rgba(128, 128, 128, 25%),
-        1px 1px 4px rgba(128, 128, 128, 25%);
+    box-shadow:
+        -1px -1px 4px rgba(128, 128, 128, 25%),
+        -1px  1px 4px rgba(128, 128, 128, 25%),
+         1px -1px 4px rgba(128, 128, 128, 25%),
+         1px  1px 4px rgba(128, 128, 128, 25%);
 }
 
 .mino:not(.ghost):not(.locking):before {
@@ -22,14 +23,15 @@ body {
     position: absolute;
     z-index: -1;
     inset: 0;
-    padding: 1px;
-    border-radius: 0.3vmin;
+    margin: 1px;
+    padding: 2px;
+    border-radius: 4px;
     --glint-x: calc(50% + 50% * (var(--piece-column) - var(--column))/10);
     --glint-y: calc(50% + 50% * (var(--piece-row) - var(--row))/25);
     background: radial-gradient(
         at var(--glint-x) var(--glint-y),
-        rgba(204, 238, 247, 0.9)   0%,
-        rgba(0, 159, 218, 0.9) 150%);
+        rgba(204, 238, 247, 0.7)   0%,
+        rgba(0, 159, 218, 0.7) 150%);
     mask: 
        linear-gradient(#666 0 0) content-box, 
        linear-gradient(#fff 0 0);
@@ -46,11 +48,12 @@ body {
         -1px  1px 8px rgba(242, 255, 255, 16%),
          1px -1px 8px rgba(242, 255, 255, 16%),
          1px  1px 8px rgba(242, 255, 255, 16%);
+    filter: blur(1px);
 }
 
 .moving.mino {
     border-width: 1px;
-    background: rgba(186, 211, 255, 30%);
+    background:   rgba(186, 211, 255, 30%);
     border-color: rgba(242, 255, 255, 0.7);
 }
 
@@ -58,10 +61,11 @@ body {
     border-width: 1px;
     background: rgba(186, 211, 255, 70%);
     border-color: rgba(242, 255, 255, 0.7);
-    box-shadow: -1px -1px 4px rgba(186, 211, 255, 27%),
-        -1px 1px 4px rgba(186, 211, 255, 27%),
-        1px -1px 4px rgba(186, 211, 255, 27%),
-        1px 1px 4px rgba(186, 211, 255, 27%);
+    box-shadow:
+        -1px -1px 4px rgba(186, 211, 255, 27%),
+        -1px  1px 4px rgba(186, 211, 255, 27%),
+         1px -1px 4px rgba(186, 211, 255, 27%),
+         1px  1px 4px rgba(186, 211, 255, 27%);
 }
 
 @keyframes locked-animation {

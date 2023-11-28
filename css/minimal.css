@@ -71,7 +71,7 @@ tr.matrix td:not(.mino) {
 }
 
 .ghost.mino {
-    --background-color: rgba(175, 175, 175, 80%);
+    opacity: 50%;
     box-shadow: none;
 }
 
@@ -99,6 +99,6 @@ tr.matrix td:not(.mino) {
         background-color: #eeeeee;
     }
     to {
-        background-color: #363941;
+        background-color: transparent;
     }
 }
