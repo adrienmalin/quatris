@@ -14,6 +14,13 @@ body {
     }
 }
 
+tr.matrix td:not(.mino) {
+    border-left  : 1px solid #222;
+    border-right : 1px solid #222;
+    border-top   : 1px solid #111;
+    border-bottom: 1px solid #111;
+}
+
 .mino {
     background: rgba(255, 255, 255, 33%);
     border: 6px solid var(--color);

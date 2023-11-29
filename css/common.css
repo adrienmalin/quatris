@@ -56,7 +56,10 @@ tr.buffer-zone td:not(.mino) {
 }
 
 tr.matrix td:not(.mino) {
-    border: 1px solid #333;
+    border-left  : 1px solid #333;
+    border-right : 1px solid #333;
+    border-top   : 1px solid #303030;
+    border-bottom: 1px solid #303030;
 }
 
 td {

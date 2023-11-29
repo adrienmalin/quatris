@@ -30,8 +30,8 @@ body {
     --glint-y: calc(50% + 50% * (var(--piece-row) - var(--row))/25);
     background: radial-gradient(
         at var(--glint-x) var(--glint-y),
-        rgba(204, 238, 247, 0.7)   0%,
-        rgba(0, 159, 218, 0.7) 150%);
+        rgba(204, 238, 247, 0.9)   0%,
+        rgba(10, 159, 218, 0.9) 150%);
     mask: 
        linear-gradient(#666 0 0) content-box, 
        linear-gradient(#fff 0 0);
@@ -44,11 +44,10 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
     box-shadow:
-        -1px -1px 8px rgba(242, 255, 255, 16%),
-        -1px  1px 8px rgba(242, 255, 255, 16%),
-         1px -1px 8px rgba(242, 255, 255, 16%),
-         1px  1px 8px rgba(242, 255, 255, 16%);
-    filter: blur(1px);
+        -1px -1px 8px rgba(242, 255, 255, 32%),
+        -1px  1px 8px rgba(242, 255, 255, 32%),
+         1px -1px 8px rgba(242, 255, 255, 32%),
+         1px  1px 8px rgba(242, 255, 255, 32%);
 }
 
 .moving.mino {
@@ -58,14 +57,15 @@ body {
 }
 
 .locking.mino {
-    border-width: 1px;
+    border-width: 3px;
     background: rgba(186, 211, 255, 70%);
     border-color: rgba(242, 255, 255, 0.7);
+    border-radius: 4px;
     box-shadow:
-        -1px -1px 4px rgba(186, 211, 255, 27%),
-        -1px  1px 4px rgba(186, 211, 255, 27%),
-         1px -1px 4px rgba(186, 211, 255, 27%),
-         1px  1px 4px rgba(186, 211, 255, 27%);
+        -1px -1px 8px rgba(186, 211, 255, 27%),
+        -1px  1px 8px rgba(186, 211, 255, 27%),
+         1px -1px 8px rgba(186, 211, 255, 27%),
+         1px  1px 8px rgba(186, 211, 255, 27%);
 }
 
 @keyframes locked-animation {
