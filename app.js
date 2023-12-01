@@ -638,6 +638,23 @@ class Stats {
         if (nbClearedLines == 4) this.nbQuatuors++
         if (tSpin == T_SPIN.T_SPIN) this.nbTSpin++
 
+        // Sound
+        if (sfxVolumeRange.value) {
+            if (nbClearedLines == 4 || (nbClearedLines && tSpin)) {
+                quatuorSound.currentTime = 0
+                quatuorSound.volume = sfxVolumeRange.value
+                quatuorSound.play()
+            } else if (nbClearedLines) {
+                lineClearSound.currentTime = 0
+                lineClearSound.volume = sfxVolumeRange.value
+                lineClearSound.play()
+            } else if (tSpin) {
+                tSpinSound.currentTime = 0
+                lineClearSound.volume = sfxVolumeRange.value
+                tSpinSound.play()
+            }
+        }
+
         // Cleared lines & T-Spin
         let awardedLineClears = AWARDED_LINE_CLEARS[tSpin][nbClearedLines]
         let patternScore = 100 * this.level * awardedLineClears
@@ -861,6 +878,9 @@ let playerActions = {
         scheduler.clearTimeout(lockDown)
         while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, "trail-animation")) stats.score +=2
         matrix.table.classList.add("hard-dropped-table-animation")
+        hardDropSound.currentTime = 0
+        hardDropSound.volume = sfxVolumeRange.value
+        hardDropSound.play()
         lockDown()
     },
 
