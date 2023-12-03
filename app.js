@@ -330,11 +330,15 @@ class Tetromino {
             }
             matrix.drawPiece()
             return true
-        } else if (translation == TRANSLATION.DOWN) {
-            this.locked = true
-            if (!scheduler.timeoutTasks.has(lockDown))
-                scheduler.setTimeout(lockDown, stats.lockDelay)
-            matrix.drawPiece()
+        } else {
+            if (translation == TRANSLATION.DOWN) {
+                this.locked = true
+                if (!scheduler.timeoutTasks.has(lockDown))
+                    scheduler.setTimeout(lockDown, stats.lockDelay)
+                matrix.drawPiece()
+            } else {
+                wallSound.play()
+            }
         }
     }
     
@@ -744,10 +748,9 @@ Stats.prototype.timeFormat = new Intl.DateTimeFormat("fr-FR", {
     timeZone: "UTC"
 })
 
-function playSound(audio) {
-    audio.currentTime = 0
-    audio.volume = sfxVolumeRange.value
-    audio.play()
+function playSound(sound) {
+    sound.currentTime = 0
+    sound.play()
 }
 
 
@@ -833,6 +836,8 @@ function resume(event) {
     settings.form.classList.add('was-validated')
 
     if (settings.form.checkValidity()) {
+        for(const sound of document.getElementsByTagName("audio")) sound.volume = sfxVolumeRange.value
+
         settings.modal.hide()
         settings.getInputs()
 
@@ -871,9 +876,7 @@ let playerActions = {
 
     rotateCounterclockwise: () => matrix.piece.rotate(ROTATION.CCW),
 
-    softDrop: function() {
-        if (matrix.piece.move(TRANSLATION.DOWN)) stats.score++
-    },
+    softDrop: () => {if (matrix.piece.move(TRANSLATION.DOWN)) stats.score++},
 
     hardDrop: function() {
         scheduler.clearTimeout(lockDown)
