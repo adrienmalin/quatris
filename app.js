@@ -459,9 +459,7 @@ class Settings {
         this.form = settingsForm
         this.load()
         this.modal = new bootstrap.Modal('#settingsModal')
-        settingsModal.addEventListener('shown.bs.modal', () => {
-            resumeButton.focus()
-        })
+        settingsModal.addEventListener('shown.bs.modal', () => resumeButton.focus())
     }
 
     load() {
@@ -512,10 +510,6 @@ class Settings {
             this.keyBind[settings[actionName]] = playerActions[actionName]
         }
     }
-}
-
-window.onload = function (event) {
-    window.document.selectedStyleSheetSet = stylesheetSelect.value
 }
 
 function changeKey(input) {
@@ -640,19 +634,9 @@ class Stats {
 
         // Sound
         if (sfxVolumeRange.value) {
-            if (nbClearedLines == 4 || (nbClearedLines && tSpin)) {
-                quatuorSound.currentTime = 0
-                quatuorSound.volume = sfxVolumeRange.value
-                quatuorSound.play()
-            } else if (nbClearedLines) {
-                lineClearSound.currentTime = 0
-                lineClearSound.volume = sfxVolumeRange.value
-                lineClearSound.play()
-            } else if (tSpin) {
-                tSpinSound.currentTime = 0
-                lineClearSound.volume = sfxVolumeRange.value
-                tSpinSound.play()
-            }
+            if (nbClearedLines == 4 || (nbClearedLines && tSpin)) playSound(quatuorSound)
+            else if (nbClearedLines) playSound(lineClearSound)
+            else if (tSpin) playSound(tSpinSound)
         }
 
         // Cleared lines & T-Spin
@@ -760,6 +744,12 @@ Stats.prototype.timeFormat = new Intl.DateTimeFormat("fr-FR", {
     timeZone: "UTC"
 })
 
+function playSound(audio) {
+    audio.currentTime = 0
+    audio.volume = sfxVolumeRange.value
+    audio.play()
+}
+
 
 /* Game */
 onanimationend = function (event) {
@@ -777,7 +767,14 @@ let holdQueue = new MinoesTable("holdTable")
 let matrix = new Matrix()
 let nextQueue = new NextQueue()
 let playing = false
-let favicon = document.querySelector("link[rel~='icon']")
+let favicon
+
+window.onload = function(event) {
+    document.selectedStyleSheetSet = stylesheetSelect.value
+    favicon = document.querySelector("link[rel~='icon']")
+
+    restart()
+}
 
 function restart() {
     stats.modal.hide()
@@ -788,8 +785,6 @@ function restart() {
     settings.init()
     pauseSettings()
 }
-
-restart()
 
 function pauseSettings() {
     scheduler.clearInterval(fall)
@@ -811,6 +806,12 @@ function newGame(event) {
         settings.form.reportValidity()
         settings.form.classList.add('was-validated')
     } else {
+        const audioContext = new AudioContext()
+        audioContext.createMediaElementSource(hardDropSound).connect(audioContext.destination)
+        audioContext.createMediaElementSource(tSpinSound).connect(audioContext.destination)
+        audioContext.createMediaElementSource(lineClearSound).connect(audioContext.destination)
+        audioContext.createMediaElementSource(quatuorSound).connect(audioContext.destination)
+
         levelInput.name = "level"
         levelInput.disabled = true
         titleHeader.innerHTML = "PAUSE"
@@ -876,11 +877,9 @@ let playerActions = {
 
     hardDrop: function() {
         scheduler.clearTimeout(lockDown)
+        playSound(hardDropSound)
         while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, "trail-animation")) stats.score +=2
         matrix.table.classList.add("hard-dropped-table-animation")
-        hardDropSound.currentTime = 0
-        hardDropSound.volume = sfxVolumeRange.value
-        hardDropSound.play()
         lockDown()
     },
 
