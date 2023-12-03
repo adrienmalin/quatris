@@ -314,11 +314,11 @@ class Tetromino {
             return false
     }
     
-    move(translation, rotation=ROTATION.NONE, clearClassName="") {
+    move(translation, rotation=ROTATION.NONE, hardDropped=false) {
         let success = this.canMove(translation, rotation)
         if (success) {
             scheduler.clearTimeout(lockDown)
-            matrix.drawPiece(this, clearClassName)
+            matrix.drawPiece(this, hardDropped? "trail-animation" : "")
             this.center = success.center
             if (rotation) this.facing = success.facing
             this.lastRotation = rotation
@@ -330,8 +330,8 @@ class Tetromino {
             }
             matrix.drawPiece()
             return true
-        } else {
-            wallSound.play()
+        } else if (!hardDropped) {
+            // wallSound.play()
             if (translation == TRANSLATION.DOWN) {
                 this.locked = true
                 if (!scheduler.timeoutTasks.has(lockDown))
@@ -809,10 +809,8 @@ function newGame(event) {
         settings.form.classList.add('was-validated')
     } else {
         const audioContext = new AudioContext()
-        audioContext.createMediaElementSource(hardDropSound).connect(audioContext.destination)
-        audioContext.createMediaElementSource(tSpinSound).connect(audioContext.destination)
-        audioContext.createMediaElementSource(lineClearSound).connect(audioContext.destination)
-        audioContext.createMediaElementSource(quatuorSound).connect(audioContext.destination)
+        for(const sound of document.getElementsByTagName("audio"))
+            audioContext.createMediaElementSource(sound).connect(audioContext.destination)
 
         levelInput.name = "level"
         levelInput.disabled = true
@@ -835,7 +833,8 @@ function resume(event) {
     settings.form.classList.add('was-validated')
 
     if (settings.form.checkValidity()) {
-        for(const sound of document.getElementsByTagName("audio")) sound.volume = sfxVolumeRange.value
+        for(const sound of document.getElementsByTagName("audio"))
+            sound.volume = sfxVolumeRange.value
 
         settings.modal.hide()
         settings.getInputs()
@@ -875,12 +874,21 @@ let playerActions = {
 
     rotateCounterclockwise: () => matrix.piece.rotate(ROTATION.CCW),
 
-    softDrop: () => {if (matrix.piece.move(TRANSLATION.DOWN)) stats.score++},
+    softDrop: function() {
+        if (matrix.piece.move(TRANSLATION.DOWN)) {
+            stats.score++
+            return true
+        } else {
+            return false
+        }
+    },
 
     hardDrop: function() {
         scheduler.clearTimeout(lockDown)
         playSound(hardDropSound)
-        while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, "trail-animation")) stats.score +=2
+        while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, true)) stats.score +=2
+        // wallSound.currentTime = 0
+        // wallSound.pause()
         matrix.table.classList.add("hard-dropped-table-animation")
         lockDown()
     },
@@ -969,7 +977,6 @@ function fall() {
 function lockDown() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
-    wallSound.pause()
 
     if (matrix.lock()) {
         let tSpin = matrix.piece.tSpin
