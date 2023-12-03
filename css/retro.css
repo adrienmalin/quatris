@@ -124,7 +124,7 @@ td {
 }
 
 .ghost.mino {
-    background: rgba(0, 0, 0, 20%);
+    opacity: 50%;
 }
 
 .locked.mino {

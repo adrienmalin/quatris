@@ -51,16 +51,6 @@
     border-bottom-color: #ca9501;
 }
 
-.T.mino {
-    --background-color: #B000FE;
-    --frontier-color:  #c541fc;
-    --light-color: #edb2ff;
-    border-top-color: #d380ff;
-    border-left-color: #b42deb;
-    border-right-color: #8000cd;
-    border-bottom-color: #6e019a;
-}
-
 .S.mino {
     --background-color: #67EE12;
     --frontier-color:  #93f85a;
@@ -69,6 +59,16 @@
     border-left-color: #5ee82b;
     border-right-color: #35db00;
     border-bottom-color: #1cbc02;
+}
+
+.T.mino {
+    --background-color: #B000FE;
+    --frontier-color:  #c541fc;
+    --light-color: #edb2ff;
+    border-top-color: #d380ff;
+    border-left-color: #b42deb;
+    border-right-color: #8000cd;
+    border-bottom-color: #6e019a;
 }
 
 .Z.mino {

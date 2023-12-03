@@ -331,13 +331,12 @@ class Tetromino {
             matrix.drawPiece()
             return true
         } else {
+            wallSound.play()
             if (translation == TRANSLATION.DOWN) {
                 this.locked = true
                 if (!scheduler.timeoutTasks.has(lockDown))
                     scheduler.setTimeout(lockDown, stats.lockDelay)
                 matrix.drawPiece()
-            } else {
-                wallSound.play()
             }
         }
     }
@@ -970,6 +969,7 @@ function fall() {
 function lockDown() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
+    wallSound.pause()
 
     if (matrix.lock()) {
         let tSpin = matrix.piece.tSpin
