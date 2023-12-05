@@ -58,7 +58,8 @@
               </fieldset>
               <fieldset class="row g-2 mb-3 align-items-center text-center">
                 <legend class="text-start">Interface</legend>
-                <label for="stylesheetSelect" class="col-sm-2 col-form-label">Thème</label>
+                <label for="sfxVolumeRange" class="col-sm-2 col-form-label">Volume</label>
+                <div class="col-sm-4 d-flex align-items-baseline"><input id="sfxVolumeRange" class="form-range" type="range" min="0" max="1" step="any" value="0.5"></div>
                 <div class="col-sm-4"><select name="stylesheet" id="stylesheetSelect" class="form-select" oninput="document.selectedStyleSheetSet=this.value">
                   <option selected>Classique</option>
                   <option>Minimal</option>
@@ -66,8 +67,7 @@
                   <option>Électro</option>
                   <option>Rétro</option>
                 </select></div>
-                <div class="col-sm-4"><input id="sfxVolumeRange" class="form-range" type="range" min="0" max="1" step="any" value="0.5"></div>
-                <label for="sfxVolumeRange" class="col-sm-2 col-form-label">Volume</label>
+                <label for="stylesheetSelect" class="col-sm-2 col-form-label">Thème</label>
               </fieldset>
               <fieldset class="row g-2 mb-3 align-items-center text-center">
                 <legend class="text-start">Partie</legend>

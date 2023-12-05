@@ -1,6 +1,3 @@
-
-
-
 class Settings {
     constructor() {
         this.form = settingsForm
