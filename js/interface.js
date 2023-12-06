@@ -253,7 +253,7 @@ class Stats {
 
         // Sound
         if (sfxVolumeRange.value) {
-            if (nbClearedLines == 4 || (nbClearedLines && tSpin)) playSound(quatuorSound, this.combo)
+            if (nbClearedLines == 4) playSound(quatuorSound, this.combo)
             else if (nbClearedLines) playSound(lineClearSound, this.combo)
             if (tSpin) playSound(tSpinSound)
         }
@@ -289,7 +289,6 @@ Stats.prototype.timeFormat = new Intl.DateTimeFormat("fr-FR", {
 })
 
 function playSound(sound, note=0) {
-    sound.pause()
     sound.currentTime = 0
     sound.playbackRate = Math.pow(5/4, note)
     sound.play()
