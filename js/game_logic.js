@@ -332,7 +332,7 @@ class Tetromino {
             matrix.drawPiece()
             return true
         } else if (!hardDropped) {
-            // wallSound.play()
+            wallSound.play()
             if (translation == TRANSLATION.DOWN) {
                 this.locked = true
                 if (!scheduler.timeoutTasks.has(lockDown))

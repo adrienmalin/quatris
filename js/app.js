@@ -45,8 +45,10 @@ function newGame(event) {
         settings.form.classList.add('was-validated')
     } else {
         const audioContext = new AudioContext()
-        for(const sound of document.getElementsByTagName("audio"))
+        for(const sound of document.getElementsByTagName("audio")) {
+            sound.preservesPitch = false
             audioContext.createMediaElementSource(sound).connect(audioContext.destination)
+        }
 
         levelInput.name = "level"
         levelInput.disabled = true

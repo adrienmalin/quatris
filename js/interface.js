@@ -176,13 +176,6 @@ class Stats {
         if (nbClearedLines == 4) this.nbQuatuors++
         if (tSpin == T_SPIN.T_SPIN) this.nbTSpin++
 
-        // Sound
-        if (sfxVolumeRange.value) {
-            if (nbClearedLines == 4 || (nbClearedLines && tSpin)) playSound(quatuorSound)
-            else if (nbClearedLines) playSound(lineClearSound)
-            else if (tSpin) playSound(tSpinSound)
-        }
-
         // Cleared lines & T-Spin
         let awardedLineClears = AWARDED_LINE_CLEARS[tSpin][nbClearedLines]
         let patternScore = 100 * this.level * awardedLineClears
@@ -258,6 +251,13 @@ class Stats {
             this.b2b = -1
         }
 
+        // Sound
+        if (sfxVolumeRange.value) {
+            if (nbClearedLines == 4 || (nbClearedLines && tSpin)) playSound(quatuorSound, this.combo)
+            else if (nbClearedLines) playSound(lineClearSound, this.combo)
+            else if (tSpin) playSound(tSpinSound)
+        }
+
         this.goal -= awardedLineClears
         if (this.goal <= 0) this.level++
     }
@@ -288,7 +288,9 @@ Stats.prototype.timeFormat = new Intl.DateTimeFormat("fr-FR", {
     timeZone: "UTC"
 })
 
-function playSound(sound) {
+function playSound(sound, note=0) {
+    sound.pause()
     sound.currentTime = 0
+    sound.playbackRate = Math.pow(5/4, note)
     sound.play()
 }
