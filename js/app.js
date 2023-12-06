@@ -160,7 +160,7 @@ function onkeydown(event) {
             action = settings.keyBind[event.key]
             if (action()) {
                 lastActionSucceded = true
-            } else if (lastActionSucceded) {
+            } else if (lastActionSucceded || !(action in REPEATABLE_ACTIONS)) {
                 wallSound.play()
                 lastActionSucceded = false
             }
@@ -218,6 +218,7 @@ function fall() {
 function lockDown() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
+    if (lastActionSucceded) wallSound.play()
 
     if (matrix.lock()) {
         let tSpin = matrix.piece.tSpin
