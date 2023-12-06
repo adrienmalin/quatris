@@ -255,7 +255,7 @@ class Stats {
         if (sfxVolumeRange.value) {
             if (nbClearedLines == 4) playSound(quatuorSound, this.combo)
             else if (nbClearedLines) playSound(lineClearSound, this.combo)
-            if (tSpin) playSound(tSpinSound)
+            if (tSpin) playSound(tSpinSound, this.combo)
         }
 
         this.goal -= awardedLineClears
