@@ -103,17 +103,32 @@ class Scheduler {
     }
 
     setInterval(func, delay, ...args) {
-        this.intervalTasks.set(func, window.setInterval(func, delay, ...args))
+        if (this.intervalTasks.has(func)) {
+            console.warn(`$func already in intervalTasks`)
+            return false
+        } else {
+            this.intervalTasks.set(func, window.setInterval(func, delay, ...args))
+            return true
+        }
     }
 
     setTimeout(func, delay, ...args) {
-        this.timeoutTasks.set(func, window.setTimeout(func, delay, ...args))
+        if (this.timeoutTasks.has(func)) {
+            console.warn(`$func already in timeoutTasks`)
+            return false
+        } else {
+            this.timeoutTasks.set(func, window.setTimeout(func, delay, ...args))
+            return true
+        }
     }
 
     clearInterval(func) {
         if (this.intervalTasks.has(func)) {
             window.clearInterval(this.intervalTasks.get(func))
             this.intervalTasks.delete(func)
+            return true
+        } else {
+            return false
         }
     }
 
@@ -121,6 +136,9 @@ class Scheduler {
         if (this.timeoutTasks.has(func)) {
             window.clearTimeout(this.timeoutTasks.get(func))
             this.timeoutTasks.delete(func)
+            return true
+        } else {
+            return false
         }
     }
 }
@@ -332,7 +350,6 @@ class Tetromino {
             matrix.drawPiece()
             return true
         } else if (!hardDropped) {
-            wallSound.play()
             if (translation == TRANSLATION.DOWN) {
                 this.locked = true
                 if (!scheduler.timeoutTasks.has(lockDown))

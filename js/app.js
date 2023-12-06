@@ -1,10 +1,11 @@
-let scheduler = new Scheduler()
-let settings = new Settings()
-let stats = new Stats()
-let holdQueue = new MinoesTable("holdTable")
-let matrix = new Matrix()
-let nextQueue = new NextQueue()
-let playing = false
+let scheduler          = new Scheduler()
+let settings           = new Settings()
+let stats              = new Stats()
+let holdQueue          = new MinoesTable("holdTable")
+let matrix             = new Matrix()
+let nextQueue          = new NextQueue()
+let playing            = false
+let lastActionSucceded = true
 let favicon
 
 window.onload = function(event) {
@@ -94,6 +95,7 @@ function ticktack() {
 
 function generate(piece) {
     matrix.piece = piece || nextQueue.shift()
+    lastActionSucceded = true
     favicon.href = matrix.piece.favicon_href
 
     if (matrix.piece.canMove(TRANSLATION.NONE)) {
@@ -112,23 +114,15 @@ let playerActions = {
 
     rotateCounterclockwise: () => matrix.piece.rotate(ROTATION.CCW),
 
-    softDrop: function() {
-        if (matrix.piece.move(TRANSLATION.DOWN)) {
-            stats.score++
-            return true
-        } else {
-            return false
-        }
-    },
+    softDrop: () => matrix.piece.move(TRANSLATION.DOWN) && ++stats.score,
 
     hardDrop: function() {
         scheduler.clearTimeout(lockDown)
         playSound(hardDropSound)
         while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, true)) stats.score +=2
-        // wallSound.currentTime = 0
-        // wallSound.pause()
         matrix.table.classList.add("hard-dropped-table-animation")
         lockDown()
+        return true
     },
 
     hold: function() {
@@ -164,7 +158,12 @@ function onkeydown(event) {
         if (!pressedKeys.has(event.key)) {
             pressedKeys.add(event.key)
             action = settings.keyBind[event.key]
-            action()
+            if (action()) {
+                lastActionSucceded = true
+            } else if (lastActionSucceded) {
+                wallSound.play()
+                lastActionSucceded = false
+            }
             if (REPEATABLE_ACTIONS.includes(action)) {
                 actionsQueue.unshift(action)
                 scheduler.clearTimeout(repeat)
@@ -186,10 +185,14 @@ function repeat() {
 
 function autorepeat() {
     if (actionsQueue.length) {
-        actionsQueue[0]()
-    } else {
-        scheduler.clearInterval(autorepeat)
+        if (actionsQueue[0]()) {
+            lastActionSucceded = true
+        } else if (lastActionSucceded) {
+            wallSound.play()
+            lastActionSucceded = false
+        }
     }
+    else scheduler.clearInterval(autorepeat)
 }
 
 function onkeyup(event) {
