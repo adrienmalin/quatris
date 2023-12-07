@@ -119,9 +119,9 @@ let playerActions = {
     hardDrop: function() {
         scheduler.clearTimeout(lockDown)
         playSound(hardDropSound)
-        while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, true)) stats.score +=2
+        while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, true)) stats.score += 2
         matrix.table.classList.add("hard-dropped-table-animation")
-        lockDown()
+        lockDown(true)
         return true
     },
 
@@ -215,10 +215,10 @@ function fall() {
     matrix.piece.move(TRANSLATION.DOWN)
 }
 
-function lockDown() {
+function lockDown(hardDropped=false) {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
-    if (lastActionSucceded) wallSound.play()
+    if (lastActionSucceded && !hardDropped) playSound(wallSound)
 
     if (matrix.lock()) {
         let tSpin = matrix.piece.tSpin
