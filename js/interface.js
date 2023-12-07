@@ -30,20 +30,12 @@ class Settings {
     }
 
     load() {
-        for (let element of settingsForm.elements) {
-            if (element.name) {
-                if (localStorage[element.name]) element.value = localStorage[element.name]
-            }
-        }
+        this.form.querySelectorAll("[name]").forEach(element => element.value = localStorage[element.name])
         window.document.selectedStyleSheetSet = stylesheetSelect.value
     }
 
     save() {
-        for (let element of settingsForm.elements) {
-            if (element.name) {
-                localStorage[element.name] = element.value
-            }
-        }
+        this.form.querySelectorAll("[name]").forEach(element => localStorage[element.name] = element.value)
     }
 
     init() {
