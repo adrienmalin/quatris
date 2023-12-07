@@ -16,8 +16,8 @@ const KEY_NAMES = new Proxy({
     ["Enter"]       : "Entrée",
     ["Entrée"]      : "Enter",
 }, {
-    get(obj, keyName) {
-        return keyName in obj? obj[keyName] : keyName
+    get(target, key) {
+        return key in target? target[key] : key
     }
 })
 
@@ -64,7 +64,12 @@ class Settings {
             this[input.name] = input.checked == true
         }
     
-        this.keyBind = {}
+        this.keyBind = new Proxy({}, {
+            get: (target, key) => target[key.toLowerCase()],
+            set: (target, key, value) => target[key.toLowerCase()] = value,
+            has: (target, key) => key.toLowerCase() in target
+            
+        })
         for (let actionName in playerActions) {
             this.keyBind[settings[actionName]] = playerActions[actionName]
         }
