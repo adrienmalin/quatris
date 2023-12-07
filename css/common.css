@@ -41,7 +41,7 @@ body {
         transform: translateY(2px);
     }
 }
-#matrixTable.hard-dropped-table-animation {
+.hard-dropped-table-animation {
     animation: hard-dropped-table-animation .2s;
 }
 
