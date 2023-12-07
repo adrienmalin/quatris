@@ -3,6 +3,14 @@ body {
     background-size: cover;
 }
 
+body[data-bs-theme="dark"] {
+    --bs-body-bg: #2125296b;
+}
+
+.btn-dark {
+    --bs-btn-bg: #2125296b;
+}
+
 .card {
     background-color: rgba(37, 41, 45, 50%);
 }
