@@ -19,11 +19,9 @@ body[data-bs-theme="dark"] {
     padding: 1px;
     position: relative;
     z-index: 0;
-    box-shadow:
-        -1px -1px 4px rgba(128, 128, 128, 25%),
-        -1px  1px 4px rgba(128, 128, 128, 25%),
-         1px -1px 4px rgba(128, 128, 128, 25%),
-         1px  1px 4px rgba(128, 128, 128, 25%);
+    border-radius: 4px;
+    background-color: rgba(128, 128, 128, 25%);
+    box-shadow: 0px 0px 8px rgba(128, 128, 128, 75%);
 }
 
 .mino:not(.ghost):not(.locking):before {
@@ -31,7 +29,7 @@ body[data-bs-theme="dark"] {
     position: absolute;
     z-index: -1;
     inset: 0;
-    margin: 1px;
+    margin: 1px 1px 0px 0px;
     padding: 2px;
     border-radius: 4px;
     --glint-x: calc(50% + 50% * (var(--piece-column) - var(--column))/10);
@@ -45,25 +43,17 @@ body[data-bs-theme="dark"] {
        linear-gradient(#fff 0 0);
     mask-mode: luminance;
     mask-composite: intersect;
-  }
+}
 
 .ghost.mino {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
-    box-shadow:
-        -1px -1px 8px rgba(242, 255, 255, 32%),
-        -1px  1px 8px rgba(242, 255, 255, 32%),
-         1px -1px 8px rgba(242, 255, 255, 32%),
-         1px  1px 8px rgba(242, 255, 255, 32%);
+    box-shadow: 0px 0px 10px rgba(242, 255, 255, 75%);
 }
 
 .moving.mino {
-    box-shadow:
-        -1px -1px 5px rgba(128, 128, 128, 35%),
-        -1px  1px 5px rgba(128, 128, 128, 35%),
-         1px -1px 5px rgba(128, 128, 128, 35%),
-         1px  1px 5px rgba(128, 128, 128, 35%);
+    box-shadow: 0px 0px 5px rgba(128, 128, 128, 75%);
 }
 
 .moving.mino:not(.locking) {
@@ -78,11 +68,7 @@ body[data-bs-theme="dark"] {
     background: rgba(186, 211, 255, 70%);
     border-color: rgba(242, 255, 255, 0.7);
     border-radius: 4px;
-    box-shadow:
-        -1px -1px 8px rgba(242, 255, 255, 32%),
-        -1px  1px 8px rgba(242, 255, 255, 32%),
-         1px -1px 8px rgba(242, 255, 255, 32%),
-         1px  1px 8px rgba(242, 255, 255, 32%);
+    box-shadow: 0px 0px 10px rgba(242, 255, 255, 100%);
 }
 
 @keyframes locked-animation {
