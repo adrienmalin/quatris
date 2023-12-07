@@ -1,3 +1,26 @@
+const KEY_NAMES = new Proxy({
+    ["ArrowLeft"]   : "←",
+    ["←"]           : "ArrowLeft",
+    ["ArrowRight"]  : "→",
+    ["→"]           : "ArrowRight",
+    ["ArrowUp"]     : "↑",
+    ["↑"]           : "ArrowUp",
+    ["ArrowDown"]   : "↓",
+    ["↓"]           : "ArrowDown",
+    [" "]           : "Espace",
+    ["Espace"]      : " ",
+    ["Escape"]      : "Échap.",
+    ["Échap."]      : "Escape",
+    ["Backspace"]   : "Ret. arrière",
+    ["Ret. arrière"]: "Backspace",
+    ["Enter"]       : "Entrée",
+    ["Entrée"]      : "Enter",
+}, {
+    get(obj, keyName) {
+        return keyName in obj? obj[keyName] : keyName
+    }
+})
+
 class Settings {
     constructor() {
         this.form = settingsForm
