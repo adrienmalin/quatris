@@ -37,14 +37,8 @@ body {
 
 
 @keyframes hard-dropped-table-animation {
-    from {
-        transform: translateY(0);
-    }
     25% {
         transform: translateY(2px);
-    }
-    to {
-        transform: translateY(0);
     }
 }
 #matrixTable.hard-dropped-table-animation {
