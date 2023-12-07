@@ -9,7 +9,7 @@ let lastActionSucceded = true
 let favicon
 
 window.onload = function(event) {
-    document.selectedStyleSheetSet = stylesheetSelect.value
+    selectedStyleSheet.href = stylesheetSelect.value
     favicon = document.querySelector("link[rel~='icon']")
 
     restart()
@@ -120,7 +120,7 @@ let playerActions = {
         scheduler.clearTimeout(lockDown)
         playSound(hardDropSound)
         while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, true)) stats.score += 2
-        matrix.table.classList.add("hard-dropped-table-animation")
+        matrixCard.classList.add("hard-dropped-table-animation")
         lockDown(true)
         return true
     },
