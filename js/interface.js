@@ -30,7 +30,10 @@ class Settings {
     }
 
     load() {
-        this.form.querySelectorAll("[name]").forEach(element => element.value = localStorage[element.name])
+        this.form.querySelectorAll("[name]").forEach(element => {
+            if (element.name in localStorage)
+                element.value = localStorage[element.name]
+        })
         window.document.selectedStyleSheetSet = stylesheetSelect.value
     }
 
