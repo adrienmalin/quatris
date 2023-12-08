@@ -9,6 +9,7 @@ let lastActionSucceded = true
 let favicon
 
 window.onload = function(event) {
+    document.selectedStyleSheetSet = selectedStyleSheet.title
     selectedStyleSheet.href = stylesheetSelect.value
     favicon = document.querySelector("link[rel~='icon']")
 
