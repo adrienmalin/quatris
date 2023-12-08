@@ -90,6 +90,20 @@ tr.cleared-line-animation {
     animation: cleared-line-animation ease-out .3s;
 }
 
+#holdTable .J,
+#holdTable .L,
+#holdTable .S,
+#holdTable .T,
+#holdTable .Z, 
+#nextTable .J,
+#nextTable .L,
+#nextTable .S,
+#nextTable .T,
+#nextTable .Z {
+    transform: translateX(50%);
+}
+
+
 #messagesSpan {
     position: absolute;
     top: 5%;
