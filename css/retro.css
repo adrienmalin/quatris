@@ -7,6 +7,9 @@
     src: url("retro/Early GameBoy.ttf");
 }
 
+body {
+}
+
 #screenRow {
     background-image: url("retro/bg.png");
     background-size: 10px;
@@ -47,6 +50,8 @@
 .card,
 #messagesSpan {
     font-family: "Early GameBoy", monospace;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
     color: #254806;
     text-shadow: -1px -1px 3px rgba(0, 0, 0, 40%), 1px 1px 1px rgba(0, 0, 0, 40%);
 }
@@ -129,6 +134,10 @@ td {
 
 .locked.mino {
     animation: none;
+}
+
+.hard-dropped-table-animation {
+    animation: hard-dropped-table-animation steps(1) .2s;
 }
 
 @keyframes cleared-line-animation {
