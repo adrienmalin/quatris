@@ -189,7 +189,7 @@ function autorepeat() {
         if (actionsQueue[0]()) {
             lastActionSucceded = true
         } else if (lastActionSucceded) {
-            playSound(wallSound)
+            wallSound.play()
             lastActionSucceded = false
         }
     }
