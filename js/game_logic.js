@@ -327,10 +327,10 @@ class Tetromino {
             matrix.drawPiece()
             return true
         } else if (!hardDropped && translation == TRANSLATION.DOWN) {
-                this.locked = true
-                if (!scheduler.timeoutTasks.has(lockDown))
-                    scheduler.setTimeout(lockDown, stats.lockDelay)
-                matrix.drawPiece()
+            this.locked = true
+            if (!scheduler.timeoutTasks.has(lockDown))
+                scheduler.setTimeout(lockDown, stats.lockDelay)
+            matrix.drawPiece()
         }
     }
     

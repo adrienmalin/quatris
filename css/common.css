@@ -21,6 +21,11 @@ body {
     text-shadow: 0 0 8px var(--bs-light);
 }
 
+#statsTable td,
+#statsModal td {
+    text-align: right;
+}
+
 .minoes-table {
     --piece-column: 0;
     --piece-row   : 0;

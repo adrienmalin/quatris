@@ -122,7 +122,7 @@ let playerActions = {
         playSound(hardDropSound)
         while (matrix.piece.move(TRANSLATION.DOWN, ROTATION.NONE, true)) stats.score += 2
         matrixCard.classList.add("hard-dropped-table-animation")
-        lockDown(true)
+        lockDown()
         return true
     },
 
@@ -162,7 +162,7 @@ function onkeydown(event) {
             if (action()) {
                 lastActionSucceded = true
             } else if (lastActionSucceded || !(action in REPEATABLE_ACTIONS)) {
-                wallSound.play()
+                playSound(wallSound)
                 lastActionSucceded = false
             }
             if (REPEATABLE_ACTIONS.includes(action)) {
@@ -189,7 +189,7 @@ function autorepeat() {
         if (actionsQueue[0]()) {
             lastActionSucceded = true
         } else if (lastActionSucceded) {
-            wallSound.play()
+            playSound(wallSound)
             lastActionSucceded = false
         }
     }
@@ -203,9 +203,12 @@ function onkeyup(event) {
         action = settings.keyBind[event.key]
         if (actionsQueue.includes(action)) {
             actionsQueue.splice(actionsQueue.indexOf(action), 1)
-            if (!actionsQueue.length) {
-                scheduler.clearTimeout(repeat)
-                scheduler.clearInterval(autorepeat)
+            scheduler.clearTimeout(repeat)
+            scheduler.clearInterval(autorepeat)
+            if (actionsQueue.length) {
+                if (action == playerActions.softDrop) scheduler.setInterval(autorepeat, settings.fallPeriod/20)
+                else scheduler.setTimeout(repeat, settings.das)
+            } else {
                 matrix.drawPiece()
             }
         }
@@ -216,15 +219,12 @@ function fall() {
     matrix.piece.move(TRANSLATION.DOWN)
 }
 
-function lockDown(hardDropped=false) {
+function lockDown() {
     scheduler.clearTimeout(lockDown)
     scheduler.clearInterval(fall)
-    if (lastActionSucceded && !hardDropped) playSound(wallSound)
 
     if (matrix.lock()) {
-        let tSpin = matrix.piece.tSpin
-        let nbClearedLines = matrix.clearLines()
-        stats.lockDown(nbClearedLines, tSpin)
+        stats.lockDown(matrix.piece.tSpin, matrix.clearLines())
         
         generate()
     } else {

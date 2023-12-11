@@ -194,7 +194,7 @@ class Stats {
         return new Date() - this.startTime
     }
 
-    lockDown(nbClearedLines, tSpin) {
+    lockDown(tSpin, nbClearedLines) {
         this.totalClearedLines += nbClearedLines
         if (nbClearedLines == 4) this.nbQuatuors++
         if (tSpin == T_SPIN.T_SPIN) this.nbTSpin++

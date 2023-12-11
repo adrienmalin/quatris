@@ -82,8 +82,9 @@
 }
 
 .ghost.mino {
+    margin: 1px;
     background: rgba(0, 0, 0, 10%) !important;
-    border: 2px solid rgba(150, 150, 150, 33%) !important;
+    border: 3px solid #646464 !important;
     box-shadow:
         -2px -2px 6px rgba(128, 128, 128, 25%),
         -2px  2px 6px rgba(128, 128, 128, 25%),
