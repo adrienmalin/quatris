@@ -86,7 +86,6 @@ function changeKey(input) {
     input.onkeydown = function (event) {
         event.preventDefault()
         input.value = KEY_NAMES[event.key]
-        if (input.value == "") input.value = prevValue
         keyInputs.forEach(input => {
             input.setCustomValidity("")
             input.classList.remove("is-invalid")
@@ -105,6 +104,7 @@ function changeKey(input) {
         }
     }
     input.onblur = function (event) {
+        if (!input.value) input.value = prevValue
         input.onkeydown = null
         input.onblur = null
     }
