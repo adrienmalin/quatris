@@ -33,20 +33,20 @@
             <form name="settingsForm" class="needs-validation" novalidate>
               <fieldset id="keyBindFielset" class="row g-2 mb-3 align-items-center text-center"><legend class="text-start">Commandes</legend>
                 <label for="moveLeftInput" title="Gauche" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-arrow-left"></i></label>
-                <div class="col-4"><input name="moveLeft" id="moveLeftInput" type="text" class="form-control text-center btn btn-dark" value="←" onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
-                <div class="col-4"><input name="moveRight" id="moveRightInput" type="text" class="form-control text-center btn btn-dark" value="→" onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="moveLeft" id="moveLeftInput" type="text" class="form-control text-center" value="←" onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="moveRight" id="moveRightInput" type="text" class="form-control text-center" value="→" onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
                 <label for="moveRightInput" title="Droite" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-arrow-right"></i></label>
                 <label for="rotateCounterclockwiseInput" title="Rotation anti-horaire" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-arrow-counterclockwise"></i></label>
-                <div class="col-4"><input name="rotateCounterclockwise" id="rotateCounterclockwiseInput" type="text" class="form-control text-center btn btn-dark" value="w" onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
-                <div class="col-4"><input name="rotateClockwise" id="rotateClockwiseInput" type="text" class="form-control text-center btn btn-dark" value="↑" onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="rotateCounterclockwise" id="rotateCounterclockwiseInput" type="text" class="form-control text-center" value="w" onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="rotateClockwise" id="rotateClockwiseInput" type="text" class="form-control text-center" value="↑" onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
                 <label for="rotateClockwiseInput" title="Rotation horaire" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-arrow-clockwise"></i></label>
                 <label for="softDropInput" title="Chute lente" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-arrow-down-short"></i></label>
-                <div class="col-4"><input name="softDrop" id="softDropInput" type="text" class="form-control text-center btn btn-dark" value="↓" onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
-                <div class="col-4"><input name="hardDrop" id="hardDropInput" type="text" class="form-control text-center btn btn-dark" value="Espace" onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="softDrop" id="softDropInput" type="text" class="form-control text-center" value="↓" onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="hardDrop" id="hardDropInput" type="text" class="form-control text-center" value="Espace" onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
                 <label for="hardDropInput" title="Chute rapide" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-download"></i></label>
                 <label for="holdInput" title="Échanger la pièce" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-arrow-left-right"></i></label>
-                <div class="col-4"><input name="hold" id="holdInput" type="text" class="form-control text-center btn btn-dark" value="c" onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
-                <div class="col-4"><input name="pause" id="pauseInput" type="text" class="form-control text-center btn btn-dark" value="Échap." onclick="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="hold" id="holdInput" type="text" class="form-control text-center" value="c" onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
+                <div class="col-4"><input name="pause" id="pauseInput" type="text" class="form-control text-center" value="Échap." onfocus="changeKey(this)" placeholder="Touche ?" title="Modifier la touche" required></div>
                 <label for="pauseInput" title="Pause" class="col-2 col-form-label d-flex align-items-center justify-content-center"><i class="bi bi-pause"></i></label>
               </fieldset>
               <fieldset id="autorepeatFieldset" class="row g-2 mb-3 align-items-center text-center"><legend class="text-start">Répétition automatique</legend>
@@ -87,7 +87,7 @@
       <div id="screenRow" class="row row-cols-auto align-items-start gap-2">
         <div class="col d-flex flex-column align-items-end">
           <div class="card mb-4 w-100">
-            <div class="card-header text-center"><strong>HOLD</strong></div>
+            <div class="card-header fw-bold text-uppercase text-center">Hold</div>
             <div class="card-body p-0">
               <table id="holdTable" class="minoes-table m-auto">
                 <tr class="buffer-zone"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -100,11 +100,11 @@
         </div>
           <div class="card shadow">
             <table id="statsTable" class="table mb-0">
-              <tr><th>Score</th>             <td id="scoreCell">0</td>                                                                          </tr>
+              <tr class="card-header fw-bold text-uppercase"><th>Score</th><td id="scoreCell">0</td>                                                                          </tr>
               <tr><th>Meilleur<br/>score</th><td id="highScoreCell"><script>document.write(Number(localStorage["highScore"]) || 0)</script></td></tr>
-              <tr><th>Niveau</th>            <td id="levelCell">0</td>                                                                          </tr>
-              <tr><th>But</th>               <td id="goalCell">0</td>                                                                           </tr>
-              <tr><th>Temps</th>             <td id="timeCell">00:00</td>                                                                       </tr>
+              <tr><th>Niveau</th>                           <td id="levelCell">0</td>                                                                          </tr>
+              <tr><th>But</th>                              <td id="goalCell">0</td>                                                                           </tr>
+              <tr><th>Temps</th>                            <td id="timeCell">00:00</td>                                                                       </tr>
             </table>
           </div>
         </div>
@@ -146,7 +146,7 @@
 
         <div class="col">
           <div class="card shadow">
-            <div class="card-header text-center"><strong>NEXT</strong></div>
+            <div class="card-header fw-bold text-uppercase text-center">Next</div>
             <div class="card-body p-0">
               <table id="nextTable" class="minoes-table caption-top">
                 <tr class="buffer-zone"><td></td><td></td><td></td><td></td><td></td><td></td></tr>

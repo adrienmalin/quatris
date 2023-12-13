@@ -7,6 +7,10 @@ body {
 }
 
 @supports (backdrop-filter: blur()) {
+    .modal {
+        backdrop-filter: blur(2px);
+    }
+
     .modal-content {
         background-color: rgba(33, 37, 41, 30%);
         backdrop-filter: blur(15px);

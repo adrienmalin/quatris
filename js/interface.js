@@ -82,13 +82,29 @@ class Settings {
 function changeKey(input) {
     prevValue = input.value
     input.value = ""
+    keyInputs = Array.from(input.form.querySelectorAll("input[type='text']"))
     input.onkeydown = function (event) {
         event.preventDefault()
         input.value = KEY_NAMES[event.key]
-        input.blur()
+        if (input.value == "") input.value = prevValue
+        keyInputs.forEach(input => {
+            input.setCustomValidity("")
+            input.classList.remove("is-invalid")
+        })
+        keyInputs.sort((input1, input2) => {
+            if(input1.value == input2.value) {
+                input1.setCustomValidity("Touche déjà utilisée")
+                input1.classList.add("is-invalid")
+                input2.setCustomValidity("Touche déjà utilisée")
+                input2.classList.add("is-invalid")
+            }
+            return input1.value > input2.value
+        })
+        if (input.checkValidity()) {
+            input.blur()
+        }
     }
     input.onblur = function (event) {
-        if (input.value == "") input.value = prevValue
         input.onkeydown = null
         input.onblur = null
     }
