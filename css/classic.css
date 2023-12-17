@@ -12,12 +12,12 @@
 }
 
 .I.mino {
-    --background-color : #009FdA;
+    --background-color : #00d6fb;
     --frontier-color   : #43e7fd;
     --light-color      : #afeff9;
     border-top-color   : #7cf2fd;
     border-left-color  : #2ed5e5;
-    border-right-color : #00b8ca;
+    border-right-color : #01b8ca;
     border-bottom-color: #00a4b0;
 }
 
