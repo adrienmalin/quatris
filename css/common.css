@@ -21,6 +21,14 @@ body {
     background-color: rgb(37, 41, 45);
 }
 
+#matrixCard {
+    background: radial-gradient(#222, rgb(37, 41, 45))
+}
+
+.card-header {
+    text-shadow: 0 0 2px black;
+}
+
 .modal-title {
     text-shadow: 0 0 8px var(--bs-light);
 }

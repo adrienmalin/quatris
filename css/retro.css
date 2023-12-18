@@ -48,6 +48,7 @@ body {
 
 #statsTable,
 .card,
+.card-header,
 #messagesSpan {
     font-family: "Early GameBoy", monospace;
     font-smooth: never;

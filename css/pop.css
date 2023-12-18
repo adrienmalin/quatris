@@ -24,6 +24,7 @@ body[data-bs-theme="dark"] {
 
 #matrixTable {
     border-spacing: 1px;
+    background: repeating-linear-gradient(transparent, #1118 1px);
 }
 
 tr.matrix td:not(.mino) {
@@ -31,7 +32,7 @@ tr.matrix td:not(.mino) {
 }
 
 .mino {
-    background: radial-gradient(rgba(0, 0, 0, 25%) 10%, var(--color) 150%);
+    background: radial-gradient(#fff3 0%, var(--color) 170%);
     border: 2px solid var(--color);
     border-radius: 0;
     outline: 1px solid #0006;
@@ -40,31 +41,31 @@ tr.matrix td:not(.mino) {
 }
 
 .I.mino {
-    --color: #9bf6ff;
+    --color: #00eaf5;
 }
 
 .J.mino {
-    --color: #a0c4ff;
+    --color: #00a9f7;
 }
 
 .L.mino {
-    --color: #ffd6a5;
+    --color: #f9b600;
 }
 
 .O.mino {
-    --color: #fdffb6;
+    --color: #f7f200;;
 }
 
 .T.mino {
-    --color: #bdb2ff;
+    --color: #d136e2;;
 }
 
 .S.mino {
-    --color: #caffbf;
+    --color: #35da3f;
 }
 
 .Z.mino {
-    --color: #ffadad;
+    --color: #ee3b3a;
 }
 
 .ghost.mino {
@@ -78,6 +79,7 @@ tr.matrix td:not(.mino) {
 
 .locking.mino {
     --color: white;
+    box-shadow: 0 0 10px var(--color);
 }
 
 @keyframes locked-animation {
