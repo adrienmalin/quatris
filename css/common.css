@@ -43,7 +43,6 @@ body {
     margin-top: calc(-1 * var(--buffer-zone-rows) * var(--cell-side));
 }
 
-
 @keyframes hard-dropped-table-animation {
     25% {
         transform: translateY(2px);
@@ -111,7 +110,6 @@ tr.cleared-line-animation {
 #nextTable .Z {
     transform: translateX(50%);
 }
-
 
 #messagesSpan {
     position: absolute;
