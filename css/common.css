@@ -12,17 +12,17 @@ body {
     }
 
     .modal-content {
-        background-color: rgba(33, 37, 41, 30%);
+        background-color: #2125294d;
         backdrop-filter: blur(15px);
     }
 }
 
 .card {
-    background-color: rgb(37, 41, 45);
+    background-color: #25292d;
 }
 
 #matrixCard {
-    background: radial-gradient(#222, rgb(37, 41, 45))
+    background: radial-gradient(#222, #25292d)
 }
 
 .card-header {
@@ -79,7 +79,7 @@ td {
 
 @keyframes trail-animation {
     from {
-        background-color: rgba(206, 255, 255, 25%);
+        background-color: #ceffff40;
         filter: saturate(50%) brightness(300%);
     }
     to {
@@ -93,7 +93,7 @@ td.trail-animation {
 
 @keyframes cleared-line-animation {
     from {
-        background-color: rgba(206, 255, 255, 40%);
+        background-color: #ceffff66;
         filter: saturate(50%) brightness(300%);
         box-shadow: -200px 0 5px white, 200px 0 5px white;
     }
@@ -124,8 +124,8 @@ tr.cleared-line-animation {
     top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+    color: #fffc;
+    text-shadow: 1px 1px #000c;
     font-size: 3vmin;
     text-align: center;
 }
