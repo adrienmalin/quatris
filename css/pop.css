@@ -93,3 +93,27 @@ tr.matrix td:not(.mino) {
     animation: locked-animation;
     animation-duration: 0.2s;
 }
+
+tr.cleared-line-animation {
+    animation: none;
+}
+
+tr.cleared-line-animation::after {
+    content: "";
+    width: 100%;
+    height: var(--cell-side);
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    background: repeating-linear-gradient(transparent, #fffb 1px);
+    opacity: 0;
+    animation: cleared-line-animation ease-out .3s;
+}
+
+@keyframes cleared-line-animation {
+    25% {
+        width: 200%;
+        opacity: 100%;
+    }
+}
