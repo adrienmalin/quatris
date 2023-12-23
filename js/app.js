@@ -206,7 +206,7 @@ function onkeyup(event) {
             scheduler.clearTimeout(repeat)
             scheduler.clearInterval(autorepeat)
             if (actionsQueue.length) {
-                if (action == playerActions.softDrop) scheduler.setInterval(autorepeat, settings.fallPeriod/20)
+                if (actionsQueue[0] == playerActions.softDrop) scheduler.setInterval(autorepeat, settings.fallPeriod/20)
                 else scheduler.setTimeout(repeat, settings.das)
             } else {
                 matrix.drawPiece()
