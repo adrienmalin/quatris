@@ -85,12 +85,12 @@
 .ghost.mino {
     margin: 1px;
     background: rgba(0, 0, 0, 10%) !important;
-    border: 3px solid #646464 !important;
+    border: 3px solid #FFF4 !important;
     box-shadow:
-        -2px -2px 6px rgba(128, 128, 128, 25%),
-        -2px  2px 6px rgba(128, 128, 128, 25%),
-         2px -2px 6px rgba(128, 128, 128, 25%),
-         2px  2px 6px rgba(128, 128, 128, 25%);
+        -2px -2px 6px #FFF2,
+        -2px  2px 6px #FFF2,
+         2px -2px 6px #FFF2,
+         2px  2px 6px #FFF2;
 }
 
 .moving.mino {
@@ -100,20 +100,20 @@
 .locking.mino {
     filter: saturate(50%) brightness(200%);
     box-shadow:
-        -1px -1px 4px rgba(128, 128, 128, 25%),
-        -1px  1px 4px rgba(128, 128, 128, 25%),
-         1px -1px 4px rgba(128, 128, 128, 25%),
-         1px  1px 4px rgba(128, 128, 128, 25%);
+        -1px -1px 4px #FFF2,
+        -1px  1px 4px #FFF2,
+         1px -1px 4px #FFF2,
+         1px  1px 4px #FFF2;
 }
 
 @keyframes locked-animation {
     from {
         filter: saturate(50%) brightness(400%);
         box-shadow:
-            -1px -1px 4px rgba(255, 255, 255, 25%),
-            -1px  1px 4px rgba(255, 255, 255, 25%),
-             1px -1px 4px rgba(255, 255, 255, 25%),
-             1px  1px 4px rgba(255, 255, 255, 25%);
+            -1px -1px 4px #FFF2,
+            -1px  1px 4px #FFF2,
+             1px -1px 4px #FFF2,
+             1px  1px 4px #FFF2;
     }
 }
 
