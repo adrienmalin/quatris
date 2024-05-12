@@ -257,8 +257,3 @@ window.onbeforeunload = function(event) {
     settings.save()
     if (playing) return false;
 }
-
-
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('js/service-worker.js');
-}
