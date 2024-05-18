@@ -24,6 +24,9 @@ body[data-bs-theme="dark"] {
 
 #matrixTable {
     border-spacing: 1px;
+}
+
+tr.matrix {
     background: repeating-linear-gradient(transparent, #1118 1px);
 }
 
