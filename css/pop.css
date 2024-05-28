@@ -11,23 +11,18 @@ body[data-bs-theme="dark"] {
     --bs-btn-bg: #2125296b;
 }
 
-.card {
-    background-color: rgba(37, 41, 45, 50%);
+.card,
+#matrixCard {
+    background: repeating-linear-gradient(transparent, #111 1px);
+    backdrop-filter: blur(3px);
 }
 
-@supports (backdrop-filter: blur()) {
-    .card {
-        background-color: rgba(33, 37, 41, 20%);
-        backdrop-filter: blur(3px);
-    }
+.card-header {
+    background-color: rgba(37, 41, 45, 50%);
 }
 
 #matrixTable {
     border-spacing: 1px;
-}
-
-tr.matrix {
-    background: repeating-linear-gradient(transparent, #1118 1px);
 }
 
 tr.matrix td:not(.mino) {
