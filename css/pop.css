@@ -92,6 +92,12 @@ tr.matrix td:not(.mino) {
     animation-duration: 0.2s;
 }
 
+.disabled.mino {
+    opacity: 50%;
+    outline: 0px;
+    box-shadow: none;
+}
+
 tr.cleared-line-animation {
     animation: none;
 }

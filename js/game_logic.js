@@ -171,6 +171,20 @@ class MinoesTable {
 MinoesTable.prototype.init_center = [2, 2]
 
 
+class HoldQueue extends MinoesTable {
+    constructor() {
+        super("holdTable")
+    }
+
+    drawPiece(piece=this.piece, className=piece.className) {
+        if (!matrix.piece.holdEnabled) {
+            className += " disabled"
+        }
+        super.drawPiece(piece, className)
+    }
+}
+
+
 class NextQueue extends MinoesTable {
     constructor() {
         super("nextTable")

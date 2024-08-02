@@ -106,6 +106,11 @@
          1px  1px 4px #FFF2;
 }
 
+.disabled.mino {
+    filter: brightness(50%) contrast(80%);
+    opacity: 70%;
+}
+
 @keyframes locked-animation {
     from {
         filter: saturate(50%) brightness(400%);

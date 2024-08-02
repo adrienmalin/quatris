@@ -1,7 +1,7 @@
 let scheduler          = new Scheduler()
 let settings           = new Settings()
 let stats              = new Stats()
-let holdQueue          = new MinoesTable("holdTable")
+let holdQueue          = new HoldQueue()
 let matrix             = new Matrix()
 let nextQueue          = new NextQueue()
 let playing            = false
@@ -22,6 +22,7 @@ function restart() {
     stats.init()
     matrix.init()
     nextQueue.init()
+    nextQueue.redraw()
     settings.init()
     pauseSettings()
 }
@@ -96,6 +97,7 @@ function ticktack() {
 
 function generate(piece) {
     matrix.piece = piece || nextQueue.shift()
+    if (!piece && holdQueue.piece) holdQueue.drawPiece()
     lastActionSucceded = true
     favicon.href = matrix.piece.favicon_href
 
@@ -131,12 +133,11 @@ let playerActions = {
             scheduler.clearInterval(fall)
             scheduler.clearTimeout(lockDown)
     
-            let heldPiece = holdQueue.piece
             matrix.piece.facing = FACING.NORTH
             matrix.piece.locked = false
+            matrix.piece.holdEnabled = false
+            let heldPiece = holdQueue.piece
             holdQueue.piece = matrix.piece
-            holdQueue.piece.holdEnabled = false
-            holdQueue.piece.locked = false
             generate(heldPiece)
         }
     },

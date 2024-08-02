@@ -129,7 +129,8 @@ td {
     animation: blinker 0.08s step-start infinite;
 }
 
-.ghost.mino {
+.ghost.mino,
+.disabled.mino {
     opacity: 50%;
 }
 
