@@ -19,10 +19,10 @@ window.onload = function(event) {
 function restart() {
     stats.modal.hide()
     holdQueue.init()
+    holdQueue.redraw()
     stats.init()
     matrix.init()
     nextQueue.init()
-    nextQueue.redraw()
     settings.init()
     pauseSettings()
 }
@@ -132,13 +132,13 @@ let playerActions = {
         if (matrix.piece.holdEnabled) {
             scheduler.clearInterval(fall)
             scheduler.clearTimeout(lockDown)
-    
-            matrix.piece.facing = FACING.NORTH
-            matrix.piece.locked = false
+
+            let piece = matrix.piece
+            generate(holdQueue.piece)
             matrix.piece.holdEnabled = false
-            let heldPiece = holdQueue.piece
-            holdQueue.piece = matrix.piece
-            generate(heldPiece)
+            piece.facing = FACING.NORTH
+            piece.locked = false
+            holdQueue.piece = piece
         }
     },
     
