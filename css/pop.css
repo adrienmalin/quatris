@@ -93,9 +93,9 @@ tr.matrix td:not(.mino) {
 }
 
 .disabled.mino {
-    opacity: 50%;
     outline: 0px;
     box-shadow: none;
+    filter: contrast(40%) brightness(50%);
 }
 
 tr.cleared-line-animation {
