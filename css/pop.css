@@ -30,7 +30,7 @@ tr.matrix td:not(.mino) {
 }
 
 .mino {
-    background: radial-gradient(#fff3 0%, var(--color) 170%);
+    background: radial-gradient(#fff2 0%, var(--color) 130%);
     border: 2px solid var(--color);
     border-radius: 0;
     outline: 1px solid #0006;
@@ -39,31 +39,31 @@ tr.matrix td:not(.mino) {
 }
 
 .I.mino {
-    --color: #00eaf5;
+    --color: #31d8e5;
 }
 
 .J.mino {
-    --color: #00a9f7;
+    --color: #2991ff;
 }
 
 .L.mino {
-    --color: #f9b600;
+    --color: #ff7d55;
 }
 
 .O.mino {
-    --color: #f7f200;;
+    --color: #f1ea7e;
 }
 
 .T.mino {
-    --color: #d136e2;;
+    --color: #ed2b87;
 }
 
 .S.mino {
-    --color: #35da3f;
+    --color: #19d39a;
 }
 
 .Z.mino {
-    --color: #ee3b3a;
+    --color: #f53a31;
 }
 
 .ghost.mino {
