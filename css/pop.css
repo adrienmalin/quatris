@@ -30,40 +30,40 @@ tr.matrix td:not(.mino) {
 }
 
 .mino {
-    background: radial-gradient(#fff2 0%, var(--color) 130%);
+    background: radial-gradient(#fff3 0%, var(--color) 170%);
     border: 2px solid var(--color);
     border-radius: 0;
     outline: 1px solid #0006;
     opacity: 100%;
-    box-shadow: 0 0 4px var(--color);
+    box-shadow: 0 0 12px var(--color);
 }
 
 .I.mino {
-    --color: #31d8e5;
+    --color: #00eaf5;
 }
 
 .J.mino {
-    --color: #2991ff;
+    --color: #00a9f7;
 }
 
 .L.mino {
-    --color: #ff7d55;
+    --color: #f9b600;
 }
 
 .O.mino {
-    --color: #f1ea7e;
+    --color: #f7f200;;
 }
 
 .T.mino {
-    --color: #ed2b87;
+    --color: #d136e2;;
 }
 
 .S.mino {
-    --color: #19d39a;
+    --color: #35da3f;
 }
 
 .Z.mino {
-    --color: #f53a31;
+    --color: #ee3b3a;
 }
 
 .ghost.mino {
