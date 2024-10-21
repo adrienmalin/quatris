@@ -5,7 +5,7 @@ let holdQueue          = new HoldQueue()
 let matrix             = new Matrix()
 let nextQueue          = new NextQueue()
 let playing            = false
-let lastActionSucceded = true
+//let lastActionSucceded = true
 let favicon
 
 window.onload = function(event) {
@@ -98,7 +98,7 @@ function ticktack() {
 function generate(piece) {
     matrix.piece = piece || nextQueue.shift()
     if (!piece && holdQueue.piece) holdQueue.drawPiece()
-    lastActionSucceded = true
+    //lastActionSucceded = true
     favicon.href = matrix.piece.favicon_href
 
     if (matrix.piece.canMove(TRANSLATION.NONE)) {
@@ -160,12 +160,13 @@ function onkeydown(event) {
         if (!pressedKeys.has(event.key)) {
             pressedKeys.add(event.key)
             action = settings.keyBind[event.key]
-            if (action()) {
+            /*if (action()) {
                 lastActionSucceded = true
             } else if (lastActionSucceded || !(action in REPEATABLE_ACTIONS)) {
                 playSound(wallSound)
                 lastActionSucceded = false
-            }
+            }*/
+            action()
             if (REPEATABLE_ACTIONS.includes(action)) {
                 actionsQueue.unshift(action)
                 scheduler.clearTimeout(repeat)
@@ -187,12 +188,13 @@ function repeat() {
 
 function autorepeat() {
     if (actionsQueue.length) {
-        if (actionsQueue[0]()) {
+        /*if (actionsQueue[0]()) {
             lastActionSucceded = true
         } else if (lastActionSucceded) {
             wallSound.play()
             lastActionSucceded = false
-        }
+        }*/
+        actionsQueue[0]()
     }
     else scheduler.clearInterval(autorepeat)
 }
