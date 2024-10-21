@@ -84,38 +84,45 @@ body {
 }
 
 .mino {
-    background: var(--color);
+    background: var(--background-color);
     padding: 0;
     opacity: 100%;
-    border: 1px outset var(--color);
+    border: 1px solid var(--light-color);
 }
 
 .I.mino {
-    --color: #00eaf5;
+    --background-color: #42AFE1;
+    --light-color: #6CEAFF;
 }
 
 .J.mino {
-    --color: #00a9f7;
+    --background-color: #1165B5;
+    --light-color: #339BFF;
 }
 
 .L.mino {
-    --color: #f9b600;
+    --background-color: #F38927;
+    --light-color: #FFBA59;
 }
 
 .O.mino {
-    --color: #f7f200;;
-}
-
-.T.mino {
-    --color: #d136e2;;
+    --background-color: #F6D03C;
+    --light-color: #FFFF7F;
 }
 
 .S.mino {
-    --color: #35da3f;
+    --background-color: #51B84D;
+    --light-color: #84F880;
+}
+
+.T.mino {
+    --background-color: #9739A2;
+    --light-color: #D958E9;
 }
 
 .Z.mino {
-    --color: #ee3b3a;
+    --background-color: #EB4F65;
+    --light-color: #FF7F79;
 }
 
 .ghost.mino {
