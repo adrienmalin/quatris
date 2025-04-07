@@ -32,42 +32,42 @@ tr.matrix td:not(.mino) {
     width: inherit;
     height: inherit;
     display: block;
-    box-shadow: 0 -6px 0 var(--light-color);
+    box-shadow: 0 -6px 0 var(--box-shadow-color);
 }
 
 .I.mino {
     --background-color: #42AFE1;
-    --light-color: #6CEAFF;
+    --box-shadow-color: #6CEAFF;
 }
 
 .J.mino {
     --background-color: #1165B5;
-    --light-color: #339BFF;
+    --box-shadow-color: #339BFF;
 }
 
 .L.mino {
     --background-color: #F38927;
-    --light-color: #FFBA59;
+    --box-shadow-color: #FFBA59;
 }
 
 .O.mino {
     --background-color: #F6D03C;
-    --light-color: #FFFF7F;
+    --box-shadow-color: #FFFF7F;
 }
 
 .S.mino {
     --background-color: #51B84D;
-    --light-color: #84F880;
+    --box-shadow-color: #84F880;
 }
 
 .T.mino {
     --background-color: #9739A2;
-    --light-color: #D958E9;
+    --box-shadow-color: #D958E9;
 }
 
 .Z.mino {
     --background-color: #EB4F65;
-    --light-color: #FF7F79;
+    --box-shadow-color: #FF7F79;
 }
 
 .ghost.mino {

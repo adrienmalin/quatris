@@ -244,7 +244,7 @@ messagesSpan.onanimationend = function(event) {
 }
 
 function gameOver() {
-    matrix.piece.locked = false
+    matrix.piece.locked = true
     matrix.drawPiece()
 
     document.onkeydown = null
@@ -259,4 +259,47 @@ window.onbeforeunload = function(event) {
     stats.save()
     settings.save()
     if (playing) return false;
+}
+
+// Play with 3D
+let mousedown = false
+let rX0 = 0
+let rY0 = 0
+let clientX0 = 0
+let clientY0 = 0
+
+screenRow.onmousedown = function(event) {
+    mousedown = true
+    rX0 = parseInt(getComputedStyle(screenRow).getPropertyValue("--rX"))
+    dy0 = parseInt(getComputedStyle(screenRow).getPropertyValue("--rY"))
+    clientX0 = event.clientX
+    clientY0 = event.clientY
+}
+
+screenRow.onmousemove = function(event) {
+	if (mousedown) {
+        event.preventDefault()
+        rX = (rX0 - event.clientY + clientY0 + 360) % 360
+        screenRow.style.setProperty("--rX", rX + "deg")
+        if (rX <= 180) {
+            screenRow.classList.remove("top")
+            screenRow.classList.add("bottom")
+        } else {
+            screenRow.classList.add("top")
+            screenRow.classList.remove("bottom")
+        }
+        rY = (rY0 + event.clientX - clientX0 + 360) % 360
+        screenRow.style.setProperty("--rY", rY + "deg")
+        if (rY >= 180) {
+            screenRow.classList.remove("left")
+            screenRow.classList.add("right")
+        } else {
+            screenRow.classList.add("left")
+            screenRow.classList.remove("right")
+        }
+    }
+}
+
+screenRow.onmouseup = function(event) {
+    mousedown = false
 }

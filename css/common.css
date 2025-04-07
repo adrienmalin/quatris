@@ -1,5 +1,7 @@
 :root {
     --cell-side: 24px;
+    --rX: -15deg;
+    --rY: 0;
 }
 
 body {
