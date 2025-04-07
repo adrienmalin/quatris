@@ -310,5 +310,5 @@ screenRow.onwheel = function(event) {
     event.stopPropagation()
     let tZ = parseInt(getComputedStyle(screenRow).getPropertyValue("--tZ"))
     tZ += event.deltaY
-    screenRow.style.setProperty("--tZ", zoom + "px")
+    screenRow.style.setProperty("--tZ", tZ + "px")
 }
