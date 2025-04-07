@@ -279,6 +279,7 @@ screenRow.onmousedown = function(event) {
 screenRow.onmousemove = function(event) {
 	if (mousedown) {
         event.preventDefault()
+        event.stopPropagation()
         rX = (rX0 - event.clientY + clientY0 + 360) % 360
         screenRow.style.setProperty("--rX", rX + "deg")
         if (rX <= 180) {
@@ -300,6 +301,15 @@ screenRow.onmousemove = function(event) {
     }
 }
 
-screenRow.onmouseup = function(event) {
+screenRow.onmouseup = screenRow.onmouseleave = function(event) {
     mousedown = false
+}
+
+screenRow.onwheel = function(event) {
+    event.preventDefault()
+    event.stopPropagation()
+    let zoom = parseInt(getComputedStyle(screenRow).getPropertyValue("--tZ"))
+    zoom += event.deltaY
+    screenRow.style.setProperty("--tZ", zoom + "px")
+    console.log(zoom)
 }

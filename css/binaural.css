@@ -8,7 +8,7 @@
 
 #screenRow {
     display: block;
-    transform: rotateX(var(--rX)) rotateY(var(--rY));
+    transform: translateZ(var(--tZ)) rotateX(var(--rX)) rotateY(var(--rY));
 }
 
 #screenRow * {
