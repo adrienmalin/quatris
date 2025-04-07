@@ -12,8 +12,6 @@ body * {
 }
 
 .minoes-table {
-    display: block;
-    flex-direction: column;
     transform-style: preserve-3d;
     transform: translateZ(var(--cell-side));
     transform: translateZ(0);
@@ -21,9 +19,6 @@ body * {
 }
 
 .minoes-table tr {
-    display: block;
-    width: max-content;
-    height: var(--cell-side);
     transform-style: preserve-3d;
 }
 
@@ -32,10 +27,6 @@ tr.matrix td:not(.mino) {
 }
 
 .minoes-table td {
-    display: inline-block;
-    width: var(--cell-side);
-    height: var(--cell-side);
-    padding: 0 !important;
     will-change: transform;
 }
 
