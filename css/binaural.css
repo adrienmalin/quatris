@@ -1,0 +1,132 @@
+body * {
+    perspective: 1000px;
+}
+
+#screenRow {
+    transform: rotate3d(-1, 0, 0, 15deg);
+    transform-style: preserve-3d;
+}
+
+.card {
+    background-color: #363941;
+}
+
+.minoes-table {
+    display: block;
+    flex-direction: column;
+    transform-style: preserve-3d;
+    transform: translateZ(var(--cell-side));
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.minoes-table tr {
+    display: block;
+    width: max-content;
+    height: var(--cell-side);
+    transform-style: preserve-3d;
+}
+
+tr.matrix td:not(.mino) {
+    border: 0;
+}
+
+.minoes-table td {
+    display: inline-block;
+    width: var(--cell-side);
+    height: var(--cell-side);
+    padding: 0 !important;
+    will-change: transform;
+}
+
+.mino {
+    background: var(--background-color);
+    transform-style: preserve-3d;
+    overflow: visible;
+}
+
+.mino::before,
+.mino::after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    background: var(--light-color);
+    z-index: -1;
+}
+
+.mino::before {
+    transform: rotateY(-90deg);
+    transform-origin: left;
+}
+
+.mino::after {
+    transform: rotateX(90deg);
+    transform-origin: top;
+}
+
+.I.mino {
+    --background-color: #42AFE180;
+    --light-color: #6CEAFF80;
+}
+
+.J.mino {
+    --background-color: #1165B5B0;
+    --light-color: #339BFF80;
+}
+
+.L.mino {
+    --background-color: #F38927B0;
+    --light-color: #FFBA5980;
+}
+
+.O.mino {
+    --background-color: #F6D03CB0;
+    --light-color: #FFFF7F80;
+}
+
+.S.mino {
+    --background-color: #51B84DB0;
+    --light-color: #84F88080;
+}
+
+.T.mino {
+    --background-color: #9739A2B0;
+    --light-color: #D958E980;
+}
+
+.Z.mino {
+    --background-color: #EB4F65B0;
+    --light-color: #FF7F7980;
+}
+
+.ghost.mino {
+    --background-color: #8888;
+    --light-color: #CCC8;
+}
+
+.locking.mino {
+    --background-color: #EEE8;
+    --light-color: #FFF8;
+}
+
+.disabled.mino {
+    --background-color: #EEE8;
+    --light-color: #FFF8;
+}
+
+.hard-dropped-table-animation {
+    animation: none;
+}
+
+@keyframes cleared-line-animation {
+    from {
+        background-color: #eeeeee;
+    }
+    to {
+        background-color: transparent;
+    }
+}
