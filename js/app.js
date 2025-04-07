@@ -308,8 +308,7 @@ screenRow.onmouseup = screenRow.onmouseleave = function(event) {
 screenRow.onwheel = function(event) {
     event.preventDefault()
     event.stopPropagation()
-    let zoom = parseInt(getComputedStyle(screenRow).getPropertyValue("--tZ"))
-    zoom += event.deltaY
+    let tZ = parseInt(getComputedStyle(screenRow).getPropertyValue("--tZ"))
+    tZ += event.deltaY
     screenRow.style.setProperty("--tZ", zoom + "px")
-    console.log(zoom)
 }
