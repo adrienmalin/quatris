@@ -69,7 +69,11 @@ tr.matrix td:not(.mino) {
 }
 
 .minoes-table .mino {
-    background: var(--background-color);
+    background: radial-gradient(
+        circle at -150% -200%,
+        #FFFB 0%,
+        var(--background-color) 100%
+    );
     overflow: visible;
 }
 
