@@ -15,6 +15,11 @@ body[data-bs-theme="dark"] {
     background-color: rgba(37, 41, 45, 40%);
 }
 
+tr.matrix td:not(.mino) {
+    border-left  : none;
+    border-bottom: none;
+}
+
 .mino:not(.ghost):not(.locking):not(.disabled) {
     padding: 1px;
     position: relative;
@@ -46,8 +51,8 @@ body[data-bs-theme="dark"] {
 }
 
 .ghost.mino {
-    background: transparent;
-    border: 1px solid transparent;
+    background: rgba(242, 255, 255, 10%);
+    border : 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
     box-shadow: 0px 0px 10px rgba(242, 255, 255, 75%);
 }
