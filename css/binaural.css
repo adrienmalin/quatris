@@ -26,11 +26,19 @@
     background-color: #363941;
 }
 
+#screenRow .card > * {
+    transform: translateZ(var(--cell-side));
+}
+
+#screenRow .card-header {
+    background-color: transparent;
+    border: none;
+}
+
 .minoes-table th,
 .minoes-table td {
     display: inline-block !important;
     width: max-content;
-    transform: translateZ(var(--cell-side));
 }
 
 .minoes-table tr {
@@ -46,6 +54,7 @@
 #statsTable th,
 #statsTable td {
     display: table-cell;
+    border: 0;
 }
 
 tr.matrix td:not(.mino) {
@@ -156,19 +165,6 @@ tr.matrix td:not(.mino) {
 .disabled.mino {
     --background-color: #EEE8;
     --light-color: #FFF8;
-}
-
-#holdTable .J,
-#holdTable .L,
-#holdTable .S,
-#holdTable .T,
-#holdTable .Z, 
-#nextTable .J,
-#nextTable .L,
-#nextTable .S,
-#nextTable .T,
-#nextTable .Z {
-    transform: translateZ(var(--cell-side)) translateX(50%);
 }
 
 @keyframes cleared-line-animation {
