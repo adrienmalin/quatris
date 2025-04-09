@@ -1,5 +1,5 @@
 .container-fluid {
-    perspective: 1000px;
+    perspective: 500px;
 }
 
 .container-fluid * {
