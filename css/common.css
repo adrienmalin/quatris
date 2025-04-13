@@ -25,7 +25,7 @@ body {
 }
 
 #matrixCard {
-    background: radial-gradient(#222, #25292d)
+    background-image: radial-gradient(#222, #25292d)
 }
 
 .card-header {

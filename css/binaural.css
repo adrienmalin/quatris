@@ -1,3 +1,7 @@
+body {
+    background: radial-gradient(circle at 40% 25%, #2a3037, #000 150%) fixed;
+}
+
 #sceneDiv {
     perspective: 500px;
 }
@@ -23,7 +27,11 @@
 }
 
 .card {
-    background-color: #363941;
+    background: #36394180;
+}
+
+#matrixCard {
+    background-image: none;
 }
 
 #screenRow .card > * {
@@ -167,8 +175,9 @@ tr.matrix td:not(.mino) {
 }
 
 .disabled.mino {
-    --background-color: #EEE8;
-    --light-color: #FFF8;
+    --background-color: #888B;
+    --light-color: #CCCB;
+    --dark-color: #333B;
 }
 
 @keyframes cleared-line-animation {
