@@ -1,5 +1,5 @@
 body {
-    background: url(binaural/bg.png),
+    background-image: url(binaural/bg.jpg),
         radial-gradient(
             circle at center,
             #39444f 0%,
