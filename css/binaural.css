@@ -1,5 +1,20 @@
 body {
-    background: radial-gradient(circle at 50% 50%, #2a3037, #14171a 80%, #000 120%) fixed;
+    background: url(binaural/bg.png),
+        radial-gradient(
+            circle at center,
+            #39444f 0%,
+            #2c323b 25%,
+            #293036 28%,
+            #252b32 34%,
+            #242930 38%,
+            #1a1d22 52%,
+            #191c22 53%,
+            #151519 63%,
+            #141418 65%,
+            #0f0f12 74%,
+            #0a0c0d 100%
+        );
+    background-repeat: round;
 }
 
 #sceneDiv {
@@ -77,17 +92,13 @@ tr.matrix td:not(.mino) {
 }
 
 .minoes-table .mino {
-    background: radial-gradient(
-        circle at -150% -200%,
-        #FFFB 0%,
-        var(--background-color) 100%
-    );
+    background: radial-gradient(circle at -150% -200%, #fffb 0%, var(--background-color) 100%);
     overflow: visible;
 }
 
 .mino::before,
 .mino::after {
-    content: "";
+    content: '';
     position: absolute;
     display: block;
     top: 0;
@@ -121,63 +132,63 @@ tr.matrix td:not(.mino) {
 }
 
 .I.mino {
-    --background-color: #42AFE1B0;
-    --light-color: #6CEAFF80;
-    --dark-color: #00a4b0B0;
+    --background-color: #42afe1b0;
+    --light-color: #6ceaff80;
+    --dark-color: #00a4b0b0;
 }
 
 .J.mino {
-    --background-color: #1165B5B0;
-    --light-color: #339BFF80;
-    --dark-color: #00009dB0;
+    --background-color: #1165b5b0;
+    --light-color: #339bff80;
+    --dark-color: #00009db0;
 }
 
 .L.mino {
-    --background-color: #F38927B0;
-    --light-color: #FFBA5980;
-    --dark-color: #c54800B0;
+    --background-color: #f38927b0;
+    --light-color: #ffba5980;
+    --dark-color: #c54800b0;
 }
 
 .O.mino {
-    --background-color: #F6D03CB0;
-    --light-color: #FFFF7F80;
-    --dark-color: #ca9501B0;
+    --background-color: #f6d03cb0;
+    --light-color: #ffff7f80;
+    --dark-color: #ca9501b0;
 }
 
 .S.mino {
-    --background-color: #51B84DB0;
-    --light-color: #84F88080;
-    --dark-color: #1cbc02B0;
+    --background-color: #51b84db0;
+    --light-color: #84f88080;
+    --dark-color: #1cbc02b0;
 }
 
 .T.mino {
-    --background-color: #9739A2B0;
-    --light-color: #D958E980;
-    --dark-color: #6e019aB0;
+    --background-color: #9739a2b0;
+    --light-color: #d958e980;
+    --dark-color: #6e019ab0;
 }
 
 .Z.mino {
-    --background-color: #EB4F65B0;
-    --light-color: #FF7F7980;
-    --dark-color: #ad1936B0;
+    --background-color: #eb4f65b0;
+    --light-color: #ff7f7980;
+    --dark-color: #ad1936b0;
 }
 
 .ghost.mino {
     --background-color: #8886;
-    --light-color: #CCC6;
+    --light-color: #ccc6;
     --dark-color: #3336;
 }
 
 .locking.mino {
-    --background-color: #EEEB;
-    --light-color: #FFFB;
-    --dark-color: #DDDB;
+    --background-color: #eeeb;
+    --light-color: #fffb;
+    --dark-color: #dddb;
 }
 
 .disabled.mino {
-    --background-color: #888B;
-    --light-color: #CCCB;
-    --dark-color: #333B;
+    --background-color: #888b;
+    --light-color: #cccb;
+    --dark-color: #333b;
 }
 
 @keyframes cleared-line-animation {
@@ -211,7 +222,6 @@ tr.matrix td:not(.mino) {
         opacity: 1;
         transform: scale3d(0.3, 0.3, 0.3);
         line-height: var(--bs-body-line-height);
-
     }
     30% {
         transform: scale3d(1, 1, 1);
@@ -230,11 +240,11 @@ tr.matrix td:not(.mino) {
 @keyframes rotate-in-animation {
     0% {
         opacity: 1;
-        transform:rotate(200deg);
+        transform: rotate(200deg);
         line-height: var(--bs-body-line-height);
     }
     30% {
-        transform:translateZ(0);
+        transform: translateZ(0);
         transform: scale3d(1, 1, 1);
     }
     80% {
