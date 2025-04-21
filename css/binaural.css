@@ -28,6 +28,11 @@ body {
 #screenRow {
     display: block;
     transform: translateZ(var(--tZ)) rotateX(var(--rX)) rotateY(var(--rY));
+    cursor: grab;
+}
+
+#screenRow:active {
+    cursor: grabbing;
 }
 
 #screenRow * {
