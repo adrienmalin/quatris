@@ -268,7 +268,7 @@ let rY0 = 0
 let clientX0 = 0
 let clientY0 = 0
 
-document.onmousedown = function(event) {
+sceneDiv.onmousedown = function(event) {
     mousedown = true
     rX0 = parseInt(getComputedStyle(screenRow).getPropertyValue("--rX"))
     dy0 = parseInt(getComputedStyle(screenRow).getPropertyValue("--rY"))
@@ -276,7 +276,7 @@ document.onmousedown = function(event) {
     clientY0 = event.clientY
 }
 
-document.onmousemove = function(event) {
+sceneDiv.onmousemove = function(event) {
 	if (mousedown) {
         event.preventDefault()
         event.stopPropagation()
@@ -301,11 +301,11 @@ document.onmousemove = function(event) {
     }
 }
 
-document.onmouseup = document.onmouseleave = function(event) {
+sceneDiv.onmouseup = document.onmouseleave = function(event) {
     mousedown = false
 }
 
-document.onwheel = function(event) {
+sceneDiv.onwheel = function(event) {
     event.preventDefault()
     event.stopPropagation()
     let tZ = parseInt(getComputedStyle(screenRow).getPropertyValue("--tZ"))
